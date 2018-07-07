@@ -11,6 +11,7 @@ cmake ^
     -DopenPMD_USE_ADIOS1=OFF    ^
     -DopenPMD_USE_ADIOS2=OFF    ^
     -DopenPMD_USE_PYTHON=ON     ^
+    -DopenPMD_USE_INTERNAL_PYBIND11=OFF  ^
     -DCMAKE_INSTALL_PREFIX=%PREFIX%  ^
     %SRC_DIR%
 if errorlevel 1 exit 1
