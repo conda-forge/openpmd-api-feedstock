@@ -10,6 +10,7 @@ cmake \
     -DopenPMD_USE_ADIOS1=ON     \
     -DopenPMD_USE_ADIOS2=OFF    \
     -DopenPMD_USE_PYTHON=ON     \
+    -DopenPMD_USE_INTERNAL_PYBIND11=OFF            \
     -DPYTHON_EXECUTABLE:FILEPATH=$(which $PYTHON)  \
     -DBUILD_TESTING=ON              \
     -DCMAKE_INSTALL_LIBDIR=lib      \

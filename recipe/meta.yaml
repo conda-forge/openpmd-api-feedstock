@@ -1,14 +1,14 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.3.0a" %}
-{% set sha256 = "4d0977a146607c592ee22f38cae7d2d489ba026a08a92a8b5c98b7cd93959c3d" %}
+{% set version = "0.3.1a" %}
+{% set sha256 = "1bd1eedc40d781c6cee9683d161ebf8b5211ac90dc00d95b46124f5d70b9f8aa" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: 0.3.0-alpha.tar.gz
-  url: https://github.com/openPMD/openPMD-api/archive/0.3.0-alpha.tar.gz
+  fn: 0.3.1-alpha.tar.gz
+  url: https://github.com/openPMD/openPMD-api/archive/0.3.1-alpha.tar.gz
   sha256: {{ sha256 }}
 
 build:
@@ -21,7 +21,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - python
-    - pybind11 >=2.2.1
+    - pybind11 >=2.2.3
     - cmake >=3.10
     - adios >=1.13.1  # [unix]
     - hdf5  >=1.8.13
