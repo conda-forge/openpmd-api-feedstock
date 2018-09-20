@@ -1,14 +1,14 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.5.0a" %}
-{% set sha256 = "3a358b3bf0be7be8da70a68dfdf1817038adf6d8c2f475be1fe1c5ba6501c184" %}
+{% set version = "0.6.0a" %}
+{% set sha256 = "b38e8094caeac94d5b21bc57b379b83e62f0ae8c3e822e05944ff1ad5f231a14" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: 0.5.0-alpha.tar.gz
-  url: https://github.com/openPMD/openPMD-api/archive/0.5.0-alpha.tar.gz
+  fn: 0.6.0-alpha.tar.gz
+  url: https://github.com/openPMD/openPMD-api/archive/0.6.0-alpha.tar.gz
   sha256: {{ sha256 }}
 
 build:
