@@ -19,10 +19,11 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - make  # [unix]
+    - cmake >=3.10
   host:
     - python
     - pybind11 >=2.2.3
-    - cmake >=3.10
     - adios >=1.13.1  # [unix]
     - hdf5  >=1.8.13
   run:
