@@ -33,5 +33,10 @@ cmake \
     ${SRC_DIR}
 
 make
+
+ldd bin/CoreTests
+ldd bin/AuxiliaryTests
+ldd bin/SerialIOTests
+
 make test
 make install
