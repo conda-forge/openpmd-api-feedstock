@@ -12,9 +12,10 @@ if [[ ${target_platform} =~ osx.* ]]; then
 else
     CMAKE_PLATFORM_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE="${RECIPE_DIR}/cross-linux.cmake")
     # link transitive ADIOS1 libraries during build of intermediate wrapper lib
-    export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,$PREFIX/lib"
+    export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
 fi
 
+export LD_LIBRARY_PATH="${PREFIX}/lib:$LD_LIBRARY_PATH"
 
 cmake \
     -DCMAKE_BUILD_TYPE=Release  \
