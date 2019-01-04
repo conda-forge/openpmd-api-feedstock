@@ -10,6 +10,8 @@ source:
   fn: 0.6.3-alpha.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/0.6.3-alpha.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - 0001-Add-CMAKE_FIND_ROOT_PATH-to-ADIOS_LIBRARY_DIRS.patch
 
 build:
   number: 1001
@@ -34,6 +36,9 @@ requirements:
     - adios >=1.13.1  # [unix]
     - hdf5  >=1.8.13
     - numpy >=1.15.0
+    - blosc
+    - bzip2
+    - zlib
 
 test:
   requires:
