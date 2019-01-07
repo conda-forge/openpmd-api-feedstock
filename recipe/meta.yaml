@@ -1,5 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.6.3a" %}
+{% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "8dca9303f2597937217de4446e1fe9aaf71c7a019393246be40603813956dcc8" %}
 
 package:
@@ -7,12 +8,12 @@ package:
   version: {{ version }}
 
 source:
-  fn: 0.6.3-alpha.tar.gz
-  url: https://github.com/openPMD/openPMD-api/archive/0.6.3-alpha.tar.gz
+  fn: {{ version_fn }}.tar.gz
+  url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  number: 1000
+  number: 1001
   # Python 2.7 stack is build with too ancient vc9 (VS2008)
   skip: True  # [win and py27]
 
