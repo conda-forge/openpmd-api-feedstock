@@ -13,7 +13,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   # Python 2.7 stack is build with too ancient vc9 (VS2008)
   skip: True  # [win and py27]
 
@@ -22,6 +22,8 @@ requirements:
     - {{ compiler('cxx') }}
     - make  # [unix]
     - cmake >=3.11
+    - cmake >=3.10
+    - lldb
   host:
     - python
     - pybind11 >=2.2.3

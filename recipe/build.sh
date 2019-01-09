@@ -32,5 +32,12 @@ cmake \
     ${SRC_DIR}
 
 make ${VERBOSE_CM} -j${CPU_COUNT}
-make ${VERBOSE_CM} test
+
+cd bin
+./SerialIOTests -a
+lldb -o run -o bt -- ./SerialIOTests -a -b
+cd ..
+
+CTEST_OUTPUT_ON_FAILURE=1 make ${VERBOSE_CM} test
+
 make install
