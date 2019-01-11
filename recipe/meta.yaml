@@ -1,7 +1,7 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.6.3a" %}
+{% set version = "0.7.0a" %}
 {% set version_fn = version.replace("a", "-alpha") %}
-{% set sha256 = "8dca9303f2597937217de4446e1fe9aaf71c7a019393246be40603813956dcc8" %}
+{% set sha256 = "4c534378b518a2554790c742ff9b412431adacf2d2e38b59b338bf00fb4082f0" %}
 
 package:
   name: {{ name|lower }}
@@ -13,7 +13,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1001
+  number: 0
   # Python 2.7 stack is build with too ancient vc9 (VS2008)
   skip: True  # [win and py27]
 
@@ -21,7 +21,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - make  # [unix]
-    - cmake >=3.10
+    - cmake >=3.11
   host:
     - python
     - pybind11 >=2.2.3
@@ -37,10 +37,10 @@ test:
   requires:
     - numpy >=1.15.0
   imports:
-    - openPMD
+    - openpmd_api
   commands:
-    - python -c "import openPMD; print(openPMD.__version__);"
-    - python -c "import openPMD; print(openPMD.variants)"
+    - python -c "import openpmd_api; print(openpmd_api.__version__);"
+    - python -c "import openpmd_api; print(openpmd_api.variants)"
     - test -f ${PREFIX}/lib/cmake/openPMD/openPMDConfig.cmake             # [unix]
     - if exist %PREFIX%\cmake\openPMDConfig.cmake (exit 0) else (exit 1)  # [win]
 
