@@ -9,10 +9,10 @@ if [[ ${target_platform} =~ osx.* ]]; then
     # only needed until conda-forge toolchain 2.3.0 is used
     #   https://github.com/conda-forge/toolchain-feedstock/pull/47
     CMAKE_PLATFORM_FLAGS+=(-DCMAKE_OSX_SYSROOT="${CONDA_BUILD_SYSROOT}")
-else
+elif [[ ${target_platform} =~ linux.* ]]; then
     CMAKE_PLATFORM_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE="${RECIPE_DIR}/cross-linux.cmake")
     # link transitive ADIOS1 libraries during build of intermediate wrapper lib
-    export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,$PREFIX/lib"
+    export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
 fi
 
 
@@ -31,6 +31,6 @@ cmake \
     ${CMAKE_PLATFORM_FLAGS[@]}        \
     ${SRC_DIR}
 
-make
-make test
+make ${VERBOSE_CM} -j${CPU_COUNT}
+make ${VERBOSE_CM} test
 make install
