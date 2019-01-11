@@ -1,5 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
+VERBOSE_CM:
+- VERBOSE=1
 build_number_decrement:
 - '0'
 channel_sources:

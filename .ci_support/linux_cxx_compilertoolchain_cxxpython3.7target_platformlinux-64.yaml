@@ -1,3 +1,5 @@
+VERBOSE_CM:
+- VERBOSE=1
 build_number_decrement:
 - '1000'
 channel_sources:
