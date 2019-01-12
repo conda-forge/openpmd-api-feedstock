@@ -11,6 +11,9 @@ source:
   fn: {{ version_fn }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # FIXME: https://github.com/openPMD/openPMD-api/pull/436
+    - 0001-Add-CMAKE_FIND_ROOT_PATH-to-ADIOS_LIBRARY_DIRS.patch
 
 build:
   number: 0
