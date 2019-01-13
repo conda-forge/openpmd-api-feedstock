@@ -14,44 +14,10 @@ elif [[ ${target_platform} =~ linux.* ]]; then
     # link transitive ADIOS1 libraries during build of intermediate wrapper lib
     export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
 
-    # old toolchain_cxx compilers needs pthread, m and rt from /
+    # old toolchain_cxx, compilers need pthread, m and rt from /
     if [[ ! -d /opt/rh/devtoolset-2/root ]]; then
-        # CMAKE_PLATFORM_FLAGS+=(-DCMAKE_SYSTEM_PREFIX_PATH="/")
-        # CMAKE_PLATFORM_FLAGS+=(-DFIND_LIBRARY_USE_LIB64_PATHS=ON)
-    # else
         CMAKE_PLATFORM_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE="${RECIPE_DIR}/cross-linux.cmake")
-        CMAKE_PLATFORM_FLAGS+=(-DCMAKE_SYSTEM_PREFIX_PATH="${BUILD_PREFIX}/${HOST}/sysroot")
     fi
-
-    echo "BUILD_PREFIX: ${BUILD_PREFIX}"
-    echo "SYSROOT:"
-    ls ${BUILD_PREFIX}/${HOST}/sysroot || ( exit 0; )
-    echo "SYSROOT - USR:"
-    ls ${BUILD_PREFIX}/${HOST}/sysroot/usr || ( exit 0; )
-    echo "PREFIX: ${PREFIX}"
-    ls ${PREFIX} || ( exit 0; )
-    echo "CXX: "
-    which ${CXX}
-    echo "CXX SYSROOT:"
-    ${CXX} -print-sysroot || ( exit 0; )
-    echo "CXX SYSROOT - HEADERS:"
-    ${CXX} -print-sysroot-headers-suffix || ( exit 0; )
-    echo "DEVTOOLSET:"
-    ls /opt/rh/devtoolset-2/root || ( exit 0; )
-    echo "DEVTOOLSET - USR:"
-    ls /opt/rh/devtoolset-2/root/usr || ( exit 0; )
-
-    echo "Find libpthread in DEVTOOLSET"
-    find /opt/rh/devtoolset-2/ -name "libpthread*" || ( exit 0; )
-
-    echo "Find libpthread in PREFIX"
-    find ${PREFIX} -name "libpthread*" || ( exit 0; )
-
-    echo "Find libpthread in BUILD_PREFIX"
-    find ${BUILD_PREFIX} -name "libpthread*" || ( exit 0; )
-
-    echo "Find libpthread in /"
-    find / -name "libpthread*" 2>/dev/null || ( exit 0; )
 fi
 
 
@@ -74,7 +40,6 @@ elif [[ ${CXXFLAGS} == *"-std="* ]]; then
 fi
 
 
-# -DCMAKE_SYSTEM_IGNORE_PATH=/usr/lib
 cmake \
     -DCMAKE_BUILD_TYPE=Release  \
     -DCMAKE_CXX_STANDARD=${CXX_STANDARD}      \
