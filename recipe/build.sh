@@ -17,9 +17,31 @@ elif [[ ${target_platform} =~ linux.* ]]; then
 fi
 
 
+# find out toolchain C++ standard
+CXX_STANDARD=11
+CXX_EXTENSIONS=OFF
+if [[ ${CXXFLAGS} == *"-std=c++11"* ]]; then
+    echo "11"
+    CXX_STANDARD=11
+elif [[ ${CXXFLAGS} == *"-std=c++14"* ]]; then
+    echo "14"
+    CXX_STANDARD=14
+elif [[ ${CXXFLAGS} == *"-std=c++17"* ]]; then
+    echo "17"
+    CXX_STANDARD=17
+elif [[ ${CXXFLAGS} == *"-std="* ]]; then
+    echo "ERROR: unknown C++ standard in toolchain!"
+    echo ${CXXFLAGS}
+    exit 1
+fi
+
+
 # -DCMAKE_SYSTEM_IGNORE_PATH=/usr/lib
 cmake \
     -DCMAKE_BUILD_TYPE=Release  \
+    -DCMAKE_CXX_STANDARD=${CXX_STANDARD}      \
+    -DCMAKE_CXX_STANDARD_REQUIRED=ON          \
+    -DCMAKE_CXX_EXTENSIONS=${CXX_EXTENSIONS}  \
     -DopenPMD_USE_MPI=OFF       \
     -DopenPMD_USE_HDF5=ON       \
     -DopenPMD_USE_ADIOS1=ON     \
