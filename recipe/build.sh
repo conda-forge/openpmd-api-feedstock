@@ -11,9 +11,47 @@ if [[ ${target_platform} =~ osx.* ]]; then
     CMAKE_PLATFORM_FLAGS+=(-DCMAKE_OSX_SYSROOT="${CONDA_BUILD_SYSROOT}")
     CMAKE_PLATFORM_FLAGS+=(-DCMAKE_FIND_ROOT_PATH="${PREFIX};${CONDA_BUILD_SYSROOT}")
 elif [[ ${target_platform} =~ linux.* ]]; then
-    CMAKE_PLATFORM_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE="${RECIPE_DIR}/cross-linux.cmake")
     # link transitive ADIOS1 libraries during build of intermediate wrapper lib
     export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
+
+    # old toolchain_cxx compilers needs pthread, m and rt from /
+    if [[ ! -d /opt/rh/devtoolset-2/root ]]; then
+        # CMAKE_PLATFORM_FLAGS+=(-DCMAKE_SYSTEM_PREFIX_PATH="/")
+        # CMAKE_PLATFORM_FLAGS+=(-DFIND_LIBRARY_USE_LIB64_PATHS=ON)
+    # else
+        CMAKE_PLATFORM_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE="${RECIPE_DIR}/cross-linux.cmake")
+        CMAKE_PLATFORM_FLAGS+=(-DCMAKE_SYSTEM_PREFIX_PATH="${BUILD_PREFIX}/${HOST}/sysroot")
+    fi
+
+    echo "BUILD_PREFIX: ${BUILD_PREFIX}"
+    echo "SYSROOT:"
+    ls ${BUILD_PREFIX}/${HOST}/sysroot || ( exit 0; )
+    echo "SYSROOT - USR:"
+    ls ${BUILD_PREFIX}/${HOST}/sysroot/usr || ( exit 0; )
+    echo "PREFIX: ${PREFIX}"
+    ls ${PREFIX} || ( exit 0; )
+    echo "CXX: "
+    which ${CXX}
+    echo "CXX SYSROOT:"
+    ${CXX} -print-sysroot || ( exit 0; )
+    echo "CXX SYSROOT - HEADERS:"
+    ${CXX} -print-sysroot-headers-suffix || ( exit 0; )
+    echo "DEVTOOLSET:"
+    ls /opt/rh/devtoolset-2/root || ( exit 0; )
+    echo "DEVTOOLSET - USR:"
+    ls /opt/rh/devtoolset-2/root/usr || ( exit 0; )
+
+    echo "Find libpthread in DEVTOOLSET"
+    find /opt/rh/devtoolset-2/ -name "libpthread*" || ( exit 0; )
+
+    echo "Find libpthread in PREFIX"
+    find ${PREFIX} -name "libpthread*" || ( exit 0; )
+
+    echo "Find libpthread in BUILD_PREFIX"
+    find ${BUILD_PREFIX} -name "libpthread*" || ( exit 0; )
+
+    echo "Find libpthread in /"
+    find / -name "libpthread*" 2>/dev/null || ( exit 0; )
 fi
 
 
@@ -56,5 +94,5 @@ cmake \
     ${SRC_DIR}
 
 make ${VERBOSE_CM} -j${CPU_COUNT}
-# make ${VERBOSE_CM} test
+make ${VERBOSE_CM} test
 make install
