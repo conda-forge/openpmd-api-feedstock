@@ -6,18 +6,18 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_cxx_compilergxxpython2.7target_platformlinux-64:
-        CONFIG: linux_cxx_compilergxxpython2.7target_platformlinux-64
-      linux_cxx_compilergxxpython3.6target_platformlinux-64:
-        CONFIG: linux_cxx_compilergxxpython3.6target_platformlinux-64
-      linux_cxx_compilergxxpython3.7target_platformlinux-64:
-        CONFIG: linux_cxx_compilergxxpython3.7target_platformlinux-64
-      linux_cxx_compilertoolchain_cxxpython2.7target_platformlinux-64:
-        CONFIG: linux_cxx_compilertoolchain_cxxpython2.7target_platformlinux-64
-      linux_cxx_compilertoolchain_cxxpython3.6target_platformlinux-64:
-        CONFIG: linux_cxx_compilertoolchain_cxxpython3.6target_platformlinux-64
-      linux_cxx_compilertoolchain_cxxpython3.7target_platformlinux-64:
-        CONFIG: linux_cxx_compilertoolchain_cxxpython3.7target_platformlinux-64
+      linux_c_compilergcccxx_compilergxxpython2.7target_platformlinux-64:
+        CONFIG: linux_c_compilergcccxx_compilergxxpython2.7target_platformlinux-64
+      linux_c_compilergcccxx_compilergxxpython3.6target_platformlinux-64:
+        CONFIG: linux_c_compilergcccxx_compilergxxpython3.6target_platformlinux-64
+      linux_c_compilergcccxx_compilergxxpython3.7target_platformlinux-64:
+        CONFIG: linux_c_compilergcccxx_compilergxxpython3.7target_platformlinux-64
+      linux_c_compilertoolchain_ccxx_compilertoolchain_cxxpython2.7target_platformlinux-64:
+        CONFIG: linux_c_compilertoolchain_ccxx_compilertoolchain_cxxpython2.7target_platformlinux-64
+      linux_c_compilertoolchain_ccxx_compilertoolchain_cxxpython3.6target_platformlinux-64:
+        CONFIG: linux_c_compilertoolchain_ccxx_compilertoolchain_cxxpython3.6target_platformlinux-64
+      linux_c_compilertoolchain_ccxx_compilertoolchain_cxxpython3.7target_platformlinux-64:
+        CONFIG: linux_c_compilertoolchain_ccxx_compilertoolchain_cxxpython3.7target_platformlinux-64
   steps:
   - script: |
       sudo pip install --upgrade pip

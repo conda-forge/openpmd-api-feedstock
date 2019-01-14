@@ -9,14 +9,14 @@ Package license: LGPL 3
 
 Feedstock license: BSD 3-Clause
 
-Summary: C++ & Python API for writing & reading (H5, BP, ...), serial & MPI parallel openPMD files.
+Summary: C++ & Python API for writing & reading (.h5, .bp, .json, ...), serial & MPI parallel openPMD files.
 
 This library provides a common high-level API for openPMD writing and
 reading. It provides a common interface to I/O libraries and file formats
-such as HDF5 and ADIOS.
+such as HDF5, ADIOS and JSON.
 This conda-forge package only provides serial I/O, please build from source
-for MPI parallel I/O on HPC systems. Window support is limited to HDF5 and
-Python 3.
+for MPI parallel I/O on HPC systems. Window support is limited to HDF5,
+JSON and Python 3.
 
 
 Current build status

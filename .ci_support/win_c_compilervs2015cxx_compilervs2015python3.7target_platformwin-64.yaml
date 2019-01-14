@@ -1,5 +1,7 @@
 VERBOSE_CM:
 - VERBOSE=1
+c_compiler:
+- vs2015
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -11,9 +13,10 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- '3.6'
+- '3.7'
 target_platform:
 - win-64
 zip_keys:
 - - python
+  - c_compiler
   - cxx_compiler
