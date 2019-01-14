@@ -1,25 +1,28 @@
 VERBOSE_CM:
 - VERBOSE=1
 build_number_decrement:
-- '0'
+- '1000'
+c_compiler:
+- toolchain_c
 channel_sources:
-- conda-forge/label/gcc7,defaults
+- conda-forge,defaults
 channel_targets:
-- conda-forge gcc7
+- conda-forge main
 cxx_compiler:
-- gxx
+- toolchain_cxx
 docker_image:
-- condaforge/linux-anvil-comp7
+- condaforge/linux-anvil
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- '2.7'
+- '3.6'
 target_platform:
 - linux-64
 zip_keys:
-- - cxx_compiler
+- - c_compiler
+  - cxx_compiler
   - channel_sources
   - channel_targets
   - docker_image

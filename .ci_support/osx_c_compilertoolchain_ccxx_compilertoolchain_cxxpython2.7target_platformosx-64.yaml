@@ -3,13 +3,15 @@ MACOSX_DEPLOYMENT_TARGET:
 VERBOSE_CM:
 - VERBOSE=1
 build_number_decrement:
-- '0'
+- '1000'
+c_compiler:
+- toolchain_c
 channel_sources:
-- conda-forge/label/gcc7,defaults
+- conda-forge,defaults
 channel_targets:
-- conda-forge gcc7
+- conda-forge main
 cxx_compiler:
-- clangxx
+- toolchain_cxx
 macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:
@@ -23,7 +25,8 @@ python:
 target_platform:
 - osx-64
 zip_keys:
-- - cxx_compiler
+- - c_compiler
+  - cxx_compiler
   - channel_sources
   - channel_targets
   - build_number_decrement

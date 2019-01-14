@@ -11,14 +11,24 @@ source:
   fn: {{ version_fn }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # FIXME: https://github.com/openPMD/openPMD-api/pull/436
+    - 0001-Add-CMAKE_FIND_ROOT_PATH-to-ADIOS_LIBRARY_DIRS.patch
+    # FIXME: https://github.com/openPMD/openPMD-api/pull/438
+    - 0002-pybind11-variant-trait.patch
 
 build:
-  number: 0
+  number: 1
   # Python 2.7 stack is build with too ancient vc9 (VS2008)
   skip: True  # [win and py27]
+  run_exports:
+    # https://conda.io/docs/user-guide/tasks/build-packages/variants.html#referencing-subpackages
+    # in 0.X.*, newer minor versions are compatible
+    - {{ pin_subpackage('openpmd-api', min_pin='x.x', max_pin='x.x') }}
 
 requirements:
   build:
+    - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make  # [unix]
     - cmake >=3.11
@@ -28,13 +38,15 @@ requirements:
     - adios >=1.13.1  # [unix]
     - hdf5  >=1.8.13
   run:
-    - python
-    - adios >=1.13.1  # [unix]
-    - hdf5  >=1.8.13
-    - numpy >=1.15.0
+    # FIXME: for some reason warnings about this
+    - blosc
+    - zlib
+    - bzip2
+    - libgcc-ng  # [linux and cxx_compiler == 'toolchain_cxx']
 
 test:
   requires:
+    - python
     - numpy >=1.15.0
   imports:
     - openpmd_api
@@ -42,6 +54,8 @@ test:
     - python -c "import openpmd_api; print(openpmd_api.__version__);"
     - python -c "import openpmd_api; print(openpmd_api.variants)"
     - test -f ${PREFIX}/lib/cmake/openPMD/openPMDConfig.cmake             # [unix]
+    - otool -L ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.dylib               # [osx]
+    - ldd ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.so                       # [linux]
     - if exist %PREFIX%\cmake\openPMDConfig.cmake (exit 0) else (exit 1)  # [win]
 
 about:
@@ -49,15 +63,15 @@ about:
   license: LGPL 3
   license_family: LGPL
   license_file: COPYING.LESSER
-  summary: 'C++ & Python API for writing & reading (H5, BP, ...), serial & MPI parallel openPMD files.'
+  summary: 'C++ & Python API for writing & reading (.h5, .bp, .json, ...), serial & MPI parallel openPMD files.'
 
   description: |
     This library provides a common high-level API for openPMD writing and
     reading. It provides a common interface to I/O libraries and file formats
-    such as HDF5 and ADIOS.
+    such as HDF5, ADIOS and JSON.
     This conda-forge package only provides serial I/O, please build from source
-    for MPI parallel I/O on HPC systems. Window support is limited to HDF5 and
-    Python 3.
+    for MPI parallel I/O on HPC systems. Window support is limited to HDF5,
+    JSON and Python 3.
   doc_url: https://openpmd-api.readthedocs.io
   dev_url: https://github.com/openPMD/openPMD-api
 
