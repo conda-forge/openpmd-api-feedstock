@@ -10,6 +10,8 @@ if [[ ${target_platform} =~ osx.* ]]; then
     if [[ ${CXX} == "x86_64-apple-darwin13.4.0-clang++" ]]; then
         CMAKE_PLATFORM_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE="${RECIPE_DIR}/cross-osx.cmake")
     fi
+    # https://stackoverflow.com/questions/49316779/dynamic-cast-dynamic-cast-fails-with-dylib-on-osx-xcode
+    # export LDFLAGS="${LDFLAGS} -Wl,-flat_namespace"
 elif [[ ${target_platform} =~ linux.* ]]; then
     # link transitive ADIOS1 libraries during build of intermediate wrapper lib
     export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
@@ -41,7 +43,7 @@ fi
 
 
 cmake \
-    -DCMAKE_BUILD_TYPE=Release  \
+    -DCMAKE_BUILD_TYPE=Debug  \
     -DCMAKE_CXX_STANDARD=${CXX_STANDARD}      \
     -DCMAKE_CXX_STANDARD_REQUIRED=ON          \
     -DCMAKE_CXX_EXTENSIONS=${CXX_EXTENSIONS}  \
@@ -59,5 +61,22 @@ cmake \
     ${SRC_DIR}
 
 make ${VERBOSE_CM} -j${CPU_COUNT}
+
+if [[ ${target_platform} =~ osx.* ]]; then
+    otool -L ./bin/3_write_serial
+    otool -L ./bin/SerialIOTests
+    otool -L $SRC_DIR/build/lib/libopenPMD.ADIOS1.Serial.dylib
+    otool -L $PREFIX/lib/libz.dylib
+    otool -L $PREFIX/lib/libbz2.dylib
+    otool -L $PREFIX/lib/libblosc.dylib
+
+    #export DYLD_PRINT_LIBRARIES=1
+    #export DYLD_PRINT_LIBRARIES_POST_LAUNCH=1
+    #export DYLD_PRINT_RPATHS=1
+
+    #./bin/3_write_serial
+    #./bin/SerialIOTests -a -b
+fi
+
 make ${VERBOSE_CM} test
 make install
