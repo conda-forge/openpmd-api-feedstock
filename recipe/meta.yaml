@@ -16,6 +16,8 @@ source:
     - 0001-Add-CMAKE_FIND_ROOT_PATH-to-ADIOS_LIBRARY_DIRS.patch
     # FIXME: https://github.com/openPMD/openPMD-api/pull/438
     - 0002-pybind11-variant-trait.patch
+    # FIXME: https://github.com/openPMD/openPMD-api/pull/442
+    - 0003-libcpp-adios1.patch
 
 build:
   number: 2
