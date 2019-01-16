@@ -18,6 +18,8 @@ source:
     - 0002-pybind11-variant-trait.patch
     # FIXME: debug OSX
     - 0003-verify-adios.patch
+    # FIXME: libc++ with ADIOS1 https://github.com/openPMD/openPMD-api/pull/442
+    - 0004-parameter-cast-adios.patch
 
 build:
   number: 2
