@@ -39,12 +39,14 @@ requirements:
     - pybind11 >=2.2.3
     - adios >=1.13.1  # [unix]
     - hdf5  >=1.8.13
-  run:
-    # FIXME: for some reason warnings about this
     - blosc
     - zlib
     - bzip2
-    - libgcc-ng  # [linux and cxx_compiler == 'toolchain_cxx']
+  run:
+    - python
+    - blosc
+    - zlib
+    - bzip2
 
 test:
   requires:
