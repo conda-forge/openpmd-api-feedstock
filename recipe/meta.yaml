@@ -20,7 +20,7 @@ source:
     - 0003-libcpp-adios1.patch
 
 build:
-  number: 2
+  number: 3
   # Python 2.7 stack is build with too ancient vc9 (VS2008)
   skip: True  # [win and py27]
   run_exports:
@@ -40,16 +40,14 @@ requirements:
     - adios >=1.13.1  # [unix]
     - hdf5  >=1.8.13
   run:
-    # FIXME: for some reason warnings about this
+    - python
+    - numpy >=1.15.0
+    # FIXME: for some reason warnings about this (ADIOS1 deps)
     - blosc
     - zlib
     - bzip2
-    - libgcc-ng  # [linux and cxx_compiler == 'toolchain_cxx']
 
 test:
-  requires:
-    - python
-    - numpy >=1.15.0
   imports:
     - openpmd_api
   commands:
