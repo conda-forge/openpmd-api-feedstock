@@ -1,7 +1,7 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.7.0a" %}
+{% set version = "0.7.1a" %}
 {% set version_fn = version.replace("a", "-alpha") %}
-{% set sha256 = "4c534378b518a2554790c742ff9b412431adacf2d2e38b59b338bf00fb4082f0" %}
+{% set sha256 = "6cf1953f73f25af8e190824a64793cb43301f2ac389b2704df7d6c4a5ec8d9c0" %}
 
 package:
   name: {{ name|lower }}
@@ -11,16 +11,9 @@ source:
   fn: {{ version_fn }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # FIXME: https://github.com/openPMD/openPMD-api/pull/436
-    - 0001-Add-CMAKE_FIND_ROOT_PATH-to-ADIOS_LIBRARY_DIRS.patch
-    # FIXME: https://github.com/openPMD/openPMD-api/pull/438
-    - 0002-pybind11-variant-trait.patch
-    # FIXME: https://github.com/openPMD/openPMD-api/pull/442
-    - 0003-libcpp-adios1.patch
 
 build:
-  number: 4
+  number: 0
   # Python 2.7 stack is build with too ancient vc9 (VS2008)
   skip: True  # [win and py27]
   run_exports:
