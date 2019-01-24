@@ -20,7 +20,7 @@ source:
     - 0003-libcpp-adios1.patch
 
 build:
-  number: 3
+  number: 4
   # Python 2.7 stack is build with too ancient vc9 (VS2008)
   skip: True  # [win and py27]
   run_exports:
