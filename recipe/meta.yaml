@@ -1,7 +1,7 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.7.1a" %}
+{% set version = "0.8.0a" %}
 {% set version_fn = version.replace("a", "-alpha") %}
-{% set sha256 = "6cf1953f73f25af8e190824a64793cb43301f2ac389b2704df7d6c4a5ec8d9c0" %}
+{% set sha256 = "5b2f96850bc65f928b2c250086dd3567e41dbd86686a938c6248155013651ab4" %}
 
 package:
   name: {{ name|lower }}
@@ -14,8 +14,7 @@ source:
 
 build:
   number: 0
-  # Python 2.7 stack is build with too ancient vc9 (VS2008)
-  skip: True  # [win and py27]
+  skip: True  # [py27]
   run_exports:
     # https://conda.io/docs/user-guide/tasks/build-packages/variants.html#referencing-subpackages
     # in 0.X.*, newer minor versions are compatible
@@ -29,7 +28,7 @@ requirements:
     - cmake >=3.11
   host:
     - python
-    - pybind11 >=2.2.3
+    - pybind11 >=2.2.4
     - adios >=1.13.1  # [unix]
     - hdf5  >=1.8.13
   run:
@@ -62,9 +61,10 @@ about:
     This library provides a common high-level API for openPMD writing and
     reading. It provides a common interface to I/O libraries and file formats
     such as HDF5, ADIOS and JSON.
+    Language bindings are provided for C++11 (or newer) and Python 3.
     This conda-forge package only provides serial I/O, please build from source
-    for MPI parallel I/O on HPC systems. Window support is limited to HDF5,
-    JSON and Python 3.
+    for MPI parallel I/O on HPC systems. Window support is limited to HDF5 and
+    JSON.
   doc_url: https://openpmd-api.readthedocs.io
   dev_url: https://github.com/openPMD/openPMD-api
 
