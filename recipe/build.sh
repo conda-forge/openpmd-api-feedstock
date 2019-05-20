@@ -34,13 +34,20 @@ elif [[ ${CXXFLAGS} == *"-std="* ]]; then
 fi
 
 
+# MPI variants
+if [[ ${mpi} == "nompi" ]]; then
+    export USE_MPI=OFF
+else
+    export USE_MPI=ON
+fi
+
 cmake \
     -DCMAKE_BUILD_TYPE=Release  \
     -DBUILD_SHARED_LIBS=ON      \
     -DCMAKE_CXX_STANDARD=${CXX_STANDARD}      \
     -DCMAKE_CXX_STANDARD_REQUIRED=ON          \
     -DCMAKE_CXX_EXTENSIONS=${CXX_EXTENSIONS}  \
-    -DopenPMD_USE_MPI=OFF       \
+    -DopenPMD_USE_MPI=${USE_MPI}              \
     -DopenPMD_USE_HDF5=ON       \
     -DopenPMD_USE_ADIOS1=ON     \
     -DopenPMD_USE_ADIOS2=OFF    \
