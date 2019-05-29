@@ -1,5 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.8.0a" %}
+{% set build = 2 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "5b2f96850bc65f928b2c250086dd3567e41dbd86686a938c6248155013651ab4" %}
 
@@ -13,7 +14,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: {{ build }}
   skip: True  # [py27]
   run_exports:
     # https://conda.io/docs/user-guide/tasks/build-packages/variants.html#referencing-subpackages
