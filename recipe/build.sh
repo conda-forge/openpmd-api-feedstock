@@ -61,5 +61,5 @@ cmake \
     ${SRC_DIR}
 
 make ${VERBOSE_CM} -j${CPU_COUNT}
-make ${VERBOSE_CM} test
+CTEST_OUTPUT_ON_FAILURE=1 make ${VERBOSE_CM} test
 make install
