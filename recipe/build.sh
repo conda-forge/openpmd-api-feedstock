@@ -34,13 +34,32 @@ elif [[ ${CXXFLAGS} == *"-std="* ]]; then
 fi
 
 
+# MPI variants
+if [[ ${mpi} == "nompi" ]]; then
+    export USE_MPI=OFF
+else
+    export USE_MPI=ON
+fi
+#   see https://github.com/conda-forge/hdf5-feedstock/blob/master/recipe/mpiexec.sh
+if [[ "$mpi" == "mpich" ]]; then
+    export HYDRA_LAUNCHER=fork
+    #export HYDRA_LAUNCHER=ssh
+fi
+if [[ "$mpi" == "openmpi" ]]; then
+    export OMPI_MCA_btl=self,tcp
+    export OMPI_MCA_plm=isolated
+    #export OMPI_MCA_plm=ssh
+    export OMPI_MCA_rmaps_base_oversubscribe=yes
+    export OMPI_MCA_btl_vader_single_copy_mechanism=none
+fi
+
 cmake \
     -DCMAKE_BUILD_TYPE=Release  \
     -DBUILD_SHARED_LIBS=ON      \
     -DCMAKE_CXX_STANDARD=${CXX_STANDARD}      \
     -DCMAKE_CXX_STANDARD_REQUIRED=ON          \
     -DCMAKE_CXX_EXTENSIONS=${CXX_EXTENSIONS}  \
-    -DopenPMD_USE_MPI=OFF       \
+    -DopenPMD_USE_MPI=${USE_MPI}              \
     -DopenPMD_USE_HDF5=ON       \
     -DopenPMD_USE_ADIOS1=ON     \
     -DopenPMD_USE_ADIOS2=OFF    \
@@ -54,5 +73,5 @@ cmake \
     ${SRC_DIR}
 
 make ${VERBOSE_CM} -j${CPU_COUNT}
-make ${VERBOSE_CM} test
+CTEST_OUTPUT_ON_FAILURE=1 make ${VERBOSE_CM} test
 make install
