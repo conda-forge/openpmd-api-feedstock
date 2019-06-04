@@ -21,6 +21,7 @@ JSON.
 Current build status
 ====================
 
+![ppc64le disabled](https://img.shields.io/badge/ppc64le-disabled-lightgrey.svg)
 
 <table><tr>
     <td>Appveyor</td>
@@ -118,7 +119,6 @@ Current build status
       </details>
     </td>
   </tr>
-![ppc64le disabled](https://img.shields.io/badge/ppc64le-disabled-lightgrey.svg)
 </table>
 
 Current release info
