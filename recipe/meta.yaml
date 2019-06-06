@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.8.0a" %}
-{% set build = 3 %}
+{% set build = 4 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "5b2f96850bc65f928b2c250086dd3567e41dbd86686a938c6248155013651ab4" %}
 
