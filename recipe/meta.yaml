@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.8.0a" %}
-{% set build = 4 %}
+{% set build = 5 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "5b2f96850bc65f928b2c250086dd3567e41dbd86686a938c6248155013651ab4" %}
 
@@ -20,6 +20,9 @@ source:
   fn: {{ version_fn }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # FIXME: https://github.com/openPMD/openPMD-api/pull/521
+    - 0004-cmake-win-cache-py.patch
 
 build:
   number: {{ build }}
@@ -74,13 +77,13 @@ test:
   commands:
     - python -c "import openpmd_api; print(openpmd_api.__version__);"
     - python -c "import openpmd_api; print(openpmd_api.variants)"
-    - test -f ${PREFIX}/lib/cmake/openPMD/openPMDConfig.cmake             # [unix]
-    - test -f ${PREFIX}/lib/libopenPMD.so                                 # [linux]
-    - otool -L ${PREFIX}/lib/libopenPMD.dylib                             # [osx]
-    - if exist %PREFIX%\bin\openPMD.dll (exit 0) else (exit 1)            # [win]
-    - otool -L ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.dylib               # [osx]
-    - ldd ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.so                       # [linux]
-    - if exist %PREFIX%\cmake\openPMDConfig.cmake (exit 0) else (exit 1)  # [win]
+    - test -f ${PREFIX}/lib/cmake/openPMD/openPMDConfig.cmake                     # [unix]
+    - test -f ${PREFIX}/lib/libopenPMD.so                                         # [linux]
+    - otool -L ${PREFIX}/lib/libopenPMD.dylib                                     # [osx]
+    - if exist %LIBRARY_PREFIX%\bin\openPMD.dll (exit 0) else (exit 1)            # [win]
+    - otool -L ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.dylib                       # [osx]
+    - ldd ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.so                               # [linux]
+    - if exist %LIBRARY_PREFIX%\cmake\openPMDConfig.cmake (exit 0) else (exit 1)  # [win]
 
 about:
   home: https://www.openPMD.org
