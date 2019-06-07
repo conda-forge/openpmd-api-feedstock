@@ -1,0 +1,27 @@
+From c4823e3767eb0c175f4835eba7e1e53a5331bd42 Mon Sep 17 00:00:00 2001
+From: Axel Huebl <axel.huebl@plasma.ninja>
+Date: Fri, 7 Jun 2019 21:20:40 +0200
+Subject: [PATCH] CMake Win: Install Paths Cache
+
+The paths not set in GNU dirs on windows needs to be set in CACHE
+in order to be override-able.
+---
+ CMakeLists.txt | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ea86981d..4c07ae21 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -33,8 +33,9 @@ include(GNUInstallDirs)
+ set(CMAKE_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/openPMD"
+     CACHE PATH "CMake config package location for installed targets")
+ if(WIN32)
+-    set(CMAKE_INSTALL_LIBDIR Lib)
+-    set(CMAKE_INSTALL_CMAKEDIR "cmake")
++    set(CMAKE_INSTALL_LIBDIR Lib
++        CACHE PATH "Object code libraries")
++    set_property(CACHE CMAKE_INSTALL_CMAKEDIR PROPERTY VALUE "cmake")
+ endif()
+ 
+ 
