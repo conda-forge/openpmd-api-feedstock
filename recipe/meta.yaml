@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.9.0a" %}
-{% set build = 0 %}
+{% set build = 1 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "2fd84f276453122b89ce66d4467ec162669315be2c75ae45d2a514d7b96a3a42" %}
 
@@ -55,8 +55,10 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi'] 
     - python
     - pybind11 >=2.3.0
-    - adios >=1.13.1                    # [unix and mpi == 'nompi']
-    - hdf5  >=1.8.13                    # [mpi == 'nompi']
+    # need to list hdf5|adios twice to get version pinning from conda_build_config
+    # and build pinning from {{ mpi_prefix }}
+    - adios >=1.13.1                    # [unix]
+    - hdf5  >=1.8.13
     - adios >=1.13.1 = mpi_{{ mpi }}_*  # [unix and mpi != 'nompi']
     - hdf5  >=1.8.13 = mpi_{{ mpi }}_*  # [mpi != 'nompi']
   run:
