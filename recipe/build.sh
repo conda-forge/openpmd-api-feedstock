@@ -73,5 +73,13 @@ cmake \
     ${SRC_DIR}
 
 make ${VERBOSE_CM} -j${CPU_COUNT}
-CTEST_OUTPUT_ON_FAILURE=1 make ${VERBOSE_CM} test
+
+if [[ ${target_platform} =~ .*aarch64.* ]] && [[ "$mpi" == "openmpi" ]]; then
+    # QEMU on MPI startup: "getsockopt level=1 optname=20 not yet supported"
+    # https://github.com/qemu/qemu/blob/586f3dced9f2b354480c140c070a3d02a0c66a1e/linux-user/syscall.c#L2530-L2535
+    echo "Skipping OpenMPI runtime tests on QEMU for aarch64 due to lack of support..."
+else
+    CTEST_OUTPUT_ON_FAILURE=1 make ${VERBOSE_CM} test
+fi
+
 make install
