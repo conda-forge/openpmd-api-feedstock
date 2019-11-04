@@ -10,36 +10,16 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_aarch64_mpimpichpython3.6target_platformlinux-aarch64:
-        CONFIG: linux_aarch64_mpimpichpython3.6target_platformlinux-aarch64
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-aarch64
-      linux_aarch64_mpimpichpython3.7target_platformlinux-aarch64:
-        CONFIG: linux_aarch64_mpimpichpython3.7target_platformlinux-aarch64
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-aarch64
-      linux_aarch64_mpinompipython3.6target_platformlinux-aarch64:
-        CONFIG: linux_aarch64_mpinompipython3.6target_platformlinux-aarch64
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-aarch64
-      linux_aarch64_mpinompipython3.7target_platformlinux-aarch64:
-        CONFIG: linux_aarch64_mpinompipython3.7target_platformlinux-aarch64
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-aarch64
-      linux_aarch64_mpiopenmpipython3.6target_platformlinux-aarch64:
-        CONFIG: linux_aarch64_mpiopenmpipython3.6target_platformlinux-aarch64
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-aarch64
-      linux_aarch64_mpiopenmpipython3.7target_platformlinux-aarch64:
-        CONFIG: linux_aarch64_mpiopenmpipython3.7target_platformlinux-aarch64
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-aarch64
       linux_mpimpichpython3.6target_platformlinux-64:
         CONFIG: linux_mpimpichpython3.6target_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_mpimpichpython3.7target_platformlinux-64:
         CONFIG: linux_mpimpichpython3.7target_platformlinux-64
+        UPLOAD_PACKAGES: True
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      linux_mpimpichpython3.8target_platformlinux-64:
+        CONFIG: linux_mpimpichpython3.8target_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_mpinompipython3.6target_platformlinux-64:
@@ -50,12 +30,20 @@ jobs:
         CONFIG: linux_mpinompipython3.7target_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      linux_mpinompipython3.8target_platformlinux-64:
+        CONFIG: linux_mpinompipython3.8target_platformlinux-64
+        UPLOAD_PACKAGES: True
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_mpiopenmpipython3.6target_platformlinux-64:
         CONFIG: linux_mpiopenmpipython3.6target_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_mpiopenmpipython3.7target_platformlinux-64:
         CONFIG: linux_mpiopenmpipython3.7target_platformlinux-64
+        UPLOAD_PACKAGES: True
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      linux_mpiopenmpipython3.8target_platformlinux-64:
+        CONFIG: linux_mpiopenmpipython3.8target_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
   steps:
@@ -69,7 +57,8 @@ jobs:
 
   - script: |
         export CI=azure
-        .azure-pipelines/run_docker_build.sh
+        export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
+        .scripts/run_docker_build.sh
     displayName: Run docker build
     env:
       BINSTAR_TOKEN: $(BINSTAR_TOKEN)
