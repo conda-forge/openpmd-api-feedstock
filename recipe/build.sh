@@ -34,6 +34,14 @@ elif [[ ${CXXFLAGS} == *"-std="* ]]; then
 fi
 
 
+# FIXME: ADIOS1 broken with MPICH
+if [[ ${mpi} == "mpich" && ${target_platform} =~ osx.* ]]; then
+    export USE_ADIOS1=OFF
+else
+    export USE_ADIOS1=ON
+fi
+
+
 # MPI variants
 if [[ ${mpi} == "nompi" ]]; then
     export USE_MPI=OFF
@@ -61,7 +69,7 @@ cmake \
     -DCMAKE_CXX_EXTENSIONS=${CXX_EXTENSIONS}  \
     -DopenPMD_USE_MPI=${USE_MPI}              \
     -DopenPMD_USE_HDF5=ON       \
-    -DopenPMD_USE_ADIOS1=ON     \
+    -DopenPMD_USE_ADIOS1=${USE_ADIOS1}        \
     -DopenPMD_USE_ADIOS2=OFF    \
     -DopenPMD_USE_PYTHON=ON     \
     -DopenPMD_USE_INTERNAL_PYBIND11=OFF              \

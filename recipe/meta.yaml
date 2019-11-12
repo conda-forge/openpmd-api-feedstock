@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.9.0a" %}
-{% set build = 2 %}
+{% set build = 3 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "2fd84f276453122b89ce66d4467ec162669315be2c75ae45d2a514d7b96a3a42" %}
 
@@ -63,6 +63,7 @@ requirements:
     - hdf5  >=1.8.13 = mpi_{{ mpi }}_*  # [mpi != 'nompi']
   run:
     - {{ mpi }}  # [mpi != 'nompi']
+    - mpi4py     # [mpi != 'nompi']
     - python
     - numpy >=1.15.0
     # FIXME: for some reason warnings about this (ADIOS1 deps)
@@ -80,7 +81,7 @@ test:
     - test -f ${PREFIX}/lib/libopenPMD.so                                         # [linux]
     - otool -L ${PREFIX}/lib/libopenPMD.dylib                                     # [osx]
     - if exist %LIBRARY_PREFIX%\bin\openPMD.dll (exit 0) else (exit 1)            # [win]
-    - otool -L ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.dylib                       # [osx]
+    - otool -L ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.dylib                       # [osx and mpi != 'mpich']
     - ldd ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.so                               # [linux]
     - if exist %LIBRARY_PREFIX%\cmake\openPMDConfig.cmake (exit 0) else (exit 1)  # [win]
 
