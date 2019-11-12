@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: linux_aarch64_mpimpichpython3.6target_platformlinux-aarch64
+name: linux_aarch64_mpimpichpython3.6targ_hbd7e601876
 
 platform:
   os: linux
@@ -26,7 +26,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpimpichpython3.7target_platformlinux-aarch64
+name: linux_aarch64_mpimpichpython3.7targ_h312b4994f2
 
 platform:
   os: linux
@@ -52,7 +52,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpimpichpython3.8target_platformlinux-aarch64
+name: linux_aarch64_mpimpichpython3.8targ_hce02f3fa64
 
 platform:
   os: linux
@@ -78,7 +78,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpinompipython3.6target_platformlinux-aarch64
+name: linux_aarch64_mpinompipython3.6targ_h5530387a2c
 
 platform:
   os: linux
@@ -104,7 +104,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpinompipython3.7target_platformlinux-aarch64
+name: linux_aarch64_mpinompipython3.7targ_h91b091a21e
 
 platform:
   os: linux
@@ -130,7 +130,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpinompipython3.8target_platformlinux-aarch64
+name: linux_aarch64_mpinompipython3.8targ_h748419dbc0
 
 platform:
   os: linux
@@ -156,7 +156,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpiopenmpipython3.6target_platformlinux-aarch64
+name: linux_aarch64_mpiopenmpipython3.6ta_h6f32c73ff8
 
 platform:
   os: linux
@@ -182,7 +182,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpiopenmpipython3.7target_platformlinux-aarch64
+name: linux_aarch64_mpiopenmpipython3.7ta_ha3757fd57f
 
 platform:
   os: linux
@@ -208,7 +208,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpiopenmpipython3.8target_platformlinux-aarch64
+name: linux_aarch64_mpiopenmpipython3.8ta_hbb906faa4a
 
 platform:
   os: linux

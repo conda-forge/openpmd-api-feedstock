@@ -239,24 +239,66 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python3.6target_platformosx-64</td>
+              <td>osx_mpimpichpython3.6target_platformosx-64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_python3.6target_platformosx-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_mpimpichpython3.6target_platformosx-64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python3.7target_platformosx-64</td>
+              <td>osx_mpimpichpython3.7target_platformosx-64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_python3.7target_platformosx-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_mpimpichpython3.7target_platformosx-64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python3.8target_platformosx-64</td>
+              <td>osx_mpimpichpython3.8target_platformosx-64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_python3.8target_platformosx-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_mpimpichpython3.8target_platformosx-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_mpinompipython3.6target_platformosx-64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_mpinompipython3.6target_platformosx-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_mpinompipython3.7target_platformosx-64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_mpinompipython3.7target_platformosx-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_mpinompipython3.8target_platformosx-64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_mpinompipython3.8target_platformosx-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_mpiopenmpipython3.6target_platformosx-64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_mpiopenmpipython3.6target_platformosx-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_mpiopenmpipython3.7target_platformosx-64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_mpiopenmpipython3.7target_platformosx-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_mpiopenmpipython3.8target_platformosx-64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=master&jobName=osx&configuration=osx_mpiopenmpipython3.8target_platformosx-64" alt="variant">
                 </a>
               </td>
             </tr><tr>

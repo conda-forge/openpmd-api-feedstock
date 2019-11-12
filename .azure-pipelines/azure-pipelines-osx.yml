@@ -10,14 +10,32 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      osx_python3.6target_platformosx-64:
-        CONFIG: osx_python3.6target_platformosx-64
+      osx_mpimpichpython3.6target_platformosx-64:
+        CONFIG: osx_mpimpichpython3.6target_platformosx-64
         UPLOAD_PACKAGES: True
-      osx_python3.7target_platformosx-64:
-        CONFIG: osx_python3.7target_platformosx-64
+      osx_mpimpichpython3.7target_platformosx-64:
+        CONFIG: osx_mpimpichpython3.7target_platformosx-64
         UPLOAD_PACKAGES: True
-      osx_python3.8target_platformosx-64:
-        CONFIG: osx_python3.8target_platformosx-64
+      osx_mpimpichpython3.8target_platformosx-64:
+        CONFIG: osx_mpimpichpython3.8target_platformosx-64
+        UPLOAD_PACKAGES: True
+      osx_mpinompipython3.6target_platformosx-64:
+        CONFIG: osx_mpinompipython3.6target_platformosx-64
+        UPLOAD_PACKAGES: True
+      osx_mpinompipython3.7target_platformosx-64:
+        CONFIG: osx_mpinompipython3.7target_platformosx-64
+        UPLOAD_PACKAGES: True
+      osx_mpinompipython3.8target_platformosx-64:
+        CONFIG: osx_mpinompipython3.8target_platformosx-64
+        UPLOAD_PACKAGES: True
+      osx_mpiopenmpipython3.6target_platformosx-64:
+        CONFIG: osx_mpiopenmpipython3.6target_platformosx-64
+        UPLOAD_PACKAGES: True
+      osx_mpiopenmpipython3.7target_platformosx-64:
+        CONFIG: osx_mpiopenmpipython3.7target_platformosx-64
+        UPLOAD_PACKAGES: True
+      osx_mpiopenmpipython3.8target_platformosx-64:
+        CONFIG: osx_mpiopenmpipython3.8target_platformosx-64
         UPLOAD_PACKAGES: True
 
   steps:
