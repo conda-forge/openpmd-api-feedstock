@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.11.1a" %}
-{% set build = 2 %}
+{% set build = 3 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "e5591de6a2a059b72d72c19f0fa4e1dd66af0f04ca94d5ce5c7e5cbf1f5d5324" %}
 
@@ -90,7 +90,7 @@ test:
     - test -f ${PREFIX}/lib/libopenPMD.so                                         # [linux]
     - otool -L ${PREFIX}/lib/libopenPMD.dylib                                     # [osx]
     - if exist %LIBRARY_PREFIX%\bin\openPMD.dll (exit 0) else (exit 1)            # [win]
-    - otool -L ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.dylib                       # [osx and mpi != 'mpich']
+    - otool -L ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.dylib                       # [osx]
     - ldd ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.so                               # [linux]
     - if exist %LIBRARY_PREFIX%\cmake\openPMDConfig.cmake (exit 0) else (exit 1)  # [win]
     - test -f ${PREFIX}/share/xeus-cling/tagfiles/openpmd-api-doxygen-web.tag.xml  # [unix]
