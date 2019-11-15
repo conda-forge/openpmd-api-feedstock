@@ -20,6 +20,10 @@ source:
   fn: {{ version_fn }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # ADIOS2 build with C++17
+    # https://github.com/openPMD/openPMD-api/pull/614
+    - 0001-adios-cxx17.patch
 
 build:
   number: {{ build }}

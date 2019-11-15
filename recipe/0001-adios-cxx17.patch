@@ -1,0 +1,42 @@
+From 6ee99763b702e247c51b287ae236f5d02c5aba9e Mon Sep 17 00:00:00 2001
+From: Axel Huebl <axel.huebl@plasma.ninja>
+Date: Fri, 15 Nov 2019 14:41:13 -0800
+Subject: [PATCH] ADIOS2: Fix C++17 Build
+
+Fix `if constexpr` syntax in C++17 build with ADIOS2.
+---
+ CHANGELOG.rst                    | 2 ++
+ src/IO/ADIOS/ADIOS2IOHandler.cpp | 3 ++-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/CHANGELOG.rst b/CHANGELOG.rst
+index 903b6a9d..5a7cb939 100644
+--- a/CHANGELOG.rst
++++ b/CHANGELOG.rst
+@@ -20,6 +20,8 @@ Features
+ Bug Fixes
+ """""""""
+ 
++- ADIOS2: fix C++17 build #614
++
+ Other
+ """""
+ 
+diff --git a/src/IO/ADIOS/ADIOS2IOHandler.cpp b/src/IO/ADIOS/ADIOS2IOHandler.cpp
+index 2cfa531c..26975cd5 100644
+--- a/src/IO/ADIOS/ADIOS2IOHandler.cpp
++++ b/src/IO/ADIOS/ADIOS2IOHandler.cpp
+@@ -699,10 +699,11 @@ namespace detail
+          * that would otherwise be lost. Check whether this has been done.
+          */
+         using rep = AttributeTypes<bool>::rep;
++        if
+ #if __cplusplus > 201402L
+         constexpr
+ #endif
+-        if( std::is_same< T, rep >::value )
++        ( std::is_same< T, rep >::value )
+         {
+             std::string metaAttr = "__is_boolean__" + name;
+             auto type = attributeInfo( IO, "__is_boolean__" + name );
+
