@@ -49,6 +49,8 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    # FIXME: pulled in by ADIOS2, see https://github.com/ornladios/ADIOS2/issues/1885
+    - {{ compiler('fortran') }}  # [linux]
     - make  # [unix]
     - cmake >=3.11
   host:
