@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.10.0a" %}
-{% set build = 0 %}
+{% set build = 1 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "1a19bba8435bee0a6a898453752a9e2108221b0f1a7137038596a2d4b6b10661" %}
 
@@ -20,6 +20,10 @@ source:
   fn: {{ version_fn }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # ADIOS2 build with C++17
+    # https://github.com/openPMD/openPMD-api/pull/614
+    - 0001-adios-cxx17.patch
 
 build:
   number: {{ build }}
@@ -49,18 +53,22 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    # FIXME: pulled in by ADIOS2, see https://github.com/ornladios/ADIOS2/issues/1885
+    - {{ compiler('fortran') }}  # [linux]
     - make  # [unix]
     - cmake >=3.11
   host:
     - {{ mpi }}  # [mpi != 'nompi'] 
     - python
     - pybind11 >=2.3.0
-    # need to list hdf5|adios twice to get version pinning from conda_build_config
-    # and build pinning from {{ mpi_prefix }}
-    - adios >=1.13.1                    # [unix]
-    - hdf5  >=1.8.13
-    - adios >=1.13.1 = mpi_{{ mpi }}_*  # [unix and mpi != 'nompi']
-    - hdf5  >=1.8.13 = mpi_{{ mpi }}_*  # [mpi != 'nompi']
+    # need to list hdf5|adios|adios2 twice to get version pinning from
+    # conda_build_config and build pinning from {{ mpi_prefix }}
+    - adios  >=1.13.1                    # [unix]
+    - adios2 >=2.4.0
+    - hdf5   >=1.8.13
+    - adios  >=1.13.1 = mpi_{{ mpi }}_*  # [unix and mpi != 'nompi']
+    - adios2 >=2.4.0  = mpi_{{ mpi }}_*  # [mpi != 'nompi']
+    - hdf5   >=1.8.13 = mpi_{{ mpi }}_*  # [mpi != 'nompi']
   run:
     - {{ mpi }}  # [mpi != 'nompi']
     - mpi4py     # [mpi != 'nompi']
@@ -95,11 +103,10 @@ about:
   description: |
     This library provides a common high-level API for openPMD writing and
     reading. It provides a common interface to I/O libraries and file formats
-    such as HDF5, ADIOS and JSON.
+    such as HDF5, ADIOS1, ADIOS2, and JSON.
     Language bindings are provided for C++11 (or newer) and Python 3.
-    This conda-forge package only provides serial I/O, please build from source
-    for MPI parallel I/O on HPC systems. Window support is limited to HDF5 and
-    JSON.
+    This conda-forge package provides serial and MPI-parallel I/O. Windows
+    support is limited to serial versions of HDF5, ADIOS2 and JSON.
   doc_url: https://openpmd-api.readthedocs.io
   dev_url: https://github.com/openPMD/openPMD-api
 

@@ -18,7 +18,7 @@ cmake ^
     -DopenPMD_USE_MPI=OFF       ^
     -DopenPMD_USE_HDF5=ON       ^
     -DopenPMD_USE_ADIOS1=OFF    ^
-    -DopenPMD_USE_ADIOS2=OFF    ^
+    -DopenPMD_USE_ADIOS2=ON     ^
     -DopenPMD_USE_PYTHON=ON     ^
     -DopenPMD_USE_INTERNAL_PYBIND11=OFF  ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%  ^
