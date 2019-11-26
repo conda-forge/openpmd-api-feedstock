@@ -1,0 +1,126 @@
+From 244afa5253701ac03ecece854de17eb78d7ba6d2 Mon Sep 17 00:00:00 2001
+From: Axel Huebl <axel.huebl@plasma.ninja>
+Date: Mon, 25 Nov 2019 18:20:45 -0800
+Subject: [PATCH] NVCC: No Visibility Attribute
+
+This project is provides host-side APIs [1]. Some downstream
+projects are unable to split their translation units properly in
+host+device and host-only, and just pass all code through `nvcc`.
+Doing so is not appreciated (by me) but tolerated (by me).
+
+Unfortunately, `nvcc` is a bit behind in supporting visibility
+attributes (Nvidia bug report: 2767443 as of v10.2). Assuming that
+openPMD-api itself is built with a proper host-compiler instead of
+`nvcc`, we can live with defining our `EXPORT` macro to nothing
+during downstream consumption.
+
+This causes a compile error when build with GCC <6 and a warning
+with newer GCC in `include/openPMD/IO/IOTask.hpp` for
+`enum class Operation`.
+
+[1] Note: We might support passing device-side pointers in the
+future, though.
+---
+ CHANGELOG.rst                                            | 3 +++
+ include/openPMD/IO/ADIOS/ADIOS1IOHandler.hpp             | 4 +++-
+ include/openPMD/IO/ADIOS/ADIOS1IOHandlerImpl.hpp         | 4 +++-
+ include/openPMD/IO/ADIOS/ParallelADIOS1IOHandler.hpp     | 4 +++-
+ include/openPMD/IO/ADIOS/ParallelADIOS1IOHandlerImpl.hpp | 4 +++-
+ include/openPMD/IO/IOTask.hpp                            | 4 +++-
+ 6 files changed, 18 insertions(+), 5 deletions(-)
+
+diff --git a/CHANGELOG.rst b/CHANGELOG.rst
+index 5a7cb939..694650bf 100644
+--- a/CHANGELOG.rst
++++ b/CHANGELOG.rst
+@@ -21,6 +21,9 @@ Bug Fixes
+ """""""""
+ 
+ - ADIOS2: fix C++17 build #614
++- nvcc:
++
++  - ignore export of ``enum class Operation`` #617
+ 
+ Other
+ """""
+diff --git a/include/openPMD/IO/ADIOS/ADIOS1IOHandler.hpp b/include/openPMD/IO/ADIOS/ADIOS1IOHandler.hpp
+index 63ab961b..42ff2b25 100644
+--- a/include/openPMD/IO/ADIOS/ADIOS1IOHandler.hpp
++++ b/include/openPMD/IO/ADIOS/ADIOS1IOHandler.hpp
+@@ -30,8 +30,10 @@
+ #   include <queue>
+ #endif
+ 
+-#if _MSC_VER
++#ifdef _MSC_VER
+ #   define EXPORT __declspec( dllexport )
++#elif defined(__NVCC__)
++#   define EXPORT
+ #else
+ #   define EXPORT __attribute__((visibility("default")))
+ #endif
+diff --git a/include/openPMD/IO/ADIOS/ADIOS1IOHandlerImpl.hpp b/include/openPMD/IO/ADIOS/ADIOS1IOHandlerImpl.hpp
+index 46710c67..ee6d151f 100644
+--- a/include/openPMD/IO/ADIOS/ADIOS1IOHandlerImpl.hpp
++++ b/include/openPMD/IO/ADIOS/ADIOS1IOHandlerImpl.hpp
+@@ -36,8 +36,10 @@
+ #   include <unordered_set>
+ #endif
+ 
+-#if _MSC_VER
++#ifdef _MSC_VER
+ #   define EXPORT __declspec( dllexport )
++#elif defined(__NVCC__)
++#   define EXPORT
+ #else
+ #   define EXPORT __attribute__((visibility("default")))
+ #endif
+diff --git a/include/openPMD/IO/ADIOS/ParallelADIOS1IOHandler.hpp b/include/openPMD/IO/ADIOS/ParallelADIOS1IOHandler.hpp
+index 17629a84..65ce4ab2 100644
+--- a/include/openPMD/IO/ADIOS/ParallelADIOS1IOHandler.hpp
++++ b/include/openPMD/IO/ADIOS/ParallelADIOS1IOHandler.hpp
+@@ -30,8 +30,10 @@
+ #   include <queue>
+ #endif
+ 
+-#if _MSC_VER
++#ifdef _MSC_VER
+ #   define EXPORT __declspec( dllexport )
++#elif defined(__NVCC__)
++#   define EXPORT
+ #else
+ #   define EXPORT __attribute__((visibility("default")))
+ #endif
+diff --git a/include/openPMD/IO/ADIOS/ParallelADIOS1IOHandlerImpl.hpp b/include/openPMD/IO/ADIOS/ParallelADIOS1IOHandlerImpl.hpp
+index b153fa78..86b2616e 100644
+--- a/include/openPMD/IO/ADIOS/ParallelADIOS1IOHandlerImpl.hpp
++++ b/include/openPMD/IO/ADIOS/ParallelADIOS1IOHandlerImpl.hpp
+@@ -37,8 +37,10 @@
+ #   include <unordered_set>
+ #endif
+ 
+-#if _MSC_VER
++#ifdef _MSC_VER
+ #   define EXPORT __declspec( dllexport )
++#elif defined(__NVCC__)
++#   define EXPORT
+ #else
+ #   define EXPORT __attribute__((visibility("default")))
+ #endif
+diff --git a/include/openPMD/IO/IOTask.hpp b/include/openPMD/IO/IOTask.hpp
+index 0e2ba0ce..a9cfd690 100644
+--- a/include/openPMD/IO/IOTask.hpp
++++ b/include/openPMD/IO/IOTask.hpp
+@@ -30,8 +30,10 @@
+ #include <string>
+ #include <utility>
+ 
+-#if _MSC_VER
++#ifdef _MSC_VER
+ #   define EXPORT __declspec( dllexport )
++#elif defined(__NVCC__)
++#   define EXPORT
+ #else
+ #   define EXPORT __attribute__((visibility("default")))
+ #endif
+
