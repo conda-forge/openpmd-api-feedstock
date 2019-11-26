@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.10.0a" %}
-{% set build = 1 %}
+{% set build = 2 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "1a19bba8435bee0a6a898453752a9e2108221b0f1a7137038596a2d4b6b10661" %}
 
@@ -24,6 +24,12 @@ source:
     # ADIOS2 build with C++17
     # https://github.com/openPMD/openPMD-api/pull/614
     - 0001-adios-cxx17.patch
+    # NVCC has no visiblity attribute
+    # https://github.com/openPMD/openPMD-api/pull/617
+    - 0002-nvcc-visibility.patch
+    # NVCC fails to build MPark.Variant in C++14
+    # https://github.com/openPMD/openPMD-api/pull/618
+    - 0003-nvcc-cxx14-variant.patch
 
 build:
   number: {{ build }}
