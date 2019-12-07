@@ -1,8 +1,8 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.10.0a" %}
-{% set build = 2 %}
+{% set version = "0.10.1a" %}
+{% set build = 0 %}
 {% set version_fn = version.replace("a", "-alpha") %}
-{% set sha256 = "1a19bba8435bee0a6a898453752a9e2108221b0f1a7137038596a2d4b6b10661" %}
+{% set sha256 = "74ec2967f38c561677e872b24d40a2c14ff507443f115fcdfdfa94c766c51a88" %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
@@ -20,16 +20,6 @@ source:
   fn: {{ version_fn }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # ADIOS2 build with C++17
-    # https://github.com/openPMD/openPMD-api/pull/614
-    - 0001-adios-cxx17.patch
-    # NVCC has no visiblity attribute
-    # https://github.com/openPMD/openPMD-api/pull/617
-    - 0002-nvcc-visibility.patch
-    # NVCC fails to build MPark.Variant in C++14
-    # https://github.com/openPMD/openPMD-api/pull/618
-    - 0003-nvcc-cxx14-variant.patch
 
 build:
   number: {{ build }}
