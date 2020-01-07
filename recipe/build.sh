@@ -80,6 +80,12 @@ cmake \
     ${CMAKE_PLATFORM_FLAGS[@]}        \
     ${SRC_DIR}
 
+# compiler error or resource exhaustion on PPC64le Travis-CI builds with:
+#   powerpc64le-conda_cos7-linux-gnu-c++: fatal error: Killed signal terminated program cc1plus
+#   FIXME: https://github.com/conda-forge/conda-forge-ci-setup-feedstock/pull/68
+if [[ ${target_platform} =~ .*ppc64le.* ]]; then
+  export CPU_COUNT=2
+fi
 make ${VERBOSE_CM} -j${CPU_COUNT}
 
 if [[ ${target_platform} =~ .*aarch64.* ]] && [[ "$mpi" == "openmpi" ]]; then
