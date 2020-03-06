@@ -41,9 +41,12 @@ build:
   run_exports:
     # strict runtime dependency on build-time MPI flavor
     - {{ name }} * {{ mpi_prefix }}_* 
-    # https://conda.io/docs/user-guide/tasks/build-packages/variants.html#referencing-subpackages
-    # in 0.X.*, newer minor versions are compatible
-    - {{ pin_subpackage('openpmd-api', min_pin='x.x', max_pin='x.x') }}
+    # patch-releases are not (yet) ABI compatible:
+    #   https://docs.conda.io/projects/conda-build/en/latest/resources/variants.html#referencing-subpackages
+    #   https://abi-laboratory.pro/?view=timeline&l=adios2
+    #   https://abi-laboratory.pro/?view=timeline&l=openpmd-api
+    - {{ pin_compatible('adios2', min_pin='x.x.x', max_pin='x.x.x') }}
+    - {{ pin_subpackage('openpmd-api', min_pin='x.x.x', max_pin='x.x.x') }}
 
 requirements:
   build:
