@@ -1,8 +1,8 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.11.0a" %}
+{% set version = "0.11.1a" %}
 {% set build = 0 %}
 {% set version_fn = version.replace("a", "-alpha") %}
-{% set sha256 = "102a317024bb1abc28ec9feda96c44165de1d90a82a3aecae9fcaf72991cdb88" %}
+{% set sha256 = "e5591de6a2a059b72d72c19f0fa4e1dd66af0f04ca94d5ce5c7e5cbf1f5d5324" %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
@@ -56,6 +56,8 @@ requirements:
     - {{ compiler('fortran') }}  # [linux]
     - make  # [unix]
     - cmake >=3.11
+    - curl
+    - pkg-config
   host:
     - {{ mpi }}  # [mpi != 'nompi'] 
     - python
@@ -91,10 +93,14 @@ test:
     - otool -L ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.dylib                       # [osx and mpi != 'mpich']
     - ldd ${PREFIX}/lib/libopenPMD.ADIOS1.Serial.so                               # [linux]
     - if exist %LIBRARY_PREFIX%\cmake\openPMDConfig.cmake (exit 0) else (exit 1)  # [win]
+    - test -f ${PREFIX}/share/xeus-cling/tagfiles/openpmd-api-doxygen-web.tag.xml  # [unix]
+    - test -f ${PREFIX}/etc/xeus-cling/tags.d/openpmd-api.json                     # [unix]
+    - if exist %LIBRARY_PREFIX%\share\xeus-cling\tagfiles\openpmd-api-doxygen-web.tag.xml (exit 0) else (exit 1)  # [win]
+    - if exist %LIBRARY_PREFIX%\etc\xeus-cling\tags.d\openpmd-api.json (exit 0) else (exit 1)                     # [win]
 
 about:
   home: https://www.openPMD.org
-  license: LGPL 3
+  license: LGPL-3.0-or-later
   license_family: LGPL
   license_file: COPYING.LESSER
   summary: 'C++ & Python API for writing & reading (.h5, .bp, .json, ...), serial & MPI parallel openPMD files.'

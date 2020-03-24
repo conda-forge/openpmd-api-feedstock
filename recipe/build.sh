@@ -97,3 +97,21 @@ else
 fi
 
 make install
+
+
+# install API documentation: tagfile for xeus-cling
+#   https://xeus-cling.readthedocs.io/en/latest/inline_help.html
+version_fn="$(pkg-config --modversion openPMD)-alpha"
+
+mkdir -p ${PREFIX}/share/xeus-cling/tagfiles
+mkdir -p ${PREFIX}/etc/xeus-cling/tags.d
+curl -sOL https://openpmd-api.readthedocs.io/en/${version_fn}/_static/doxyhtml/openpmd-api-doxygen-web.tag.xml
+mv openpmd-api-doxygen-web.tag.xml ${PREFIX}/share/xeus-cling/tagfiles/
+
+cat > ${PREFIX}/etc/xeus-cling/tags.d/openpmd-api.json << TextDelimiter
+{
+    "url": "https://openpmd-api.readthedocs.io/en/${version_fn}/_static/doxyhtml/",
+    "tagfile": "openpmd-api-doxygen-web.tag.xml"
+}
+TextDelimiter
+cat ${PREFIX}/etc/xeus-cling/tags.d/openpmd-api.json
