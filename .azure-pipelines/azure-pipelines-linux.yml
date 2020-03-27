@@ -10,6 +10,10 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
+      linux_mpimpichpython3.6.____73_pypytarget_platformlinux-64:
+        CONFIG: linux_mpimpichpython3.6.____73_pypytarget_platformlinux-64
+        UPLOAD_PACKAGES: True
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_mpimpichpython3.6.____cpythontarget_platformlinux-64:
         CONFIG: linux_mpimpichpython3.6.____cpythontarget_platformlinux-64
         UPLOAD_PACKAGES: True
@@ -22,6 +26,10 @@ jobs:
         CONFIG: linux_mpimpichpython3.8.____cpythontarget_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      linux_mpinompipython3.6.____73_pypytarget_platformlinux-64:
+        CONFIG: linux_mpinompipython3.6.____73_pypytarget_platformlinux-64
+        UPLOAD_PACKAGES: True
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_mpinompipython3.6.____cpythontarget_platformlinux-64:
         CONFIG: linux_mpinompipython3.6.____cpythontarget_platformlinux-64
         UPLOAD_PACKAGES: True
@@ -32,6 +40,10 @@ jobs:
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_mpinompipython3.8.____cpythontarget_platformlinux-64:
         CONFIG: linux_mpinompipython3.8.____cpythontarget_platformlinux-64
+        UPLOAD_PACKAGES: True
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      linux_mpiopenmpipython3.6.____73_pypytarget_platformlinux-64:
+        CONFIG: linux_mpiopenmpipython3.6.____73_pypytarget_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_mpiopenmpipython3.6.____cpythontarget_platformlinux-64:

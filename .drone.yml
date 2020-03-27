@@ -1,5 +1,31 @@
 ---
 kind: pipeline
+name: linux_aarch64_mpimpichpython3.6.____h11bfc9f5c2
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: Install and build
+  image: condaforge/linux-anvil-aarch64
+  environment:
+    CONFIG: linux_aarch64_mpimpichpython3.6.____73_pypytarget_platformlinux-aarch64
+    UPLOAD_PACKAGES: True
+    PLATFORM: linux-aarch64
+    BINSTAR_TOKEN: 
+      from_secret: BINSTAR_TOKEN
+  commands:
+    - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
+    - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
+    - export CI=drone
+    - export GIT_BRANCH="$DRONE_BRANCH"
+    - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
+    - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
+    - echo "Done building"
+
+---
+kind: pipeline
 name: linux_aarch64_mpimpichpython3.6.____hc7779a371d
 
 platform:
@@ -78,6 +104,32 @@ steps:
 
 ---
 kind: pipeline
+name: linux_aarch64_mpinompipython3.6.____h482bd55a09
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: Install and build
+  image: condaforge/linux-anvil-aarch64
+  environment:
+    CONFIG: linux_aarch64_mpinompipython3.6.____73_pypytarget_platformlinux-aarch64
+    UPLOAD_PACKAGES: True
+    PLATFORM: linux-aarch64
+    BINSTAR_TOKEN: 
+      from_secret: BINSTAR_TOKEN
+  commands:
+    - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
+    - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
+    - export CI=drone
+    - export GIT_BRANCH="$DRONE_BRANCH"
+    - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
+    - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
+    - echo "Done building"
+
+---
+kind: pipeline
 name: linux_aarch64_mpinompipython3.6.____hb20a8ec56d
 
 platform:
@@ -141,6 +193,32 @@ steps:
   image: condaforge/linux-anvil-aarch64
   environment:
     CONFIG: linux_aarch64_mpinompipython3.8.____cpythontarget_platformlinux-aarch64
+    UPLOAD_PACKAGES: True
+    PLATFORM: linux-aarch64
+    BINSTAR_TOKEN: 
+      from_secret: BINSTAR_TOKEN
+  commands:
+    - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
+    - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
+    - export CI=drone
+    - export GIT_BRANCH="$DRONE_BRANCH"
+    - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
+    - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
+    - echo "Done building"
+
+---
+kind: pipeline
+name: linux_aarch64_mpiopenmpipython3.6.__hac6b77f404
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: Install and build
+  image: condaforge/linux-anvil-aarch64
+  environment:
+    CONFIG: linux_aarch64_mpiopenmpipython3.6.____73_pypytarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN: 

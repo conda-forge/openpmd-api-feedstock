@@ -10,6 +10,9 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
+      osx_mpimpichpython3.6.____73_pypytarget_platformosx-64:
+        CONFIG: osx_mpimpichpython3.6.____73_pypytarget_platformosx-64
+        UPLOAD_PACKAGES: True
       osx_mpimpichpython3.6.____cpythontarget_platformosx-64:
         CONFIG: osx_mpimpichpython3.6.____cpythontarget_platformosx-64
         UPLOAD_PACKAGES: True
@@ -19,6 +22,9 @@ jobs:
       osx_mpimpichpython3.8.____cpythontarget_platformosx-64:
         CONFIG: osx_mpimpichpython3.8.____cpythontarget_platformosx-64
         UPLOAD_PACKAGES: True
+      osx_mpinompipython3.6.____73_pypytarget_platformosx-64:
+        CONFIG: osx_mpinompipython3.6.____73_pypytarget_platformosx-64
+        UPLOAD_PACKAGES: True
       osx_mpinompipython3.6.____cpythontarget_platformosx-64:
         CONFIG: osx_mpinompipython3.6.____cpythontarget_platformosx-64
         UPLOAD_PACKAGES: True
@@ -27,6 +33,9 @@ jobs:
         UPLOAD_PACKAGES: True
       osx_mpinompipython3.8.____cpythontarget_platformosx-64:
         CONFIG: osx_mpinompipython3.8.____cpythontarget_platformosx-64
+        UPLOAD_PACKAGES: True
+      osx_mpiopenmpipython3.6.____73_pypytarget_platformosx-64:
+        CONFIG: osx_mpiopenmpipython3.6.____73_pypytarget_platformosx-64
         UPLOAD_PACKAGES: True
       osx_mpiopenmpipython3.6.____cpythontarget_platformosx-64:
         CONFIG: osx_mpiopenmpipython3.6.____cpythontarget_platformosx-64
