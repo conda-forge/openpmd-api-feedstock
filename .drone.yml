@@ -13,8 +13,12 @@ steps:
     CONFIG: linux_aarch64_mpimpichpython3.6.____73_pypytarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -39,8 +43,12 @@ steps:
     CONFIG: linux_aarch64_mpimpichpython3.6.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -65,8 +73,12 @@ steps:
     CONFIG: linux_aarch64_mpimpichpython3.7.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -91,8 +103,12 @@ steps:
     CONFIG: linux_aarch64_mpimpichpython3.8.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -117,8 +133,12 @@ steps:
     CONFIG: linux_aarch64_mpinompipython3.6.____73_pypytarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -143,8 +163,12 @@ steps:
     CONFIG: linux_aarch64_mpinompipython3.6.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -169,8 +193,12 @@ steps:
     CONFIG: linux_aarch64_mpinompipython3.7.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -195,8 +223,12 @@ steps:
     CONFIG: linux_aarch64_mpinompipython3.8.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -221,8 +253,12 @@ steps:
     CONFIG: linux_aarch64_mpiopenmpipython3.6.____73_pypytarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -247,8 +283,12 @@ steps:
     CONFIG: linux_aarch64_mpiopenmpipython3.6.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -273,8 +313,12 @@ steps:
     CONFIG: linux_aarch64_mpiopenmpipython3.7.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
@@ -299,8 +343,12 @@ steps:
     CONFIG: linux_aarch64_mpiopenmpipython3.8.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
+    FEEDSTOCK_TOKEN:
+      from_secret: FEEDSTOCK_TOKEN
+    STAGING_BINSTAR_TOKEN:
+      from_secret: STAGING_BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
