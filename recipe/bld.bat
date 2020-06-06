@@ -1,10 +1,8 @@
 REM Install library with openPMDConfig.cmake files with cmake
 
-:: remove -GL (whole program optimization) from CXXFLAGS
-:: causes a fatal error when linking our .dll
-echo "%CXXFLAGS%"
-set CXXFLAGS=%CXXFLAGS: -GL=%
-echo "%CXXFLAGS%"
+echo "CFLAGS: %CFLAGS%"
+echo "CXXFLAGS: %CXXFLAGS%"
+echo "LDFLAGS: %LDFLAGS%"
 
 mkdir build
 cd build
@@ -21,6 +19,7 @@ cmake ^
     -DopenPMD_USE_ADIOS2=ON     ^
     -DopenPMD_USE_PYTHON=ON     ^
     -DopenPMD_USE_INTERNAL_PYBIND11=OFF  ^
+    -DPYTHON_EXECUTABLE:FILEPATH=%PYTHON%  ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%  ^
     -DCMAKE_INSTALL_LIBDIR=lib  ^
     -DCMAKE_INSTALL_PYTHONDIR=%SP_DIR%  ^
@@ -45,8 +44,8 @@ for /f %%i in ('pkg-config --modversion openPMD') do set VERSION_FN=%%i
 if errorlevel 1 exit 1
 set VERSION_FN=%VERSION_FN%-alpha
 
-mkdir -p %LIBRARY_PREFIX%\share\xeus-cling\tagfiles
-mkdir -p %LIBRARY_PREFIX%\etc\xeus-cling\tags.d
+mkdir %LIBRARY_PREFIX%\share\xeus-cling\tagfiles
+mkdir %LIBRARY_PREFIX%\etc\xeus-cling\tags.d
 curl -sOL https://openpmd-api.readthedocs.io/en/%VERSION_FN%/_static/doxyhtml/openpmd-api-doxygen-web.tag.xml
 copy openpmd-api-doxygen-web.tag.xml %LIBRARY_PREFIX%\share\xeus-cling\tagfiles\ || exit 1
 if errorlevel 1 exit 1

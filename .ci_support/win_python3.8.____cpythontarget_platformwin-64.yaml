@@ -1,15 +1,15 @@
 VERBOSE_CM:
 - VERBOSE=1
 c_compiler:
-- vs2015
+- vs2017
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 curl:
-- '7.64'
+- '7'
 cxx_compiler:
-- vs2015
+- vs2017
 mpi:
 - nompi
 pin_run_as_build:
