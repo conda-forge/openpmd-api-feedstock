@@ -1,10 +1,8 @@
 REM Install library with openPMDConfig.cmake files with cmake
 
-:: remove -GL (whole program optimization) from CXXFLAGS
-:: causes a fatal error when linking our .dll
-echo "%CXXFLAGS%"
-set CXXFLAGS=%CXXFLAGS: -GL=%
-echo "%CXXFLAGS%"
+echo "CFLAGS: %CFLAGS%"
+echo "CXXFLAGS: %CXXFLAGS%"
+echo "LDFLAGS: %LDFLAGS%"
 
 mkdir build
 cd build
