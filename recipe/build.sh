@@ -34,14 +34,6 @@ elif [[ ${CXXFLAGS} == *"-std="* ]]; then
 fi
 
 
-# FIXME: ADIOS1 broken with MPICH
-if [[ ${mpi} == "mpich" && ${target_platform} =~ osx.* ]]; then
-    export USE_ADIOS1=OFF
-else
-    export USE_ADIOS1=ON
-fi
-
-
 # MPI variants
 if [[ ${mpi} == "nompi" ]]; then
     export USE_MPI=OFF
@@ -69,7 +61,7 @@ cmake \
     -DCMAKE_CXX_EXTENSIONS=${CXX_EXTENSIONS}  \
     -DopenPMD_USE_MPI=${USE_MPI}              \
     -DopenPMD_USE_HDF5=ON       \
-    -DopenPMD_USE_ADIOS1=${USE_ADIOS1}        \
+    -DopenPMD_USE_ADIOS1=ON     \
     -DopenPMD_USE_ADIOS2=ON     \
     -DopenPMD_USE_PYTHON=ON     \
     -DopenPMD_USE_INTERNAL_PYBIND11=OFF              \
@@ -93,7 +85,8 @@ if [[ ${target_platform} =~ .*aarch64.* ]] && [[ "$mpi" == "openmpi" ]]; then
     # https://github.com/qemu/qemu/blob/586f3dced9f2b354480c140c070a3d02a0c66a1e/linux-user/syscall.c#L2530-L2535
     echo "Skipping OpenMPI runtime tests on QEMU for aarch64 due to lack of support..."
 else
-    CTEST_OUTPUT_ON_FAILURE=1 make ${VERBOSE_CM} test
+    # CTEST_OUTPUT_ON_FAILURE=1 make ${VERBOSE_CM} test
+    ctest -VV --output-on-failure
 fi
 
 make install
