@@ -1,8 +1,8 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.11.1a" %}
-{% set build = 3 %}
+{% set version = "0.12.0a" %}
+{% set build = 1 %}
 {% set version_fn = version.replace("a", "-alpha") %}
-{% set sha256 = "e5591de6a2a059b72d72c19f0fa4e1dd66af0f04ca94d5ce5c7e5cbf1f5d5324" %}
+{% set sha256 = "2529e0df68b2f7606c53439d42e5444ed4c2acf61bb1779ffd07b95d10b234ff" %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
@@ -52,8 +52,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    # FIXME: pulled in by ADIOS2, see https://github.com/ornladios/ADIOS2/issues/1885
-    - {{ compiler('fortran') }}  # [linux]
     - make  # [unix]
     - cmake >=3.11
     - curl
@@ -65,10 +63,10 @@ requirements:
     # need to list hdf5|adios|adios2 twice to get version pinning from
     # conda_build_config and build pinning from {{ mpi_prefix }}
     - adios  >=1.13.1                    # [unix]
-    - adios2 >=2.4.0
+    - adios2 >=2.6.0
     - hdf5   >=1.8.13
     - adios  >=1.13.1 = mpi_{{ mpi }}_*  # [unix and mpi != 'nompi']
-    - adios2 >=2.4.0  = mpi_{{ mpi }}_*  # [mpi != 'nompi']
+    - adios2 >=2.6.0  = mpi_{{ mpi }}_*  # [mpi != 'nompi']
     - hdf5   >=1.8.13 = mpi_{{ mpi }}_*  # [mpi != 'nompi']
   run:
     - {{ mpi }}  # [mpi != 'nompi']
@@ -118,4 +116,4 @@ about:
 extra:
   recipe-maintainers:
     - ax3l
-    - C0nsultant
+    - franzpoeschel
