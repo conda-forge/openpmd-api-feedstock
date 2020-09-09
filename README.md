@@ -505,6 +505,6 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
-* [@C0nsultant](https://github.com/C0nsultant/)
 * [@ax3l](https://github.com/ax3l/)
+* [@franzpoeschel](https://github.com/franzpoeschel/)
 
