@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.12.0a" %}
-{% set build = 1 %}
+{% set build = 2 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "2529e0df68b2f7606c53439d42e5444ed4c2acf61bb1779ffd07b95d10b234ff" %}
 
@@ -20,6 +20,9 @@ source:
   fn: {{ version_fn }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # https://github.com/openPMD/openPMD-api/pull/776
+    - 0001-win-ls-module.patch
 
 build:
   number: {{ build }}
