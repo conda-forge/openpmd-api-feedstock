@@ -41,6 +41,15 @@ else
     export USE_ADIOS1=ON
 fi
 
+# FIXME: ADIOS2 has no PyPy support yet (internally shipped, unpatched pybind11<2.6.0)
+#   https://github.com/conda-forge/adios2-feedstock/pull/16
+#   https://github.com/ornladios/ADIOS2/issues/2068
+if [[ ${python_impl} == "pypy" ]]; then
+    export USE_ADIOS2=OFF
+else
+    export USE_ADIOS2=ON
+fi
+
 
 # MPI variants
 if [[ ${mpi} == "nompi" ]]; then
@@ -70,7 +79,7 @@ cmake \
     -DopenPMD_USE_MPI=${USE_MPI}              \
     -DopenPMD_USE_HDF5=ON       \
     -DopenPMD_USE_ADIOS1=${USE_ADIOS1}        \
-    -DopenPMD_USE_ADIOS2=ON     \
+    -DopenPMD_USE_ADIOS2=${USE_ADIOS2}        \
     -DopenPMD_USE_PYTHON=ON     \
     -DopenPMD_USE_INTERNAL_PYBIND11=OFF              \
     -DPYTHON_EXECUTABLE:FILEPATH=$(which ${PYTHON})  \
