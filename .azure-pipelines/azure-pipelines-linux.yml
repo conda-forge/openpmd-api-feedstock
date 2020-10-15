@@ -24,6 +24,10 @@ jobs:
         CONFIG: linux_64_mpimpichpython3.8.____cpythonpython_implcpythontarget_platformlinux-64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      linux_64_mpimpichpython3.9.____cpythonpython_implcpythontarget_platformlinux-64:
+        CONFIG: linux_64_mpimpichpython3.9.____cpythonpython_implcpythontarget_platformlinux-64
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_64_mpinompipython3.6.____73_pypypython_implpypytarget_platformlinux-64:
         CONFIG: linux_64_mpinompipython3.6.____73_pypypython_implpypytarget_platformlinux-64
         UPLOAD_PACKAGES: 'True'
@@ -40,6 +44,10 @@ jobs:
         CONFIG: linux_64_mpinompipython3.8.____cpythonpython_implcpythontarget_platformlinux-64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      linux_64_mpinompipython3.9.____cpythonpython_implcpythontarget_platformlinux-64:
+        CONFIG: linux_64_mpinompipython3.9.____cpythonpython_implcpythontarget_platformlinux-64
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_64_mpiopenmpipython3.6.____73_pypypython_implpypytarget_platformlinux-64:
         CONFIG: linux_64_mpiopenmpipython3.6.____73_pypypython_implpypytarget_platformlinux-64
         UPLOAD_PACKAGES: 'True'
@@ -54,6 +62,10 @@ jobs:
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_64_mpiopenmpipython3.8.____cpythonpython_implcpythontarget_platformlinux-64:
         CONFIG: linux_64_mpiopenmpipython3.8.____cpythonpython_implcpythontarget_platformlinux-64
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      linux_64_mpiopenmpipython3.9.____cpythonpython_implcpythontarget_platformlinux-64:
+        CONFIG: linux_64_mpiopenmpipython3.9.____cpythonpython_implcpythontarget_platformlinux-64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
   timeoutInMinutes: 360
