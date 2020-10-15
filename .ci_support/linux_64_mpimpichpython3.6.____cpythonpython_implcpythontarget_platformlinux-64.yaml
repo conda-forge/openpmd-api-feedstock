@@ -1,7 +1,9 @@
 VERBOSE_CM:
 - VERBOSE=1
 c_compiler:
-- vs2017
+- gcc
+c_compiler_version:
+- '7'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -9,9 +11,13 @@ channel_targets:
 curl:
 - '7'
 cxx_compiler:
-- vs2017
+- gxx
+cxx_compiler_version:
+- '7'
+docker_image:
+- condaforge/linux-anvil-comp7
 mpi:
-- nompi
+- mpich
 pin_run_as_build:
   curl:
     max_pin: x
@@ -19,11 +25,13 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.8.* *_cpython
+- 3.6.* *_cpython
 python_impl:
 - cpython
 target_platform:
-- win-64
+- linux-64
 zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
 - - python
   - python_impl
