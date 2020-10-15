@@ -1,7 +1,11 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 VERBOSE_CM:
 - VERBOSE=1
 c_compiler:
-- vs2017
+- clang
+c_compiler_version:
+- '10'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -9,9 +13,13 @@ channel_targets:
 curl:
 - '7'
 cxx_compiler:
-- vs2017
+- clangxx
+cxx_compiler_version:
+- '10'
+macos_machine:
+- x86_64-apple-darwin13.4.0
 mpi:
-- nompi
+- openmpi
 pin_run_as_build:
   curl:
     max_pin: x
@@ -19,11 +27,13 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.8.* *_cpython
+- 3.6.* *_cpython
 python_impl:
 - cpython
 target_platform:
-- win-64
+- osx-64
 zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
 - - python
   - python_impl
