@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: linux_aarch64_mpimpichpython3.6.____h54e4462ab8
+name: linux_aarch64_mpimpichpython3.6.____haaa014ed50
 
 platform:
   os: linux
@@ -8,9 +8,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpimpichpython3.6.____73_pypypython_implpypytarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpimpichpython3.6.____73_pypypython_implpypy
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -31,7 +31,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpimpichpython3.6.____h1e5325c91f
+name: linux_aarch64_mpimpichpython3.6.____h900363daef
 
 platform:
   os: linux
@@ -39,9 +39,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpimpichpython3.6.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpimpichpython3.6.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -62,7 +62,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpimpichpython3.7.____h910db349be
+name: linux_aarch64_mpimpichpython3.7.____h663c5f9a0b
 
 platform:
   os: linux
@@ -70,9 +70,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpimpichpython3.7.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpimpichpython3.7.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -93,7 +93,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpimpichpython3.8.____h6d5590ff7b
+name: linux_aarch64_mpimpichpython3.8.____hd07ca8cd7c
 
 platform:
   os: linux
@@ -101,9 +101,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpimpichpython3.8.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpimpichpython3.8.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -124,7 +124,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpimpichpython3.9.____h4b9fb291ed
+name: linux_aarch64_mpimpichpython3.9.____h05308ac64e
 
 platform:
   os: linux
@@ -132,9 +132,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpimpichpython3.9.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpimpichpython3.9.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -155,7 +155,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpinompipython3.6.____habeacff2a6
+name: linux_aarch64_mpinompipython3.6.____h725b1e07bf
 
 platform:
   os: linux
@@ -163,9 +163,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpinompipython3.6.____73_pypypython_implpypytarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpinompipython3.6.____73_pypypython_implpypy
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -186,7 +186,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpinompipython3.6.____hd6916914f0
+name: linux_aarch64_mpinompipython3.6.____h14f1b0aaf5
 
 platform:
   os: linux
@@ -194,9 +194,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpinompipython3.6.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpinompipython3.6.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -217,7 +217,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpinompipython3.7.____h89fddc567f
+name: linux_aarch64_mpinompipython3.7.____ha7bb6fcaa6
 
 platform:
   os: linux
@@ -225,9 +225,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpinompipython3.7.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpinompipython3.7.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -248,7 +248,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpinompipython3.8.____h1f8de0f0af
+name: linux_aarch64_mpinompipython3.8.____hcd7a86b23c
 
 platform:
   os: linux
@@ -256,9 +256,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpinompipython3.8.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpinompipython3.8.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -279,7 +279,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpinompipython3.9.____hdbe04d80ce
+name: linux_aarch64_mpinompipython3.9.____h75c0b14341
 
 platform:
   os: linux
@@ -287,9 +287,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpinompipython3.9.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpinompipython3.9.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -310,7 +310,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpiopenmpipython3.6.__h06aaf95bb0
+name: linux_aarch64_mpiopenmpipython3.6.__h3e81442aff
 
 platform:
   os: linux
@@ -318,9 +318,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpiopenmpipython3.6.____73_pypypython_implpypytarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpiopenmpipython3.6.____73_pypypython_implpypy
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -341,7 +341,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpiopenmpipython3.6.__hccb1fc35d7
+name: linux_aarch64_mpiopenmpipython3.6.__hf6a6968a2a
 
 platform:
   os: linux
@@ -349,9 +349,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpiopenmpipython3.6.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpiopenmpipython3.6.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -372,7 +372,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpiopenmpipython3.7.__h3467b85bd1
+name: linux_aarch64_mpiopenmpipython3.7.__hc56eb57c9a
 
 platform:
   os: linux
@@ -380,9 +380,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpiopenmpipython3.7.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpiopenmpipython3.7.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -403,7 +403,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpiopenmpipython3.8.__he0cc18725f
+name: linux_aarch64_mpiopenmpipython3.8.__hd1087d2661
 
 platform:
   os: linux
@@ -411,9 +411,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpiopenmpipython3.8.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpiopenmpipython3.8.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -434,7 +434,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_mpiopenmpipython3.9.__h79720055a6
+name: linux_aarch64_mpiopenmpipython3.9.__hee95e05177
 
 platform:
   os: linux
@@ -442,9 +442,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_mpiopenmpipython3.9.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_mpiopenmpipython3.9.____cpythonpython_implcpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
