@@ -49,7 +49,7 @@ build:
     #   https://abi-laboratory.pro/?view=timeline&l=adios2
     #   https://abi-laboratory.pro/?view=timeline&l=openpmd-api
     - {{ pin_compatible('adios2', min_pin='x.x.x', max_pin='x.x.x') }}  # [python_impl != 'pypy']
-    - {{ pin_subpackage('openpmd-api', min_pin='x.x.x.x', max_pin='x.x.x.x') }}
+    -  openpmd-api {{ version }}
 
 requirements:
   build:
