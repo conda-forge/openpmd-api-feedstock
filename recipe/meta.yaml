@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.12.0a" %}
-{% set build = 5 %}
+{% set build = 6 %}
 {% set version_fn = version.replace("a", "-alpha") %}
 {% set sha256 = "2529e0df68b2f7606c53439d42e5444ed4c2acf61bb1779ffd07b95d10b234ff" %}
 
@@ -49,7 +49,7 @@ build:
     #   https://abi-laboratory.pro/?view=timeline&l=adios2
     #   https://abi-laboratory.pro/?view=timeline&l=openpmd-api
     - {{ pin_compatible('adios2', min_pin='x.x.x', max_pin='x.x.x') }}  # [python_impl != 'pypy']
-    - {{ pin_subpackage('openpmd-api', min_pin='x.x.x', max_pin='x.x.x') }}
+    -  openpmd-api {{ version }}
 
 requirements:
   build:
