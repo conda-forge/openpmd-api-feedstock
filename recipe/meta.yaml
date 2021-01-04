@@ -22,6 +22,8 @@ source:
   patches:
     # https://github.com/openPMD/openPMD-api/pull/776
     - 0001-win-ls-module.patch
+    # https://github.com/openPMD/openPMD-api/issues/867
+    - 0002-osx-sourceID.patch
 
 build:
   number: {{ build }}
