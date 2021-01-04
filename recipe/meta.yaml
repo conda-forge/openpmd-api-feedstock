@@ -1,8 +1,7 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.12.0a" %}
-{% set build = 6 %}
-{% set version_fn = version.replace("a", "-alpha") %}
-{% set sha256 = "2529e0df68b2f7606c53439d42e5444ed4c2acf61bb1779ffd07b95d10b234ff" %}
+{% set version = "0.13.0" %}
+{% set build = 0 %}
+{% set sha256 = "97c2e43d80ee5c5288f278bd54f0dcb40e7f48a575b278fcef9660214b779bb0" %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
@@ -17,8 +16,8 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ version_fn }}.tar.gz
-  url: https://github.com/openPMD/openPMD-api/archive/{{ version_fn }}.tar.gz
+  fn: {{ version }}.tar.gz
+  url: https://github.com/openPMD/openPMD-api/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
     # https://github.com/openPMD/openPMD-api/pull/776
@@ -56,13 +55,13 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make  # [unix]
-    - cmake >=3.11
+    - cmake >=3.15.0
     - curl
     - pkg-config
   host:
     - {{ mpi }}  # [mpi != 'nompi'] 
     - python
-    - pybind11 >=2.3.0
+    - pybind11 >=2.6.1
     # need to list hdf5|adios|adios2 twice to get version pinning from
     # conda_build_config and build pinning from {{ mpi_prefix }}
     - adios  >=1.13.1                    # [unix]

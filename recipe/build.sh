@@ -77,12 +77,12 @@ cmake \
     -DCMAKE_CXX_STANDARD_REQUIRED=ON          \
     -DCMAKE_CXX_EXTENSIONS=${CXX_EXTENSIONS}  \
     -DopenPMD_USE_MPI=${USE_MPI}              \
-    -DopenPMD_USE_HDF5=ON       \
+    -DopenPMD_USE_HDF5=ON                     \
     -DopenPMD_USE_ADIOS1=${USE_ADIOS1}        \
     -DopenPMD_USE_ADIOS2=${USE_ADIOS2}        \
-    -DopenPMD_USE_PYTHON=ON     \
-    -DopenPMD_USE_INTERNAL_PYBIND11=OFF              \
-    -DPYTHON_EXECUTABLE:FILEPATH=$(which ${PYTHON})  \
+    -DopenPMD_USE_PYTHON=ON                   \
+    -DopenPMD_USE_INTERNAL_PYBIND11=OFF       \
+    -DPython_ROOT_DIR:FILEPATH=${PREFIX}      \
     -DBUILD_TESTING=ON                \
     -DCMAKE_INSTALL_LIBDIR=lib        \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}  \
