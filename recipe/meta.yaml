@@ -1,7 +1,7 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.13.0" %}
+{% set version = "0.13.1" %}
 {% set build = 0 %}
-{% set sha256 = "97c2e43d80ee5c5288f278bd54f0dcb40e7f48a575b278fcef9660214b779bb0" %}
+{% set sha256 = "81ff79419982eb1b0865d1736f73f950f5d4c356d3c78200ceeab7f54dc07fd7" %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
@@ -22,12 +22,10 @@ source:
   patches:
     # https://github.com/openPMD/openPMD-api/pull/776
     - 0001-win-ls-module.patch
-    # https://github.com/openPMD/openPMD-api/issues/867
-    - 0002-osx-sourceID.patch
 
 build:
   number: {{ build }}
-  skip: True  # [py27]
+  skip: true  # [py27]
 
   # add build string so packages can depend on
   # mpi or nompi variants
@@ -40,17 +38,17 @@ build:
   {% else %}
   {% set mpi_prefix = "mpi_" + mpi %}
   {% endif %}
-  string: "{{ mpi_prefix }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
+  string: {{ mpi_prefix }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}
 
   run_exports:
     # strict runtime dependency on build-time MPI flavor
-    - {{ name }} * {{ mpi_prefix }}_* 
+    - {{ name }} * {{ mpi_prefix }}_*
     # patch-releases are not (yet) ABI compatible:
     #   https://docs.conda.io/projects/conda-build/en/latest/resources/variants.html#referencing-subpackages
     #   https://abi-laboratory.pro/?view=timeline&l=adios2
     #   https://abi-laboratory.pro/?view=timeline&l=openpmd-api
     - {{ pin_compatible('adios2', min_pin='x.x.x', max_pin='x.x.x') }}  # [python_impl != 'pypy']
-    -  openpmd-api {{ version }}
+    - openpmd-api {{ version }}
 
 requirements:
   build:
@@ -105,7 +103,7 @@ about:
   license: LGPL-3.0-or-later
   license_family: LGPL
   license_file: COPYING.LESSER
-  summary: 'C++ & Python API for writing & reading (.h5, .bp, .json, ...), serial & MPI parallel openPMD files.'
+  summary: C++ & Python API for writing & reading (.h5, .bp, .json, ...), serial & MPI parallel openPMD files.
 
   description: |
     This library provides a common high-level API for openPMD writing and
