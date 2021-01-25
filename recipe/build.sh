@@ -70,7 +70,7 @@ if [[ "$mpi" == "openmpi" ]]; then
     export OMPI_MCA_btl_vader_single_copy_mechanism=none
 fi
 
-cmake \
+cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=Release  \
     -DBUILD_SHARED_LIBS=ON      \
     -DCMAKE_CXX_STANDARD=${CXX_STANDARD}      \
