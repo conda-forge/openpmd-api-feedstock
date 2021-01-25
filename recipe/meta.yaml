@@ -57,6 +57,8 @@ requirements:
     - pybind11                               # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    # needed by MPI_C on OSX for X1
+    - {{ compiler('fortran') }}  # [osx]
     - make  # [unix]
     - cmake >=3.15.0
     - curl
