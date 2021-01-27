@@ -22,6 +22,8 @@ source:
   patches:
     # https://github.com/openPMD/openPMD-api/pull/776
     - 0001-win-ls-module.patch
+    # https://github.com/openPMD/openPMD-api/pull/710
+    - 0002-mpi-components.patch
 
 build:
   number: {{ build }}

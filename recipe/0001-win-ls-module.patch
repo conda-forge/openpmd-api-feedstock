@@ -1,4 +1,4 @@
-From 490a05bff2d2693a646fb101e5e3e6813812f474 Mon Sep 17 00:00:00 2001
+From 29587f8cf70aa6673f871b31b6a4d90809d815b8 Mon Sep 17 00:00:00 2001
 From: Axel Huebl <axel.huebl@plasma.ninja>
 Date: Tue, 8 Sep 2020 08:30:27 -0700
 Subject: [PATCH] Fix Windows: CLI.py.help.ls Path
@@ -6,14 +6,14 @@ Subject: [PATCH] Fix Windows: CLI.py.help.ls Path
 Fix test issue on conda-forge by adding the exact same hints as for
 other python tests.
 ---
- CMakeLists.txt | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
+ CMakeLists.txt | 29 +++++++++++++++++++++--------
+ 1 file changed, 21 insertions(+), 8 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 76f50e8c2..924ff9704 100644
+index 796e0addf..3ec38e82c 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -920,19 +920,19 @@ if(BUILD_TESTING)
+@@ -1008,19 +1008,19 @@ if(openPMD_BUILD_TESTING)
                          ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
                  )
                  if(WIN32)
@@ -36,7 +36,7 @@ index 76f50e8c2..924ff9704 100644
                      )
                  endif()
              endif()
-@@ -993,15 +993,19 @@ if(BUILD_TESTING)
+@@ -1079,15 +1079,19 @@ if(openPMD_BUILD_TESTING)
                   WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
              )
              if(WIN32)
@@ -58,7 +58,7 @@ index 76f50e8c2..924ff9704 100644
                  )
              endif()
          endforeach()
-@@ -1048,19 +1052,19 @@ if(BUILD_TESTING)
+@@ -1124,19 +1128,19 @@ if(openPMD_BUILD_TESTING)
                          )
                      endif()
                      if(WIN32)
@@ -81,3 +81,19 @@ index 76f50e8c2..924ff9704 100644
                          )
                      endif()
                  endif()
+@@ -1157,6 +1161,15 @@ message("  C++ Compiler: ${CMAKE_CXX_COMPILER_ID} "
+                         "${CMAKE_CXX_COMPILER_WRAPPER}")
+ message("    ${CMAKE_CXX_COMPILER}")
+ message("")
++message("  Build prefix: ${openPMD_BINARY_DIR}")
++message("        bin: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
++message("        lib: ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
++message("    include: ...")
++message("      cmake: ...")
++if(openPMD_HAVE_PYTHON)
++    message("     python: ${CMAKE_PYTHON_OUTPUT_DIRECTORY}")
++endif()
++message("")
+ if(openPMD_INSTALL)
+     message("  Installation prefix: ${CMAKE_INSTALL_PREFIX}")
+     message("        bin: ${CMAKE_INSTALL_BINDIR}")
