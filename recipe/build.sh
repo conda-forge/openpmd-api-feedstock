@@ -82,7 +82,7 @@ cmake \
     -DopenPMD_USE_ADIOS2=${USE_ADIOS2}        \
     -DopenPMD_USE_PYTHON=ON                   \
     -DopenPMD_USE_INTERNAL_PYBIND11=OFF       \
-    -DPython_ROOT_DIR:FILEPATH=${PREFIX}      \
+    -DPython_EXECUTABLE:FILEPATH=$PYTHON      \
     -DBUILD_TESTING=ON                \
     -DCMAKE_INSTALL_LIBDIR=lib        \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}  \
