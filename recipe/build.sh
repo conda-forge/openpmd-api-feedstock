@@ -77,6 +77,7 @@ cmake \
     -DopenPMD_USE_ADIOS1=${USE_ADIOS1}        \
     -DopenPMD_USE_ADIOS2=${USE_ADIOS2}        \
     -DopenPMD_USE_PYTHON=ON                   \
+    -DopenPMD_USE_INTERNAL_CATCH=OFF          \
     -DopenPMD_USE_INTERNAL_PYBIND11=OFF       \
     -DPython_EXECUTABLE:FILEPATH=$PYTHON      \
     -DBUILD_TESTING=ON                \
