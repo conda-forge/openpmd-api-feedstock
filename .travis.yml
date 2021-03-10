@@ -15,6 +15,10 @@ matrix:
       os: linux
       arch: ppc64le
 
+    - env: CONFIG=linux_ppc64le_mpimpichpython3.7.____73_pypypython_implpypy UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
+      os: linux
+      arch: ppc64le
+
     - env: CONFIG=linux_ppc64le_mpimpichpython3.7.____cpythonpython_implcpython UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
@@ -35,6 +39,10 @@ matrix:
       os: linux
       arch: ppc64le
 
+    - env: CONFIG=linux_ppc64le_mpinompipython3.7.____73_pypypython_implpypy UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
+      os: linux
+      arch: ppc64le
+
     - env: CONFIG=linux_ppc64le_mpinompipython3.7.____cpythonpython_implcpython UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
@@ -52,6 +60,10 @@ matrix:
       arch: ppc64le
 
     - env: CONFIG=linux_ppc64le_mpiopenmpipython3.6.____cpythonpython_implcpython UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
+      os: linux
+      arch: ppc64le
+
+    - env: CONFIG=linux_ppc64le_mpiopenmpipython3.7.____73_pypypython_implpypy UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
