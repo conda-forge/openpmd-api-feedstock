@@ -84,7 +84,9 @@ cmake ${CMAKE_ARGS} \
     -DCMAKE_INSTALL_LIBDIR=lib        \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}  \
     ${CMAKE_PLATFORM_FLAGS[@]}        \
-    ${SRC_DIR}
+    ${SRC_DIR}                     || \
+cat $SRC_DIR/build/CMakeFiles/CMakeOutput.log; \
+cat $SRC_DIR/build/CMakeFiles/CMakeError.log; exit 1
 
 # compiler error or resource exhaustion on PPC64le Travis-CI builds with:
 #   powerpc64le-conda_cos7-linux-gnu-c++: fatal error: Killed signal terminated program cc1plus
