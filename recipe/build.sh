@@ -3,6 +3,16 @@
 mkdir build
 cd build
 
+# for cross compiling using openmpi
+export OPAL_PREFIX=${PREFIX}
+
+if [[ "$mpi" == "openmpi" && "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+    # Fix for cmake bug when cross-compiling
+    export CFLAGS="$CFLAGS $LDFLAGS"
+    export CC=mpicc
+    export CXXFLAGS="$CXXFLAGS $LDFLAGS"
+    export CXX=mpic++
+fi
 
 declare -a CMAKE_PLATFORM_FLAGS
 if [[ ${target_platform} =~ linux.* ]]; then
