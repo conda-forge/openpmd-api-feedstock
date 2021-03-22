@@ -3,6 +3,16 @@
 mkdir build
 cd build
 
+# for cross compiling using openmpi
+export OPAL_PREFIX=${PREFIX}
+
+if [[ "$mpi" == "openmpi" && "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+    # Fix for cmake bug when cross-compiling
+    export CFLAGS="$CFLAGS $LDFLAGS"
+    export CC=mpicc
+    export CXXFLAGS="$CXXFLAGS $LDFLAGS"
+    export CXX=mpic++
+fi
 
 declare -a CMAKE_PLATFORM_FLAGS
 if [[ ${target_platform} =~ linux.* ]]; then
@@ -66,7 +76,7 @@ if [[ "$mpi" == "openmpi" ]]; then
     export OMPI_MCA_btl_vader_single_copy_mechanism=none
 fi
 
-cmake \
+cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=Release  \
     -DBUILD_SHARED_LIBS=ON      \
     -DCMAKE_CXX_STANDARD=${CXX_STANDARD}      \
@@ -84,7 +94,9 @@ cmake \
     -DCMAKE_INSTALL_LIBDIR=lib        \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}  \
     ${CMAKE_PLATFORM_FLAGS[@]}        \
-    ${SRC_DIR}
+    ${SRC_DIR}                     || \
+{ cat $SRC_DIR/build/CMakeFiles/CMakeOutput.log; \
+  cat $SRC_DIR/build/CMakeFiles/CMakeError.log; exit 1; }
 
 # compiler error or resource exhaustion on PPC64le Travis-CI builds with:
 #   powerpc64le-conda_cos7-linux-gnu-c++: fatal error: Killed signal terminated program cc1plus
