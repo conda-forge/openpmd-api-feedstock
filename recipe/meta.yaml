@@ -69,6 +69,7 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi'] 
     - python
     - pybind11 >=2.6.2
+    - numpy >=1.15.0  # for ctest tests
     # need to list hdf5|adios|adios2 twice to get version pinning from
     # conda_build_config and build pinning from {{ mpi_prefix }}
     - adios  >=1.13.1                    # [unix]
