@@ -19,9 +19,6 @@ source:
   fn: {{ version }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # https://github.com/openPMD/openPMD-api/pull/776
-    - 0001-win-ls-module.patch
 
 build:
   number: {{ build }}
