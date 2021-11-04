@@ -22,7 +22,7 @@ source:
 
 build:
   number: {{ build }}
-  skip: true  # [py27]
+  skip: true  # [py==27]
 
   # add build string so packages can depend on
   # mpi or nompi variants
