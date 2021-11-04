@@ -19,9 +19,6 @@ source:
   fn: {{ version }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # https://github.com/openPMD/openPMD-api/pull/1128
-    - 1128.patch
 
 build:
   number: {{ build }}
