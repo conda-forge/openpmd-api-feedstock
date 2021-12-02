@@ -44,7 +44,7 @@ if errorlevel 1 exit 1
 set PKG_CONFIG_PATH=%PKG_CONFIG_PATH%;%LIBRARY_PREFIX%\lib\pkgconfig
 for /f %%i in ('pkg-config --modversion openPMD') do set VERSION_FN=%%i
 if errorlevel 1 exit 1
-set VERSION_FN=%VERSION_FN%-alpha
+set VERSION_FN=%VERSION_FN%
 
 mkdir %LIBRARY_PREFIX%\share\xeus-cling\tagfiles
 mkdir %LIBRARY_PREFIX%\etc\xeus-cling\tags.d
