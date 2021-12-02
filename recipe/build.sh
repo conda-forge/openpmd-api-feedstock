@@ -22,12 +22,9 @@ fi
 
 
 # find out toolchain C++ standard
-CXX_STANDARD=11
+CXX_STANDARD=14
 CXX_EXTENSIONS=OFF
-if [[ ${CXXFLAGS} == *"-std=c++11"* ]]; then
-    echo "11"
-    CXX_STANDARD=11
-elif [[ ${CXXFLAGS} == *"-std=c++14"* ]]; then
+if [[ ${CXXFLAGS} == *"-std=c++14"* ]]; then
     echo "14"
     CXX_STANDARD=14
 elif [[ ${CXXFLAGS} == *"-std=c++17"* ]]; then
