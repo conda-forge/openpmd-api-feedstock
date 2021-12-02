@@ -14,6 +14,9 @@ if [[ "$mpi" == "openmpi" && "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; the
     export CXX=mpic++
 fi
 
+# try porting https://github.com/conda-forge/clang-compiler-activation-feedstock/commit/a0a7c000c4b6746ce7cade7f30e2a3249d6bef8c
+CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_PROGRAM_PATH=${BUILD_PREFIX}/bin;$PREFIX/bin"
+
 declare -a CMAKE_PLATFORM_FLAGS
 if [[ ${target_platform} =~ linux.* ]]; then
     # link transitive ADIOS1 libraries during build of intermediate wrapper lib
