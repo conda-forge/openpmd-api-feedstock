@@ -1,5 +1,5 @@
 mpi:
   - nompi
   - mpich  # [unix]
-  - openmpi # [unix]
+  - openmpi  # [unix]
 
