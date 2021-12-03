@@ -17,17 +17,7 @@ fi
 # try porting https://github.com/conda-forge/clang-compiler-activation-feedstock/commit/a0a7c000c4b6746ce7cade7f30e2a3249d6bef8c
 CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_PROGRAM_PATH=${BUILD_PREFIX}/bin;$PREFIX/bin"
 
-# Cross-compilation has troubles finding Python
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
-    CMAKE_ARGS="${CMAKE_ARGS} -DPython_INCLUDE_DIR=${PREFIX}/include"
-fi
-
 declare -a CMAKE_PLATFORM_FLAGS
-if [[ ${target_platform} =~ linux.* ]]; then
-    # link transitive ADIOS1 libraries during build of intermediate wrapper lib
-    export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
-fi
-
 
 # find out toolchain C++ standard
 CXX_STANDARD=11
