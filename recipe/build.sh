@@ -6,12 +6,10 @@ cd build
 # for cross compiling using openmpi
 export OPAL_PREFIX=${PREFIX}
 
-if [[ "$mpi" == "openmpi" && "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
     # Fix for cmake bug when cross-compiling
     export CFLAGS="$CFLAGS $LDFLAGS"
-    export CC=mpicc
     export CXXFLAGS="$CXXFLAGS $LDFLAGS"
-    export CXX=mpic++
 fi
 
 # try porting https://github.com/conda-forge/clang-compiler-activation-feedstock/commit/a0a7c000c4b6746ce7cade7f30e2a3249d6bef8c
