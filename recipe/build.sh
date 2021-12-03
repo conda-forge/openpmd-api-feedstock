@@ -19,7 +19,7 @@ CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_PROGRAM_PATH=${BUILD_PREFIX}/bin;$PREFIX/bin"
 
 # Cross-compilation has troubles finding Python
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
-    CMAKE_ARGS="${CMAKE_ARGS} -DPython_INCLUDE_DIR=${BUILD_PREFIX}/include"
+    CMAKE_ARGS="${CMAKE_ARGS} -DPython_INCLUDE_DIR=${PREFIX}/include"
 fi
 
 declare -a CMAKE_PLATFORM_FLAGS
