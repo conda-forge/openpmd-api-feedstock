@@ -12,28 +12,6 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
     export CXXFLAGS="$CXXFLAGS $LDFLAGS"
 fi
 
-# try porting https://github.com/conda-forge/clang-compiler-activation-feedstock/commit/a0a7c000c4b6746ce7cade7f30e2a3249d6bef8c
-CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_PROGRAM_PATH=${BUILD_PREFIX}/bin;$PREFIX/bin"
-
-# find out toolchain C++ standard
-CXX_STANDARD=11
-CXX_EXTENSIONS=OFF
-if [[ ${CXXFLAGS} == *"-std=c++11"* ]]; then
-    echo "11"
-    CXX_STANDARD=11
-elif [[ ${CXXFLAGS} == *"-std=c++14"* ]]; then
-    echo "14"
-    CXX_STANDARD=14
-elif [[ ${CXXFLAGS} == *"-std=c++17"* ]]; then
-    echo "17"
-    CXX_STANDARD=17
-elif [[ ${CXXFLAGS} == *"-std="* ]]; then
-    echo "ERROR: unknown C++ standard in toolchain!"
-    echo ${CXXFLAGS}
-    exit 1
-fi
-
-
 # FIXME: ADIOS1 broken with MPICH
 if [[ ${mpi} == "mpich" && ${target_platform} =~ osx.* ]]; then
     export USE_ADIOS1=OFF
@@ -49,7 +27,6 @@ if [[ ${python_impl} == "pypy" ]]; then
 else
     export USE_ADIOS2=ON
 fi
-
 
 # MPI variants
 if [[ ${mpi} == "nompi" ]]; then
@@ -73,9 +50,6 @@ fi
 cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=Release  \
     -DBUILD_SHARED_LIBS=ON      \
-    -DCMAKE_CXX_STANDARD=${CXX_STANDARD}      \
-    -DCMAKE_CXX_STANDARD_REQUIRED=ON          \
-    -DCMAKE_CXX_EXTENSIONS=${CXX_EXTENSIONS}  \
     -DopenPMD_USE_MPI=${USE_MPI}              \
     -DopenPMD_USE_HDF5=ON                     \
     -DopenPMD_USE_ADIOS1=${USE_ADIOS1}        \
