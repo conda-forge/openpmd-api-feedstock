@@ -89,7 +89,7 @@ make install
 
 # install API documentation: tagfile for xeus-cling
 #   https://xeus-cling.readthedocs.io/en/latest/inline_help.html
-version_fn="$(pkg-config --modversion openPMD)-alpha"
+version_fn="$(pkg-config --modversion openPMD)"
 
 mkdir -p ${PREFIX}/share/xeus-cling/tagfiles
 mkdir -p ${PREFIX}/etc/xeus-cling/tags.d
