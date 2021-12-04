@@ -15,8 +15,6 @@ fi
 # try porting https://github.com/conda-forge/clang-compiler-activation-feedstock/commit/a0a7c000c4b6746ce7cade7f30e2a3249d6bef8c
 CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_PROGRAM_PATH=${BUILD_PREFIX}/bin;$PREFIX/bin"
 
-declare -a CMAKE_PLATFORM_FLAGS
-
 # find out toolchain C++ standard
 CXX_STANDARD=11
 CXX_EXTENSIONS=OFF
@@ -89,7 +87,7 @@ cmake ${CMAKE_ARGS} \
     -DBUILD_TESTING=ON                \
     -DCMAKE_INSTALL_LIBDIR=lib        \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}  \
-    ${CMAKE_PLATFORM_FLAGS[@]}        \
+    -DPython_INCLUDE_DIR=$(python -c "from sysconfig import get_paths as gp; print(gp()['include'])") \
     ${SRC_DIR}                     || \
 { cat $SRC_DIR/build/CMakeFiles/CMakeOutput.log; \
   cat $SRC_DIR/build/CMakeFiles/CMakeError.log; exit 1; }
