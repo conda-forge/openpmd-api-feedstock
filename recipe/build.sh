@@ -6,36 +6,11 @@ cd build
 # for cross compiling using openmpi
 export OPAL_PREFIX=${PREFIX}
 
-if [[ "$mpi" == "openmpi" && "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
     # Fix for cmake bug when cross-compiling
     export CFLAGS="$CFLAGS $LDFLAGS"
-    export CC=mpicc
     export CXXFLAGS="$CXXFLAGS $LDFLAGS"
-    export CXX=mpic++
 fi
-
-declare -a CMAKE_PLATFORM_FLAGS
-if [[ ${target_platform} =~ linux.* ]]; then
-    # link transitive ADIOS1 libraries during build of intermediate wrapper lib
-    export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
-fi
-
-
-# find out toolchain C++ standard
-CXX_STANDARD=14
-CXX_EXTENSIONS=OFF
-if [[ ${CXXFLAGS} == *"-std=c++14"* ]]; then
-    echo "14"
-    CXX_STANDARD=14
-elif [[ ${CXXFLAGS} == *"-std=c++17"* ]]; then
-    echo "17"
-    CXX_STANDARD=17
-elif [[ ${CXXFLAGS} == *"-std="* ]]; then
-    echo "ERROR: unknown C++ standard in toolchain!"
-    echo ${CXXFLAGS}
-    exit 1
-fi
-
 
 # FIXME: ADIOS1 broken with MPICH
 if [[ ${mpi} == "mpich" && ${target_platform} =~ osx.* ]]; then
@@ -52,7 +27,6 @@ if [[ ${python_impl} == "pypy" ]]; then
 else
     export USE_ADIOS2=ON
 fi
-
 
 # MPI variants
 if [[ ${mpi} == "nompi" ]]; then
@@ -76,9 +50,6 @@ fi
 cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=Release  \
     -DBUILD_SHARED_LIBS=ON      \
-    -DCMAKE_CXX_STANDARD=${CXX_STANDARD}      \
-    -DCMAKE_CXX_STANDARD_REQUIRED=ON          \
-    -DCMAKE_CXX_EXTENSIONS=${CXX_EXTENSIONS}  \
     -DopenPMD_USE_MPI=${USE_MPI}              \
     -DopenPMD_USE_HDF5=ON                     \
     -DopenPMD_USE_ADIOS1=${USE_ADIOS1}        \
@@ -90,7 +61,7 @@ cmake ${CMAKE_ARGS} \
     -DBUILD_TESTING=ON                \
     -DCMAKE_INSTALL_LIBDIR=lib        \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}  \
-    ${CMAKE_PLATFORM_FLAGS[@]}        \
+    -DPython_INCLUDE_DIR=$(python -c "from sysconfig import get_paths as gp; print(gp()['include'])") \
     ${SRC_DIR}                     || \
 { cat $SRC_DIR/build/CMakeFiles/CMakeOutput.log; \
   cat $SRC_DIR/build/CMakeFiles/CMakeError.log; exit 1; }
