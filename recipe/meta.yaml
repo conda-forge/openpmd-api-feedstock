@@ -1,7 +1,7 @@
 {% set name = "openpmd-api" %}
-{% set version = "0.14.3" %}
-{% set build = 1 %}
-{% set sha256 = "57282455e0fb1873b4def1894fadadd6425dfc8349eac7fcc68daf677c48b7ce" %}
+{% set version = "0.14.4" %}
+{% set build = 0 %}
+{% set sha256 = "42b7bcd043e772d63f0fe0e5e70da411f001db10096d5b8be797ffc88e786379" %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
