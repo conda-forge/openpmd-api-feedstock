@@ -61,7 +61,7 @@ cmake ${CMAKE_ARGS} \
     -DBUILD_TESTING=ON                \
     -DCMAKE_INSTALL_LIBDIR=lib        \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}  \
-    -DPython_INCLUDE_DIR=$(python -c "from sysconfig import get_paths as gp; print(gp()['include'])") \
+    -DPython_INCLUDE_DIR=$(${PYTHON} -c "from sysconfig import get_paths as gp; print(gp()['include'])") \
     ${SRC_DIR}                     || \
 { cat $SRC_DIR/build/CMakeFiles/CMakeOutput.log; \
   cat $SRC_DIR/build/CMakeFiles/CMakeError.log; exit 1; }
