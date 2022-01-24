@@ -8,6 +8,9 @@ jobs:
     vmImage: macOS-10.15
   strategy:
     matrix:
+      osx_64_mpimpichpython3.10.____cpythonpython_implcpython:
+        CONFIG: osx_64_mpimpichpython3.10.____cpythonpython_implcpython
+        UPLOAD_PACKAGES: 'True'
       osx_64_mpimpichpython3.7.____73_pypypython_implpypy:
         CONFIG: osx_64_mpimpichpython3.7.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
@@ -19,6 +22,9 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       osx_64_mpimpichpython3.9.____cpythonpython_implcpython:
         CONFIG: osx_64_mpimpichpython3.9.____cpythonpython_implcpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_mpinompipython3.10.____cpythonpython_implcpython:
+        CONFIG: osx_64_mpinompipython3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
       osx_64_mpinompipython3.7.____73_pypypython_implpypy:
         CONFIG: osx_64_mpinompipython3.7.____73_pypypython_implpypy
@@ -32,6 +38,9 @@ jobs:
       osx_64_mpinompipython3.9.____cpythonpython_implcpython:
         CONFIG: osx_64_mpinompipython3.9.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
+      osx_64_mpiopenmpipython3.10.____cpythonpython_implcpython:
+        CONFIG: osx_64_mpiopenmpipython3.10.____cpythonpython_implcpython
+        UPLOAD_PACKAGES: 'True'
       osx_64_mpiopenmpipython3.7.____73_pypypython_implpypy:
         CONFIG: osx_64_mpiopenmpipython3.7.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
@@ -44,17 +53,26 @@ jobs:
       osx_64_mpiopenmpipython3.9.____cpythonpython_implcpython:
         CONFIG: osx_64_mpiopenmpipython3.9.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
+      osx_arm64_mpimpichpython3.10.____cpython:
+        CONFIG: osx_arm64_mpimpichpython3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
       osx_arm64_mpimpichpython3.8.____cpython:
         CONFIG: osx_arm64_mpimpichpython3.8.____cpython
         UPLOAD_PACKAGES: 'True'
       osx_arm64_mpimpichpython3.9.____cpython:
         CONFIG: osx_arm64_mpimpichpython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
+      osx_arm64_mpinompipython3.10.____cpython:
+        CONFIG: osx_arm64_mpinompipython3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
       osx_arm64_mpinompipython3.8.____cpython:
         CONFIG: osx_arm64_mpinompipython3.8.____cpython
         UPLOAD_PACKAGES: 'True'
       osx_arm64_mpinompipython3.9.____cpython:
         CONFIG: osx_arm64_mpinompipython3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_mpiopenmpipython3.10.____cpython:
+        CONFIG: osx_arm64_mpiopenmpipython3.10.____cpython
         UPLOAD_PACKAGES: 'True'
       osx_arm64_mpiopenmpipython3.8.____cpython:
         CONFIG: osx_arm64_mpiopenmpipython3.8.____cpython
