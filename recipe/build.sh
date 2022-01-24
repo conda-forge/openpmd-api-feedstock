@@ -24,6 +24,20 @@ fi
 #   https://github.com/ornladios/ADIOS2/issues/2068
 if [[ ${python_impl} == "pypy" ]]; then
     export USE_ADIOS2=OFF
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+        # work-around for PyPy 3.7:
+        PYTHON_MODULE_EXTENSION=$(${PYTHON} -c "import sysconfig; print(sysconfig.get_config_var('EXT_SUFFIX'))")
+        # 1) setuptools seems to always add x86_64 instead of the cross-arch
+        #    https://github.com/conda-forge/openpmd-api-feedstock/pull/86
+        #    https://github.com/benfogle/crossenv/pull/86
+        # e.g.: pypy37-pp73-x86_64-linux-gnu.so -> pypy37-pp73-aarch64-linux-gnu.so
+        #PYTHON_MODULE_EXTENSION="${PYTHON_MODULE_EXTENSION/x86_64/$cdt_arch}"
+        # 2) PyPy 3.7 for C module extensions forgot the arch in this release altogether.
+        #    This is fixed in PyPy3.8.
+        # e.g.: pypy37-pp73-x86_64-linux-gnu.so -> pypy37-pp73-linux-gnu.so
+        PYTHON_MODULE_EXTENSION="${PYTHON_MODULE_EXTENSION/x86_64-/}"
+        export CMAKE_ARGS="${CMAKE_ARGS} -DPYTHON_MODULE_EXTENSION=${PYTHON_MODULE_EXTENSION} -DPYBIND11_PYTHON_EXECUTABLE_LAST=$PYTHON"
+    fi
 else
     export USE_ADIOS2=ON
 fi
@@ -46,6 +60,8 @@ if [[ "$mpi" == "openmpi" ]]; then
     export OMPI_MCA_rmaps_base_oversubscribe=yes
     export OMPI_MCA_btl_vader_single_copy_mechanism=none
 fi
+
+echo "Some CMAKE_ARGS=${CMAKE_ARGS}"
 
 cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=Release  \
