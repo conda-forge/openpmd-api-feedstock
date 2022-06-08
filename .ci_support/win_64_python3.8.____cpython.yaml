@@ -12,6 +12,10 @@ cxx_compiler:
 - vs2017
 mpi:
 - nompi
+mpich:
+- '4'
+openmpi:
+- '4'
 pin_run_as_build:
   curl:
     max_pin: x
