@@ -19,6 +19,10 @@ source:
   fn: {{ version }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # macOS ADIOS1 wrapper libs: linker issues
+    # https://github.com/openPMD/openPMD-api/pull/1288
+    - 1288.patch
 
 build:
   number: {{ build }}
