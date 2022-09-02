@@ -10,6 +10,7 @@ cd build
 set CURRENTDIR="%cd%"
 
 cmake ^
+    %CMAKE_ARGS%                ^
     -G "NMake Makefiles"        ^
     -DCMAKE_BUILD_TYPE=Release  ^
     -DBUILD_SHARED_LIBS=ON      ^

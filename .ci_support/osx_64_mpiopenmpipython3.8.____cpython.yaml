@@ -5,7 +5,7 @@ VERBOSE_CM:
 c_compiler:
 - clang
 c_compiler_version:
-- '13'
+- '14'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -15,7 +15,7 @@ curl:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '13'
+- '14'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 mpi:
@@ -31,7 +31,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.7.* *_cpython
+- 3.8.* *_cpython
 python_impl:
 - cpython
 target_platform:
