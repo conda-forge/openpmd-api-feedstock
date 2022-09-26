@@ -1,0 +1,25 @@
+From 6b1705e491c056d07026c297de01b790b7e2349c Mon Sep 17 00:00:00 2001
+From: Axel Huebl <axel.huebl@plasma.ninja>
+Date: Tue, 9 Aug 2022 12:19:15 -0600
+Subject: [PATCH] Fix `operationAsString` Export
+
+The `operationAsString` function is used in the ADIOS1 backend, which
+does symbol hiding to wrap ADIOS1's MPI mock library. Thus, we need
+to export this symbol once we wrap ADIOS1.
+---
+ include/openPMD/IO/IOTask.hpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/openPMD/IO/IOTask.hpp b/include/openPMD/IO/IOTask.hpp
+index f8d08ab82..d4db58483 100644
+--- a/include/openPMD/IO/IOTask.hpp
++++ b/include/openPMD/IO/IOTask.hpp
+@@ -67,7 +67,7 @@ namespace internal
+      * The returned strings are compile-time constants, so no worries about
+      * pointer validity.
+      */
+-    std::string operationAsString(Operation);
++    OPENPMDAPI_EXPORT std::string operationAsString(Operation);
+ } // namespace internal
+ 
+ struct OPENPMDAPI_EXPORT AbstractParameter
