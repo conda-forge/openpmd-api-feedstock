@@ -9,6 +9,15 @@ cd build
 
 set CURRENTDIR="%cd%"
 
+:: FIXME: ADIOS2 has no PyPy support yet (internally shipped, unpatched pybind11<2.6.0)
+::   https://github.com/conda-forge/adios2-feedstock/pull/16
+::   https://github.com/ornladios/ADIOS2/issues/2068
+if %PYTHON_IMPL%==pypy (
+    set USE_ADIOS2=OFF
+) else (
+    set USE_ADIOS2=ON
+)
+
 cmake ^
     %CMAKE_ARGS%                ^
     -G "NMake Makefiles"        ^
@@ -17,7 +26,7 @@ cmake ^
     -DopenPMD_USE_MPI=OFF       ^
     -DopenPMD_USE_HDF5=ON       ^
     -DopenPMD_USE_ADIOS1=OFF    ^
-    -DopenPMD_USE_ADIOS2=ON     ^
+    -DopenPMD_USE_ADIOS2=%USE_ADIOS2%  ^
     -DopenPMD_USE_PYTHON=ON     ^
     -DopenPMD_USE_INTERNAL_CATCH=OFF     ^
     -DopenPMD_USE_INTERNAL_PYBIND11=OFF  ^
