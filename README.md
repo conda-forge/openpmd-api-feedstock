@@ -46,10 +46,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_mpimpichpython3.7.____cpython</td>
+              <td>linux_64_mpimpichpython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_64_mpimpichpython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_64_mpimpichpython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -74,10 +74,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_mpinompipython3.7.____cpython</td>
+              <td>linux_64_mpinompipython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_64_mpinompipython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_64_mpinompipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -102,10 +102,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_mpiopenmpipython3.7.____cpython</td>
+              <td>linux_64_mpiopenmpipython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_64_mpiopenmpipython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_64_mpiopenmpipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -130,10 +130,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_mpimpichpython3.7.____cpython</td>
+              <td>linux_aarch64_mpimpichpython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_mpimpichpython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_mpimpichpython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -158,10 +158,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_mpinompipython3.7.____cpython</td>
+              <td>linux_aarch64_mpinompipython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_mpinompipython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_mpinompipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -186,10 +186,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_mpiopenmpipython3.7.____cpython</td>
+              <td>linux_aarch64_mpiopenmpipython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_mpiopenmpipython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_mpiopenmpipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -214,10 +214,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_mpimpichpython3.7.____cpython</td>
+              <td>linux_ppc64le_mpimpichpython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_mpimpichpython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_mpimpichpython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -242,10 +242,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_mpinompipython3.7.____cpython</td>
+              <td>linux_ppc64le_mpinompipython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_mpinompipython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_mpinompipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -270,10 +270,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_mpiopenmpipython3.7.____cpython</td>
+              <td>linux_ppc64le_mpiopenmpipython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_mpiopenmpipython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_mpiopenmpipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -298,10 +298,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_mpimpichpython3.7.____cpython</td>
+              <td>osx_64_mpimpichpython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_64_mpimpichpython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_64_mpimpichpython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -326,10 +326,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_mpinompipython3.7.____cpython</td>
+              <td>osx_64_mpinompipython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_64_mpinompipython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_64_mpinompipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -354,10 +354,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_mpiopenmpipython3.7.____cpython</td>
+              <td>osx_64_mpiopenmpipython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_64_mpiopenmpipython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_64_mpiopenmpipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -382,6 +382,13 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>osx_arm64_mpimpichpython3.11.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_arm64_mpimpichpython3.11.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>osx_arm64_mpimpichpython3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
@@ -400,6 +407,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_arm64_mpinompipython3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_mpinompipython3.11.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_arm64_mpinompipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -424,6 +438,13 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>osx_arm64_mpiopenmpipython3.11.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=osx&configuration=osx_arm64_mpiopenmpipython3.11.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>osx_arm64_mpiopenmpipython3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
@@ -445,10 +466,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_python3.7.____cpython</td>
+              <td>win_64_python3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=722&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=win&configuration=win_64_python3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openpmd-api-feedstock?branchName=main&jobName=win&configuration=win_64_python3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
