@@ -1,0 +1,68 @@
+From a1aac530dbc8261656cf6a07900374bc6ac6fcab Mon Sep 17 00:00:00 2001
+From: Axel Huebl <axel.huebl@plasma.ninja>
+Date: Sat, 25 Mar 2023 21:00:09 -0700
+Subject: [PATCH] Fix: Older AppleClang
+
+Issue seen with AppleClang 12.0 and not seen with 14.0.
+Assume 13 might be affected, too.
+---
+ include/openPMD/RecordComponent.tpp              | 9 +++++++--
+ include/openPMD/backend/PatchRecordComponent.hpp | 4 +++-
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/include/openPMD/RecordComponent.tpp b/include/openPMD/RecordComponent.tpp
+index 1df93875b..2f12a5cf2 100644
+--- a/include/openPMD/RecordComponent.tpp
++++ b/include/openPMD/RecordComponent.tpp
+@@ -28,6 +28,9 @@
+ #include "openPMD/auxiliary/TypeTraits.hpp"
+ #include "openPMD/auxiliary/UniquePtr.hpp"
+ 
++#include <memory>
++
++
+ namespace openPMD
+ {
+ template< typename T >
+@@ -80,7 +83,8 @@ inline std::shared_ptr< T > RecordComponent::loadChunk(
+     for( auto const& dimensionSize : extent )
+         numPoints *= dimensionSize;
+ 
+-#if defined(__clang_major__) && __clang_major__ < 7
++#if (defined(__clang_major__) && __clang_major__ < 7) ||                       \
++    (defined(__apple_build_version__) && __clang_major__ < 14)
+     auto newData =
+         std::shared_ptr<T>(new T[numPoints], [](T *p) { delete[] p; });
+     loadChunk(newData, offset, extent);
+@@ -374,7 +378,8 @@ RecordComponent::storeChunk( Offset offset, Extent extent )
+         std::move( extent ),
+         []( size_t size )
+         {
+-#if defined(__clang_major__) && __clang_major__ < 7
++#if (defined(__clang_major__) && __clang_major__ < 7) ||                       \
++    (defined(__apple_build_version__) && __clang_major__ < 14)
+             return std::shared_ptr< T >{
+                 new T[ size ], []( auto * ptr ) { delete[] ptr; } };
+ #else
+diff --git a/include/openPMD/backend/PatchRecordComponent.hpp b/include/openPMD/backend/PatchRecordComponent.hpp
+index 51537b007..dfed6107d 100644
+--- a/include/openPMD/backend/PatchRecordComponent.hpp
++++ b/include/openPMD/backend/PatchRecordComponent.hpp
+@@ -23,6 +23,7 @@
+ #include "openPMD/auxiliary/ShareRawInternal.hpp"
+ #include "openPMD/backend/BaseRecordComponent.hpp"
+ 
++#include <memory>
+ #include <sstream>
+ #include <stdexcept>
+ #include <string>
+@@ -144,7 +145,8 @@ template <typename T>
+ inline std::shared_ptr<T> PatchRecordComponent::load()
+ {
+     uint64_t numPoints = getExtent()[0];
+-#if defined(__clang_major__) && __clang_major__ < 7
++#if (defined(__clang_major__) && __clang_major__ < 7) ||                       \
++    (defined(__apple_build_version__) && __clang_major__ < 14)
+     auto newData =
+         std::shared_ptr<T>(new T[numPoints], [](T *p) { delete[] p; });
+     load(newData);
