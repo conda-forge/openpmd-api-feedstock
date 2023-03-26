@@ -83,6 +83,8 @@ requirements:
     - adios  >=1.13.1 = mpi_{{ mpi }}_*  # [unix and mpi != 'nompi']
     - adios2 >=2.8.3  = mpi_{{ mpi }}_*  # [mpi != 'nompi' and python_impl != 'pypy']
     - hdf5   >=1.8.13 = mpi_{{ mpi }}_*  # [mpi != 'nompi']
+    # missing in conda-forge
+    #- toml11>=3.7.1
   run:
     - {{ mpi }}  # [mpi != 'nompi']
     - mpi4py     # [mpi != 'nompi']

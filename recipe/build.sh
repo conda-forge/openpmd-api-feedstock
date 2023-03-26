@@ -19,6 +19,12 @@ else
     export USE_ADIOS1=ON
 fi
 
+# newer C++ standard lib features
+# https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
+if [[ ${target_platform} =~ osx.* ]]; then
+    export CXXFLAGS="$CXXFLAGS -D_LIBCPP_DISABLE_AVAILABILITY"  # conda-forge ships its own (modern) libcxx
+fi
+
 # FIXME: ADIOS2 has no PyPy support yet (internally shipped, unpatched pybind11<2.6.0)
 #   https://github.com/conda-forge/adios2-feedstock/pull/16
 #   https://github.com/ornladios/ADIOS2/issues/2068
@@ -73,6 +79,7 @@ cmake ${CMAKE_ARGS} \
     -DopenPMD_USE_PYTHON=ON                   \
     -DopenPMD_USE_INTERNAL_CATCH=ON           \
     -DopenPMD_USE_INTERNAL_PYBIND11=OFF       \
+    -DopenPMD_USE_INTERNAL_TOML11=ON          \
     -DPython_EXECUTABLE:FILEPATH=$PYTHON      \
     -DBUILD_TESTING=ON                \
     -DCMAKE_INSTALL_LIBDIR=lib        \
