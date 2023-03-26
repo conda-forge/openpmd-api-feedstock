@@ -1,0 +1,52 @@
+From b622cc5ea770f866c1e373185a9e389c04bdb54c Mon Sep 17 00:00:00 2001
+From: Axel Huebl <axel.huebl@plasma.ninja>
+Date: Sat, 25 Mar 2023 17:36:52 -0700
+Subject: [PATCH] CMake: Fix Python Install Directory
+
+Fix regressions in 0.15.0 that showed up during packaging.
+---
+ CMakeLists.txt | 10 +++++-----
+ setup.py       |  2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c1e2f6e04..d737552e6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -680,7 +680,7 @@ if(openPMD_HAVE_ADIOS1)
+                 COMPILE_PDB_NAME_${CFG_UPPER} openPMD.ADIOS1.Serial
+                 ARCHIVE_OUTPUT_DIRECTORY_${CFG_UPPER} ${openPMD_ARCHIVE_OUTPUT_DIRECTORY}/${CFG}
+                 LIBRARY_OUTPUT_DIRECTORY_${CFG_UPPER} ${openPMD_LIBRARY_OUTPUT_DIRECTORY}/${CFG}
+-                RUNTIME_OUTPUT_DIRECTORY_${CFG_UPPER} ${CMAKE_PYTHON_OUTPUT_DIRECTORY}/${CFG}
++                RUNTIME_OUTPUT_DIRECTORY_${CFG_UPPER} ${openPMD_RUNTIME_OUTPUT_DIRECTORY}/${CFG}
+                 PDB_OUTPUT_DIRECTORY_${CFG_UPPER} ${openPMD_PDB_OUTPUT_DIRECTORY}/${CFG}
+                 COMPILE_PDB_OUTPUT_DIRECTORY_${CFG_UPPER} ${openPMD_COMPILE_PDB_OUTPUT_DIRECTORY}/${CFG}
+             )
+@@ -875,10 +875,10 @@ if(openPMD_HAVE_PYTHON)
+             "${CMAKE_INSTALL_LIBDIR}/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages"
+         )
+     endif()
+-    # Location for installed python package
+-    set(openPMD_INSTALL_PYTHONDIR "${openPMD_INSTALL_PYTHONDIR_DEFAULT}")
+-    # Build directory for python modules
+-    set(openPMD_PYTHON_OUTPUT_DIRECTORY "${openPMD_BINARY_DIR}/${openPMD_INSTALL_PYTHONDIR}")
++    set(openPMD_INSTALL_PYTHONDIR "${openPMD_INSTALL_PYTHONDIR_DEFAULT}"
++        CACHE STRING "Location for installed python package")
++    set(openPMD_PYTHON_OUTPUT_DIRECTORY "${openPMD_BINARY_DIR}/${openPMD_INSTALL_PYTHONDIR}"
++        CACHE STRING "Build directory for python modules")
+     set_target_properties(openPMD.py PROPERTIES
+         ARCHIVE_OUTPUT_NAME openpmd_api_cxx
+         LIBRARY_OUTPUT_NAME openpmd_api_cxx
+diff --git a/setup.py b/setup.py
+index cea00f580..a56ea38fe 100644
+--- a/setup.py
++++ b/setup.py
+@@ -47,7 +47,7 @@ def build_extension(self, ext):
+             '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' +
+             os.path.join(extdir, "openpmd_api"),
+             # '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=' + extdir,
+-            '-DCMAKE_PYTHON_OUTPUT_DIRECTORY=' + extdir,
++            '-DopenPMD_PYTHON_OUTPUT_DIRECTORY=' + extdir,
+             '-DPython_EXECUTABLE=' + sys.executable,
+             '-DopenPMD_USE_PYTHON:BOOL=ON',
+             # variants
