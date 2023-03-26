@@ -75,7 +75,8 @@ requirements:
     # conda_build_config and build pinning from {{ mpi_prefix }}
     - adios  >=1.13.1                    # [unix]
     - adios2 >=2.8.3                     # [python_impl != 'pypy']
-    - catch2 >=2.13.4,<3
+    # jumped by conda-forge, already at v3+
+    #- catch2 >=2.13.10,<3
     - hdf5   >=1.8.13
     - adios  >=1.13.1 = mpi_{{ mpi }}_*  # [unix and mpi != 'nompi']
     - adios2 >=2.8.3  = mpi_{{ mpi }}_*  # [mpi != 'nompi' and python_impl != 'pypy']
