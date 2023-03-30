@@ -1,0 +1,157 @@
+From 032ebfc3260cb3e85e04d4428c4a480781a07d8a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Franz=20P=C3=B6schel?= <franz.poeschel@gmail.com>
+Date: Mon, 27 Mar 2023 11:50:02 +0200
+Subject: [PATCH] Include error symbols into ADIOS1
+
+... but don't rely on catching
+
+- Add missing .cpp files to ADIOS1
+- Avoid global variables in JSON.cpp
+---
+ CMakeLists.txt                              | 11 ++++++++---
+ include/openPMD/Error.hpp                   |  4 ----
+ include/openPMD/auxiliary/JSON_internal.hpp |  2 +-
+ src/IO/ADIOS/CommonADIOS1IOHandler.cpp      |  2 +-
+ src/IO/IOTask.cpp                           |  2 +-
+ src/auxiliary/JSON.cpp                      |  7 +++++--
+ test/SerialIOTest.cpp                       | 13 +++++++++----
+ 7 files changed, 25 insertions(+), 16 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8b5146100..4567c7c18 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -543,13 +543,21 @@ set(IO_SOURCE
+         src/IO/InvalidatableFile.cpp)
+ set(IO_ADIOS1_SEQUENTIAL_SOURCE
+         src/auxiliary/Filesystem.cpp
++        src/auxiliary/JSON.cpp
++        src/IO/AbstractIOHandlerImpl.cpp
+         src/ChunkInfo.cpp
++        src/Error.cpp
++        src/IO/IOTask.cpp
+         src/IO/ADIOS/CommonADIOS1IOHandler.cpp
+         src/IO/ADIOS/ADIOS1IOHandler.cpp
+         src/IO/IOTask.cpp)
+ set(IO_ADIOS1_SOURCE
+         src/auxiliary/Filesystem.cpp
++        src/auxiliary/JSON.cpp
++        src/IO/AbstractIOHandlerImpl.cpp
+         src/ChunkInfo.cpp
++        src/Error.cpp
++        src/IO/IOTask.cpp
+         src/IO/ADIOS/CommonADIOS1IOHandler.cpp
+         src/IO/ADIOS/ParallelADIOS1IOHandler.cpp
+         src/IO/IOTask.cpp)
+@@ -715,9 +723,6 @@ if(openPMD_HAVE_ADIOS1)
+     target_compile_definitions(openPMD.ADIOS1.Serial PRIVATE openPMD_HAVE_ADIOS1=1)
+     target_compile_definitions(openPMD.ADIOS1.Serial PRIVATE openPMD_HAVE_MPI=0)
+     target_compile_definitions(openPMD.ADIOS1.Serial PRIVATE _NOMPI)  # ADIOS header
+-    # This ensures that the ADIOS1 targets don't ever include Error.hpp
+-    # To avoid incompatible error types in weird compile configurations
+-    target_compile_definitions(openPMD.ADIOS1.Serial PRIVATE OPENPMD_ADIOS1_IMPLEMENTATION)
+ 
+     if(openPMD_HAVE_MPI)
+         set_target_properties(openPMD.ADIOS1.Parallel PROPERTIES
+diff --git a/include/openPMD/Error.hpp b/include/openPMD/Error.hpp
+index 6bbabd1c7..f503dd229 100644
+--- a/include/openPMD/Error.hpp
++++ b/include/openPMD/Error.hpp
+@@ -8,10 +8,6 @@
+ #include <utility>
+ #include <vector>
+ 
+-#if defined(OPENPMD_ADIOS1_IMPLEMENTATION)
+-static_assert(false, "ADIOS1 implementation must not include Error.hpp");
+-#endif
+-
+ namespace openPMD
+ {
+ /**
+diff --git a/include/openPMD/auxiliary/JSON_internal.hpp b/include/openPMD/auxiliary/JSON_internal.hpp
+index e865ddc7d..299cd6987 100644
+--- a/include/openPMD/auxiliary/JSON_internal.hpp
++++ b/include/openPMD/auxiliary/JSON_internal.hpp
+@@ -231,7 +231,7 @@ namespace json
+      * Vector containing the lower-case keys to the single backends'
+      * configurations.
+      */
+-    extern std::vector<std::string> backendKeys;
++    extern std::vector<std::string> backendKeys();
+ 
+     /**
+      * Function that can be called after reading all global options from the
+diff --git a/src/IO/ADIOS/CommonADIOS1IOHandler.cpp b/src/IO/ADIOS/CommonADIOS1IOHandler.cpp
+index f15ab0fdd..98e14f020 100644
+--- a/src/IO/ADIOS/CommonADIOS1IOHandler.cpp
++++ b/src/IO/ADIOS/CommonADIOS1IOHandler.cpp
+@@ -20,7 +20,7 @@
+  */
+ 
+ #include "openPMD/IO/ADIOS/CommonADIOS1IOHandler.hpp"
+-#include "openPMD/ThrowError.hpp"
++#include "openPMD/Error.hpp"
+ 
+ #if openPMD_HAVE_ADIOS1
+ 
+diff --git a/src/IO/IOTask.cpp b/src/IO/IOTask.cpp
+index 0b43cc383..e6ff0be88 100644
+--- a/src/IO/IOTask.cpp
++++ b/src/IO/IOTask.cpp
+@@ -50,7 +50,7 @@ void Parameter<Operation::CREATE_DATASET>::warnUnusedParameters<
+     auto shadow = config.invertShadow();
+     // The backends are supposed to deal with this
+     // Only global options here
+-    for (auto const &backendKey : json::backendKeys)
++    for (auto const &backendKey : json::backendKeys())
+     {
+         if (backendKey != currentBackendName)
+         {
+diff --git a/src/auxiliary/JSON.cpp b/src/auxiliary/JSON.cpp
+index 9cfe6539f..f57cf7455 100644
+--- a/src/auxiliary/JSON.cpp
++++ b/src/auxiliary/JSON.cpp
+@@ -499,14 +499,17 @@ std::optional<std::string> asLowerCaseStringDynamic(nlohmann::json const &value)
+     return maybeString;
+ }
+ 
+-std::vector<std::string> backendKeys{"adios1", "adios2", "json", "hdf5"};
++std::vector<std::string> backendKeys()
++{
++    return {"adios1", "adios2", "json", "hdf5"};
++}
+ 
+ void warnGlobalUnusedOptions(TracingJSON const &config)
+ {
+     auto shadow = config.invertShadow();
+     // The backends are supposed to deal with this
+     // Only global options here
+-    for (auto const &backendKey : json::backendKeys)
++    for (auto const &backendKey : json::backendKeys())
+     {
+         shadow.erase(backendKey);
+     }
+diff --git a/test/SerialIOTest.cpp b/test/SerialIOTest.cpp
+index e1296d4a8..9dda38cd4 100644
+--- a/test/SerialIOTest.cpp
++++ b/test/SerialIOTest.cpp
+@@ -6564,10 +6564,15 @@ TEST_CASE("unfinished_iteration_test", "[serial]")
+         "bp", IterationEncoding::fileBased, R"({"backend": "adios2"})");
+ #endif
+ #if openPMD_HAVE_ADIOS1
+-    unfinished_iteration_test(
+-        "adios1.bp", IterationEncoding::groupBased, R"({"backend": "adios1"})");
+-    unfinished_iteration_test(
+-        "adios1.bp", IterationEncoding::fileBased, R"({"backend": "adios1"})");
++    /*
++     * Catching errors from ADIOS1 is not generally supported
++     */
++    // unfinished_iteration_test(
++    //     "adios1.bp", IterationEncoding::groupBased, R"({"backend":
++    //     "adios1"})");
++    // unfinished_iteration_test(
++    //     "adios1.bp", IterationEncoding::fileBased, R"({"backend":
++    //     "adios1"})");
+ #endif
+ #if openPMD_HAVE_HDF5
+     unfinished_iteration_test("h5", IterationEncoding::groupBased);

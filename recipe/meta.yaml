@@ -25,6 +25,8 @@ source:
     - 1393.patch
     # macOS: AppleClang<14 work-arounds for std::shared_ptr<T[]>
     - 1395.patch
+    # macOS: ADIOS1 symbol issues
+    - 1396.patch
 
 build:
   number: {{ build }}
