@@ -27,6 +27,8 @@ source:
     - 1395.patch
     # macOS: ADIOS1 symbol issues
     - 1396.patch
+    # macOS: Instantiate only parallel ADIOS1 IO Handler in parallel ADIOS1 library
+    - 1411.patch
 
 build:
   number: {{ build }}
