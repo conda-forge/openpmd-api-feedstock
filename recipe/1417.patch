@@ -1,0 +1,24 @@
+From 2c093d9be64690e516b2996dba851a8d19c2fe84 Mon Sep 17 00:00:00 2001
+From: Axel Huebl <axel.huebl@plasma.ninja>
+Date: Wed, 5 Apr 2023 09:33:46 -0700
+Subject: [PATCH] `version.hpp`: 0.15.1
+
+Forgot to bump this for the release.
+Will patch this in for package managers...
+---
+ include/openPMD/version.hpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/openPMD/version.hpp b/include/openPMD/version.hpp
+index 29a4f7d5b..ab82e630c 100644
+--- a/include/openPMD/version.hpp
++++ b/include/openPMD/version.hpp
+@@ -29,7 +29,7 @@
+  */
+ #define OPENPMDAPI_VERSION_MAJOR 0
+ #define OPENPMDAPI_VERSION_MINOR 15
+-#define OPENPMDAPI_VERSION_PATCH 0
++#define OPENPMDAPI_VERSION_PATCH 1
+ #define OPENPMDAPI_VERSION_LABEL ""
+ /** @} */
+ 
