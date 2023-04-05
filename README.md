@@ -1,11 +1,11 @@
-About openpmd-api
-=================
+About openpmd-api-feedstock
+===========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openpmd-api-feedstock/blob/main/LICENSE.txt)
 
 Home: https://www.openPMD.org
 
 Package license: LGPL-3.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openpmd-api-feedstock/blob/main/LICENSE.txt)
 
 Summary: C++ & Python API for writing & reading (.h5, .bp, .json, ...), serial & MPI parallel openPMD files.
 
