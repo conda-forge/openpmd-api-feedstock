@@ -13,10 +13,10 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
 fi
 
 # FIXME: ADIOS1 broken with MPI
-if [[ ${mpi} == "nompi" && ${target_platform} =~ osx.* ]]; then
-    export USE_ADIOS1=ON
-else
+if [[ ${mpi} != "nompi" && ${target_platform} =~ osx.* ]]; then
     export USE_ADIOS1=OFF
+else
+    export USE_ADIOS1=ON
 fi
 
 # newer C++ standard lib features
