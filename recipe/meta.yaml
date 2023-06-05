@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.15.1" %}
-{% set build = 2 %}
+{% set build = 3 %}
 {% set sha256 = "0e81652152391ba4d2b62cfac95238b11233a4f89ff45e1fcffcc7bcd79dabe1" %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
@@ -46,9 +46,7 @@ build:
     - {{ name }} * {{ mpi_prefix }}_*
     # patch-releases are not (yet) ABI compatible:
     #   https://docs.conda.io/projects/conda-build/en/latest/resources/variants.html#referencing-subpackages
-    #   https://abi-laboratory.pro/?view=timeline&l=adios2
     #   https://abi-laboratory.pro/?view=timeline&l=openpmd-api
-    - {{ pin_compatible('adios2', min_pin='x.x.x', max_pin='x.x.x') }}  # [python_impl != 'pypy']
     - openpmd-api {{ version }}
 
 requirements:
