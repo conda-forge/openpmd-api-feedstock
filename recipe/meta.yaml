@@ -81,6 +81,10 @@ requirements:
     - hdf5   >=1.8.13 = mpi_{{ mpi }}_*  # [mpi != 'nompi']
     # missing in conda-forge
     #- toml11>=3.7.1
+    # adios1 (static) deps
+    - blosc
+    - zlib
+    - bzip2
   run:
     - {{ mpi }}  # [mpi != 'nompi']
     - mpi4py     # [mpi != 'nompi']
