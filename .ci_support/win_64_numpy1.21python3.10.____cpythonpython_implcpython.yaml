@@ -1,5 +1,7 @@
 VERBOSE_CM:
 - VERBOSE=1
+bzip2:
+- '1'
 c_compiler:
 - vs2019
 channel_sources:
@@ -10,6 +12,8 @@ curl:
 - '8'
 cxx_compiler:
 - vs2019
+hdf5:
+- 1.12.2
 mpi:
 - nompi
 mpich:
@@ -32,3 +36,5 @@ zip_keys:
 - - python
   - numpy
   - python_impl
+zlib:
+- '1.2'

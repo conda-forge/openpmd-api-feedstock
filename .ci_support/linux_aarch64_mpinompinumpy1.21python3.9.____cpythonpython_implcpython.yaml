@@ -2,6 +2,8 @@ BUILD:
 - aarch64-conda_cos7-linux-gnu
 VERBOSE_CM:
 - VERBOSE=1
+bzip2:
+- '1'
 c_compiler:
 - gcc
 c_compiler_version:
@@ -22,6 +24,8 @@ cxx_compiler_version:
 - '12'
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
+hdf5:
+- 1.12.2
 mpi:
 - nompi
 mpich:
@@ -46,3 +50,5 @@ zip_keys:
 - - python
   - numpy
   - python_impl
+zlib:
+- '1.2'

@@ -2,6 +2,8 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 VERBOSE_CM:
 - VERBOSE=1
+bzip2:
+- '1'
 c_compiler:
 - clang
 c_compiler_version:
@@ -16,6 +18,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '15'
+hdf5:
+- 1.12.2
 macos_machine:
 - x86_64-apple-darwin13.4.0
 mpi:
@@ -42,3 +46,5 @@ zip_keys:
 - - python
   - numpy
   - python_impl
+zlib:
+- '1.2'
