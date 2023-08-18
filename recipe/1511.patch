@@ -1,0 +1,84 @@
+From 686322b8be9434292c8868bb5db8ef2a3d761ef5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Franz=20P=C3=B6schel?= <franz.poeschel@gmail.com>
+Date: Fri, 18 Aug 2023 10:41:28 +0200
+Subject: [PATCH] Streaming examples: Set WAN as default transport
+
+---
+ examples/10_streaming_read.cpp  | 11 ++++++++++-
+ examples/10_streaming_read.py   |  3 ++-
+ examples/10_streaming_write.cpp | 11 ++++++++++-
+ examples/10_streaming_write.py  |  3 ++-
+ 4 files changed, 24 insertions(+), 4 deletions(-)
+
+diff --git a/examples/10_streaming_read.cpp b/examples/10_streaming_read.cpp
+index 2128297934..6e6aba1fd9 100644
+--- a/examples/10_streaming_read.cpp
++++ b/examples/10_streaming_read.cpp
+@@ -19,7 +19,16 @@ int main()
+         return 0;
+     }
+ 
+-    Series series = Series("electrons.sst", Access::READ_LINEAR);
++    Series series = Series("electrons.sst", Access::READ_LINEAR, R"(
++{
++  "adios2": {
++    "engine": {
++      "parameters": {
++        "DataTransport": "WAN"
++      }
++    }
++  }
++})");
+ 
+     // `Series::writeIterations()` and `Series::readIterations()` are
+     // intentionally restricted APIs that ensure a workflow which also works
+diff --git a/examples/10_streaming_read.py b/examples/10_streaming_read.py
+index 4946c36e04..f33d778842 100755
+--- a/examples/10_streaming_read.py
++++ b/examples/10_streaming_read.py
+@@ -7,7 +7,8 @@
+ # pass-through for ADIOS2 engine parameters
+ # https://adios2.readthedocs.io/en/latest/engines/engines.html
+ config = {'adios2': {'engine': {}, 'dataset': {}}}
+-config['adios2']['engine'] = {'parameters': {'Threads': '4'}}
++config['adios2']['engine'] = {'parameters':
++                              {'Threads': '4', 'DataTransport': 'WAN'}}
+ config['adios2']['dataset'] = {'operators': [{'type': 'bzip2'}]}
+ 
+ if __name__ == "__main__":
+diff --git a/examples/10_streaming_write.cpp b/examples/10_streaming_write.cpp
+index 463b4c52e2..2eb825ae4a 100644
+--- a/examples/10_streaming_write.cpp
++++ b/examples/10_streaming_write.cpp
+@@ -20,7 +20,16 @@ int main()
+     }
+ 
+     // open file for writing
+-    Series series = Series("electrons.sst", Access::CREATE);
++    Series series = Series("electrons.sst", Access::CREATE, R"(
++{
++  "adios2": {
++    "engine": {
++      "parameters": {
++        "DataTransport": "WAN"
++      }
++    }
++  }
++})");
+ 
+     Datatype datatype = determineDatatype<position_t>();
+     constexpr unsigned long length = 10ul;
+diff --git a/examples/10_streaming_write.py b/examples/10_streaming_write.py
+index bf92bcf14c..e0b830bd35 100755
+--- a/examples/10_streaming_write.py
++++ b/examples/10_streaming_write.py
+@@ -8,7 +8,8 @@
+ # pass-through for ADIOS2 engine parameters
+ # https://adios2.readthedocs.io/en/latest/engines/engines.html
+ config = {'adios2': {'engine': {}, 'dataset': {}}}
+-config['adios2']['engine'] = {'parameters': {'Threads': '4'}}
++config['adios2']['engine'] = {'parameters':
++                              {'Threads': '4', 'DataTransport': 'WAN'}}
+ config['adios2']['dataset'] = {'operators': [{'type': 'bzip2'}]}
+ 
+ if __name__ == "__main__":
