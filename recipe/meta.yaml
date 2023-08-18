@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.15.1" %}
-{% set build = 5 %}
+{% set build = 6 %}
 {% set sha256 = "0e81652152391ba4d2b62cfac95238b11233a4f89ff45e1fcffcc7bcd79dabe1" %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
@@ -23,6 +23,12 @@ source:
     # version.hpp: 0.15.1
     # https://github.com/openPMD/openPMD-api/pull/1417
     - 1417.patch
+    # ADIOS2 Streaming: Use WAN by default
+    # https://github.com/openPMD/openPMD-api/pull/1511
+    - 1511.patch
+    # HDF5_VERSION in 1.14.1 is empty on macOS arm64
+    # https://github.com/openPMD/openPMD-api/pull/1512
+    - 1512.patch
 
 build:
   number: {{ build }}
@@ -65,7 +71,7 @@ requirements:
     # wrappers are bash scripts and wrappers in build can't use host libraries.
     - openmpi  # [mpi == "openmpi" and (build_platform != target_platform)]
   host:
-    - {{ mpi }}  # [mpi != 'nompi'] 
+    - {{ mpi }}  # [mpi != 'nompi']
     - python
     - pybind11
     - numpy  # for ctest tests
