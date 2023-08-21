@@ -19,16 +19,6 @@ source:
   fn: {{ version }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # version.hpp: 0.15.1
-    # https://github.com/openPMD/openPMD-api/pull/1417
-    - 1417.patch
-    # ADIOS2 Streaming: Use WAN by default
-    # https://github.com/openPMD/openPMD-api/pull/1511
-    - 1511.patch
-    # HDF5_VERSION in 1.14.1 is empty on macOS arm64
-    # https://github.com/openPMD/openPMD-api/pull/1512
-    - 1512.patch
 
 build:
   number: {{ build }}
