@@ -12,10 +12,6 @@ jobs:
         CONFIG: linux_64_mpimpichnumpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_mpimpichnumpy1.22python3.8.____73_pypypython_implpypy:
-        CONFIG: linux_64_mpimpichnumpy1.22python3.8.____73_pypypython_implpypy
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_mpimpichnumpy1.22python3.8.____cpythonpython_implcpython:
         CONFIG: linux_64_mpimpichnumpy1.22python3.8.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
@@ -32,12 +28,12 @@ jobs:
         CONFIG: linux_64_mpimpichnumpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_mpinompinumpy1.22python3.10.____cpythonpython_implcpython:
-        CONFIG: linux_64_mpinompinumpy1.22python3.10.____cpythonpython_implcpython
+      linux_64_mpimpichnumpy1.26python3.12.____cpythonpython_implcpython:
+        CONFIG: linux_64_mpimpichnumpy1.26python3.12.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_mpinompinumpy1.22python3.8.____73_pypypython_implpypy:
-        CONFIG: linux_64_mpinompinumpy1.22python3.8.____73_pypypython_implpypy
+      linux_64_mpinompinumpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_64_mpinompinumpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_mpinompinumpy1.22python3.8.____cpythonpython_implcpython:
@@ -56,12 +52,12 @@ jobs:
         CONFIG: linux_64_mpinompinumpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython:
-        CONFIG: linux_64_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython
+      linux_64_mpinompinumpy1.26python3.12.____cpythonpython_implcpython:
+        CONFIG: linux_64_mpinompinumpy1.26python3.12.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_mpiopenmpinumpy1.22python3.8.____73_pypypython_implpypy:
-        CONFIG: linux_64_mpiopenmpinumpy1.22python3.8.____73_pypypython_implpypy
+      linux_64_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_64_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_mpiopenmpinumpy1.22python3.8.____cpythonpython_implcpython:
@@ -80,12 +76,12 @@ jobs:
         CONFIG: linux_64_mpiopenmpinumpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_mpimpichnumpy1.22python3.10.____cpythonpython_implcpython:
-        CONFIG: linux_aarch64_mpimpichnumpy1.22python3.10.____cpythonpython_implcpython
+      linux_64_mpiopenmpinumpy1.26python3.12.____cpythonpython_implcpython:
+        CONFIG: linux_64_mpiopenmpinumpy1.26python3.12.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_mpimpichnumpy1.22python3.8.____73_pypypython_implpypy:
-        CONFIG: linux_aarch64_mpimpichnumpy1.22python3.8.____73_pypypython_implpypy
+      linux_aarch64_mpimpichnumpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_mpimpichnumpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_aarch64_mpimpichnumpy1.22python3.8.____cpythonpython_implcpython:
@@ -104,12 +100,12 @@ jobs:
         CONFIG: linux_aarch64_mpimpichnumpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_mpinompinumpy1.22python3.10.____cpythonpython_implcpython:
-        CONFIG: linux_aarch64_mpinompinumpy1.22python3.10.____cpythonpython_implcpython
+      linux_aarch64_mpimpichnumpy1.26python3.12.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_mpimpichnumpy1.26python3.12.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_mpinompinumpy1.22python3.8.____73_pypypython_implpypy:
-        CONFIG: linux_aarch64_mpinompinumpy1.22python3.8.____73_pypypython_implpypy
+      linux_aarch64_mpinompinumpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_mpinompinumpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_aarch64_mpinompinumpy1.22python3.8.____cpythonpython_implcpython:
@@ -128,12 +124,12 @@ jobs:
         CONFIG: linux_aarch64_mpinompinumpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython:
-        CONFIG: linux_aarch64_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython
+      linux_aarch64_mpinompinumpy1.26python3.12.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_mpinompinumpy1.26python3.12.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_mpiopenmpinumpy1.22python3.8.____73_pypypython_implpypy:
-        CONFIG: linux_aarch64_mpiopenmpinumpy1.22python3.8.____73_pypypython_implpypy
+      linux_aarch64_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_aarch64_mpiopenmpinumpy1.22python3.8.____cpythonpython_implcpython:
@@ -152,12 +148,12 @@ jobs:
         CONFIG: linux_aarch64_mpiopenmpinumpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_mpimpichnumpy1.22python3.10.____cpythonpython_implcpython:
-        CONFIG: linux_ppc64le_mpimpichnumpy1.22python3.10.____cpythonpython_implcpython
+      linux_aarch64_mpiopenmpinumpy1.26python3.12.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_mpiopenmpinumpy1.26python3.12.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_mpimpichnumpy1.22python3.8.____73_pypypython_implpypy:
-        CONFIG: linux_ppc64le_mpimpichnumpy1.22python3.8.____73_pypypython_implpypy
+      linux_ppc64le_mpimpichnumpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_mpimpichnumpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_ppc64le_mpimpichnumpy1.22python3.8.____cpythonpython_implcpython:
@@ -176,12 +172,12 @@ jobs:
         CONFIG: linux_ppc64le_mpimpichnumpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_mpinompinumpy1.22python3.10.____cpythonpython_implcpython:
-        CONFIG: linux_ppc64le_mpinompinumpy1.22python3.10.____cpythonpython_implcpython
+      linux_ppc64le_mpimpichnumpy1.26python3.12.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_mpimpichnumpy1.26python3.12.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_mpinompinumpy1.22python3.8.____73_pypypython_implpypy:
-        CONFIG: linux_ppc64le_mpinompinumpy1.22python3.8.____73_pypypython_implpypy
+      linux_ppc64le_mpinompinumpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_mpinompinumpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_ppc64le_mpinompinumpy1.22python3.8.____cpythonpython_implcpython:
@@ -200,12 +196,12 @@ jobs:
         CONFIG: linux_ppc64le_mpinompinumpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython:
-        CONFIG: linux_ppc64le_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython
+      linux_ppc64le_mpinompinumpy1.26python3.12.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_mpinompinumpy1.26python3.12.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_mpiopenmpinumpy1.22python3.8.____73_pypypython_implpypy:
-        CONFIG: linux_ppc64le_mpiopenmpinumpy1.22python3.8.____73_pypypython_implpypy
+      linux_ppc64le_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_mpiopenmpinumpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_ppc64le_mpiopenmpinumpy1.22python3.8.____cpythonpython_implcpython:
@@ -224,7 +220,11 @@ jobs:
         CONFIG: linux_ppc64le_mpiopenmpinumpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-    maxParallel: 30
+      linux_ppc64le_mpiopenmpinumpy1.26python3.12.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_mpiopenmpinumpy1.26python3.12.____cpythonpython_implcpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+    maxParallel: 29
   timeoutInMinutes: 360
 
   steps:
