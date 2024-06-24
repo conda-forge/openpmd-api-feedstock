@@ -1,6 +1,6 @@
 {% set name = "openpmd-api" %}
 {% set version = "0.15.2" %}
-{% set build = 3 %}
+{% set build = 4 %}
 {% set sha256 = "fbe3b356fe6f4589c659027c8056844692c62382e3ec53b953bed1c87e58ba13" %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
@@ -86,7 +86,6 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
     - mpi4py     # [mpi != 'nompi']
     - python
-    - {{ pin_compatible('numpy') }}
     # FIXME: for some reason warnings about this (ADIOS1 deps)
     - blosc
     - zlib
