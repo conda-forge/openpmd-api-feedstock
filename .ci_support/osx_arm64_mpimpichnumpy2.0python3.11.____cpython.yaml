@@ -9,7 +9,7 @@ bzip2:
 c_compiler:
 - clang
 c_compiler_version:
-- '16'
+- '17'
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
@@ -23,7 +23,7 @@ curl:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '16'
+- '17'
 hdf5:
 - 1.14.3
 macos_machine:
@@ -52,5 +52,6 @@ zip_keys:
 - - python
   - numpy
   - python_impl
+  - channel_sources
 zlib:
 - '1'
