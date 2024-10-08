@@ -74,6 +74,7 @@ requirements:
     - hdf5
     - adios2 * mpi_{{ mpi }}_*  # [mpi != 'nompi' and python_impl != 'pypy']
     - hdf5   * mpi_{{ mpi }}_*  # [mpi != 'nompi']
+    - nlohmann_json
     # missing in conda-forge
     #- toml11>=3.7.1
   run:

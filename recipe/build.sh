@@ -57,8 +57,7 @@ cmake ${CMAKE_ARGS} \
     -DopenPMD_USE_HDF5=ON                     \
     -DopenPMD_USE_ADIOS2=${USE_ADIOS2}        \
     -DopenPMD_USE_PYTHON=ON                   \
-    -DopenPMD_USE_INTERNAL_CATCH=ON           \
-    -DopenPMD_USE_INTERNAL_PYBIND11=OFF       \
+    -DopenPMD_SUPERBUILD=OFF                  \
     -DopenPMD_USE_INTERNAL_TOML11=ON          \
     -DPython_EXECUTABLE:FILEPATH=$PYTHON      \
     -DBUILD_TESTING=ON                \
