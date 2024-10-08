@@ -1,0 +1,269 @@
+From 47bcafbc1f195e4e7564ccc87381e15980f1d0e7 Mon Sep 17 00:00:00 2001
+From: Axel Huebl <axel.huebl@plasma.ninja>
+Date: Tue, 8 Oct 2024 10:44:26 -0700
+Subject: [PATCH] Fix: CMake Internal Control
+
+The `openPMD_USE_INTERNAL_*` options are for general internal/external
+control. They were accidentally overwritten by new tar flags
+and sometimes incomplete.
+
+Signed-off-by: Axel Huebl <axel.huebl@plasma.ninja>
+---
+ cmake/dependencies/catch.cmake    | 50 +++++++++++++++----------------
+ cmake/dependencies/json.cmake     | 50 +++++++++++++++----------------
+ cmake/dependencies/pybind11.cmake | 50 +++++++++++++++----------------
+ cmake/dependencies/toml11.cmake   | 50 +++++++++++++++----------------
+ 4 files changed, 96 insertions(+), 104 deletions(-)
+
+diff --git a/cmake/dependencies/catch.cmake b/cmake/dependencies/catch.cmake
+index 956d66493e..c86ca941c1 100644
+--- a/cmake/dependencies/catch.cmake
++++ b/cmake/dependencies/catch.cmake
+@@ -16,34 +16,32 @@ function(find_catch2)
+     endif()
+     if(TARGET Catch2::Catch2)
+         # nothing to do, target already exists in the superbuild
+-    elseif(openPMD_USE_INTERNAL_CATCH OR openPMD_catch_src OR openPMD_catch_tar)
+-        if(openPMD_catch_src)
+-            add_subdirectory(${openPMD_catch_src} _deps/localCatch2-build/)
++    elseif(openPMD_USE_INTERNAL_CATCH AND openPMD_catch_src)
++        add_subdirectory(${openPMD_catch_src} _deps/localCatch2-build/)
++    elseif(openPMD_USE_INTERNAL_CATCH AND (openPMD_catch_tar OR openPMD_catch_branch))
++        include(FetchContent)
++        if(openPMD_catch_tar)
++            FetchContent_Declare(fetchedCatch2
++                URL             ${openPMD_catch_tar}
++                URL_HASH        ${openPMD_catch_tar_hash}
++                BUILD_IN_SOURCE OFF
++            )
+         else()
+-            include(FetchContent)
+-            if(openPMD_catch_tar)
+-                FetchContent_Declare(fetchedCatch2
+-                    URL             ${openPMD_catch_tar}
+-                    URL_HASH        ${openPMD_catch_tar_hash}
+-                    BUILD_IN_SOURCE OFF
+-                )
+-            else()
+-                FetchContent_Declare(fetchedCatch2
+-                    GIT_REPOSITORY ${openPMD_catch_repo}
+-                    GIT_TAG        ${openPMD_catch_branch}
+-                    BUILD_IN_SOURCE OFF
+-                )
+-            endif()
+-            FetchContent_MakeAvailable(fetchedCatch2)
+-
+-            # advanced fetch options
+-            mark_as_advanced(FETCHCONTENT_BASE_DIR)
+-            mark_as_advanced(FETCHCONTENT_FULLY_DISCONNECTED)
+-            mark_as_advanced(FETCHCONTENT_QUIET)
+-            #mark_as_advanced(FETCHCONTENT_SOURCE_DIR_FETCHEDCatch2)
+-            mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
+-            #mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_FETCHEDCatch2)
++            FetchContent_Declare(fetchedCatch2
++                GIT_REPOSITORY ${openPMD_catch_repo}
++                GIT_TAG        ${openPMD_catch_branch}
++                BUILD_IN_SOURCE OFF
++            )
+         endif()
++        FetchContent_MakeAvailable(fetchedCatch2)
++
++        # advanced fetch options
++        mark_as_advanced(FETCHCONTENT_BASE_DIR)
++        mark_as_advanced(FETCHCONTENT_FULLY_DISCONNECTED)
++        mark_as_advanced(FETCHCONTENT_QUIET)
++        #mark_as_advanced(FETCHCONTENT_SOURCE_DIR_FETCHEDCatch2)
++        mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
++        #mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_FETCHEDCatch2)
+     elseif(NOT openPMD_USE_INTERNAL_CATCH)
+         find_package(Catch2 2.13.10 CONFIG REQUIRED)
+         message(STATUS "Catch2: Found version '${Catch2_VERSION}'")
+diff --git a/cmake/dependencies/json.cmake b/cmake/dependencies/json.cmake
+index 8b22eb80f8..cd3105a04d 100644
+--- a/cmake/dependencies/json.cmake
++++ b/cmake/dependencies/json.cmake
+@@ -16,34 +16,32 @@ function(find_json)
+     endif()
+     if(TARGET nlohmann_json::nlohmann_json)
+         # nothing to do, target already exists in the superbuild
+-    elseif(openPMD_USE_INTERNAL_JSON OR openPMD_json_src OR openPMD_json_tar)
+-        if(openPMD_json_src)
+-            add_subdirectory(${openPMD_json_src} _deps/localnlohmann_json-build/)
++    elseif(openPMD_USE_INTERNAL_JSON AND openPMD_json_src)
++        add_subdirectory(${openPMD_json_src} _deps/localnlohmann_json-build/)
++    elseif(openPMD_USE_INTERNAL_JSON AND (openPMD_json_tar OR openPMD_json_branch))
++        include(FetchContent)
++        if(openPMD_json_tar)
++            FetchContent_Declare(fetchednlohmann_json
++                URL             ${openPMD_json_tar}
++                URL_HASH        ${openPMD_json_tar_hash}
++                BUILD_IN_SOURCE OFF
++            )
+         else()
+-            include(FetchContent)
+-            if(openPMD_json_tar)
+-                FetchContent_Declare(fetchednlohmann_json
+-                    URL             ${openPMD_json_tar}
+-                    URL_HASH        ${openPMD_json_tar_hash}
+-                    BUILD_IN_SOURCE OFF
+-                )
+-            else()
+-                FetchContent_Declare(fetchednlohmann_json
+-                    GIT_REPOSITORY ${openPMD_json_repo}
+-                    GIT_TAG        ${openPMD_json_branch}
+-                    BUILD_IN_SOURCE OFF
+-                )
+-            endif()
+-            FetchContent_MakeAvailable(fetchednlohmann_json)
+-
+-            # advanced fetch options
+-            mark_as_advanced(FETCHCONTENT_BASE_DIR)
+-            mark_as_advanced(FETCHCONTENT_FULLY_DISCONNECTED)
+-            mark_as_advanced(FETCHCONTENT_QUIET)
+-            #mark_as_advanced(FETCHCONTENT_SOURCE_DIR_FETCHEDnlohmann_json)
+-            mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
+-            #mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_FETCHEDnlohmann_json)
++            FetchContent_Declare(fetchednlohmann_json
++                GIT_REPOSITORY ${openPMD_json_repo}
++                GIT_TAG        ${openPMD_json_branch}
++                BUILD_IN_SOURCE OFF
++            )
+         endif()
++        FetchContent_MakeAvailable(fetchednlohmann_json)
++
++        # advanced fetch options
++        mark_as_advanced(FETCHCONTENT_BASE_DIR)
++        mark_as_advanced(FETCHCONTENT_FULLY_DISCONNECTED)
++        mark_as_advanced(FETCHCONTENT_QUIET)
++        #mark_as_advanced(FETCHCONTENT_SOURCE_DIR_FETCHEDnlohmann_json)
++        mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
++        #mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_FETCHEDnlohmann_json)
+     elseif(NOT openPMD_USE_INTERNAL_JSON)
+         find_package(nlohmann_json 3.9.1 CONFIG REQUIRED)
+         message(STATUS "nlohmann_json: Found version '${nlohmann_json_VERSION}'")
+diff --git a/cmake/dependencies/pybind11.cmake b/cmake/dependencies/pybind11.cmake
+index 742aafa7dc..b949e02d74 100644
+--- a/cmake/dependencies/pybind11.cmake
++++ b/cmake/dependencies/pybind11.cmake
+@@ -16,34 +16,32 @@ function(find_pybind11)
+     endif()
+     if(TARGET pybind11::module)
+         # nothing to do, target already exists in the superbuild
+-    elseif(openPMD_USE_INTERNAL_PYBIND11 OR openPMD_pybind11_src)
+-        if(openPMD_pybind11_src)
+-            add_subdirectory(${openPMD_pybind11_src} _deps/localpybind11-build/)
+-        else()
+-            include(FetchContent)
+-            if(openPMD_pybind11_tar)
+-                FetchContent_Declare(fetchedpybind11
+-                        URL             ${openPMD_pybind11_tar}
+-                        URL_HASH        ${openPMD_pybind11_tar_hash}
+-                        BUILD_IN_SOURCE OFF
+-                )
+-            else()
+-                FetchContent_Declare(fetchedpybind11
+-                    GIT_REPOSITORY ${openPMD_pybind11_repo}
+-                    GIT_TAG        ${openPMD_pybind11_branch}
++    elseif(openPMD_USE_INTERNAL_PYBIND11 AND openPMD_pybind11_src)
++        add_subdirectory(${openPMD_pybind11_src} _deps/localpybind11-build/)
++    elseif(openPMD_USE_INTERNAL_PYBIND11 AND (openPMD_pybind11_tar OR openPMD_pybind11_branch))
++        include(FetchContent)
++        if(openPMD_pybind11_tar)
++            FetchContent_Declare(fetchedpybind11
++                    URL             ${openPMD_pybind11_tar}
++                    URL_HASH        ${openPMD_pybind11_tar_hash}
+                     BUILD_IN_SOURCE OFF
+-                )
+-            endif()
+-            FetchContent_MakeAvailable(fetchedpybind11)
+-
+-            # advanced fetch options
+-            mark_as_advanced(FETCHCONTENT_BASE_DIR)
+-            mark_as_advanced(FETCHCONTENT_FULLY_DISCONNECTED)
+-            mark_as_advanced(FETCHCONTENT_QUIET)
+-            mark_as_advanced(FETCHCONTENT_SOURCE_DIR_FETCHEDpybind11)
+-            mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
+-            mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_FETCHEDpybind11)
++            )
++        else()
++            FetchContent_Declare(fetchedpybind11
++                GIT_REPOSITORY ${openPMD_pybind11_repo}
++                GIT_TAG        ${openPMD_pybind11_branch}
++                BUILD_IN_SOURCE OFF
++            )
+         endif()
++        FetchContent_MakeAvailable(fetchedpybind11)
++
++        # advanced fetch options
++        mark_as_advanced(FETCHCONTENT_BASE_DIR)
++        mark_as_advanced(FETCHCONTENT_FULLY_DISCONNECTED)
++        mark_as_advanced(FETCHCONTENT_QUIET)
++        mark_as_advanced(FETCHCONTENT_SOURCE_DIR_FETCHEDpybind11)
++        mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
++        mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_FETCHEDpybind11)
+     elseif(NOT openPMD_USE_INTERNAL_PYBIND11)
+         if(openPMD_USE_PYTHON STREQUAL AUTO)
+             find_package(pybind11 2.13.0 CONFIG)
+diff --git a/cmake/dependencies/toml11.cmake b/cmake/dependencies/toml11.cmake
+index 6ad9990db2..1972dde5f1 100644
+--- a/cmake/dependencies/toml11.cmake
++++ b/cmake/dependencies/toml11.cmake
+@@ -16,34 +16,32 @@ function(find_toml11)
+     endif()
+     if(TARGET toml11::toml11)
+         # nothing to do, target already exists in the superbuild
+-    elseif(openPMD_USE_INTERNAL_TOML11 OR openPMD_toml11_src)
+-        if(openPMD_toml11_src)
+-            add_subdirectory(${openPMD_toml11_src} _deps/localtoml11-build/)
+-        else()
+-            include(FetchContent)
+-            if(openPMD_toml11_tar)
+-                FetchContent_Declare(fetchedtoml11
+-                        URL             ${openPMD_toml11_tar}
+-                        URL_HASH        ${openPMD_toml11_tar_hash}
+-                        BUILD_IN_SOURCE OFF
+-                )
+-            else()
+-                FetchContent_Declare(fetchedtoml11
+-                    GIT_REPOSITORY ${openPMD_toml11_repo}
+-                    GIT_TAG        ${openPMD_toml11_branch}
++    elseif(openPMD_USE_INTERNAL_TOML11 AND openPMD_toml11_src)
++        add_subdirectory(${openPMD_toml11_src} _deps/localtoml11-build/)
++    elseif(openPMD_USE_INTERNAL_TOML11 AND (openPMD_toml11_tar OR openPMD_toml11_branch))
++        include(FetchContent)
++        if(openPMD_toml11_tar)
++            FetchContent_Declare(fetchedtoml11
++                    URL             ${openPMD_toml11_tar}
++                    URL_HASH        ${openPMD_toml11_tar_hash}
+                     BUILD_IN_SOURCE OFF
+-                )
+-            endif()
+-            FetchContent_MakeAvailable(fetchedtoml11)
+-
+-            # advanced fetch options
+-            mark_as_advanced(FETCHCONTENT_BASE_DIR)
+-            mark_as_advanced(FETCHCONTENT_FULLY_DISCONNECTED)
+-            mark_as_advanced(FETCHCONTENT_QUIET)
+-            #mark_as_advanced(FETCHCONTENT_SOURCE_DIR_FETCHEDtoml11)
+-            mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
+-            #mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_FETCHEDtoml11)
++            )
++        else()
++            FetchContent_Declare(fetchedtoml11
++                GIT_REPOSITORY ${openPMD_toml11_repo}
++                GIT_TAG        ${openPMD_toml11_branch}
++                BUILD_IN_SOURCE OFF
++            )
+         endif()
++        FetchContent_MakeAvailable(fetchedtoml11)
++
++        # advanced fetch options
++        mark_as_advanced(FETCHCONTENT_BASE_DIR)
++        mark_as_advanced(FETCHCONTENT_FULLY_DISCONNECTED)
++        mark_as_advanced(FETCHCONTENT_QUIET)
++        #mark_as_advanced(FETCHCONTENT_SOURCE_DIR_FETCHEDtoml11)
++        mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
++        #mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_FETCHEDtoml11)
+     elseif(NOT openPMD_USE_INTERNAL_TOML11)
+         # toml11 4.0 was a breaking change. This is reflected in the library's CMake
+         # logic: version 4.0 is not accepted by a call to find_package(toml11 3.7).
