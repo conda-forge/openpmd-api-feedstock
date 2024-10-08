@@ -1,4 +1,4 @@
-From 47bcafbc1f195e4e7564ccc87381e15980f1d0e7 Mon Sep 17 00:00:00 2001
+From bcb1e17100db00eefddd7a2780e1ba78504d0da4 Mon Sep 17 00:00:00 2001
 From: Axel Huebl <axel.huebl@plasma.ninja>
 Date: Tue, 8 Oct 2024 10:44:26 -0700
 Subject: [PATCH] Fix: CMake Internal Control
@@ -9,17 +9,45 @@ and sometimes incomplete.
 
 Signed-off-by: Axel Huebl <axel.huebl@plasma.ninja>
 ---
- cmake/dependencies/catch.cmake    | 50 +++++++++++++++----------------
- cmake/dependencies/json.cmake     | 50 +++++++++++++++----------------
- cmake/dependencies/pybind11.cmake | 50 +++++++++++++++----------------
- cmake/dependencies/toml11.cmake   | 50 +++++++++++++++----------------
- 4 files changed, 96 insertions(+), 104 deletions(-)
+ cmake/dependencies/catch.cmake    | 74 +++++++++++++++----------------
+ cmake/dependencies/json.cmake     | 74 +++++++++++++++----------------
+ cmake/dependencies/pybind11.cmake | 74 +++++++++++++++----------------
+ cmake/dependencies/toml11.cmake   | 74 +++++++++++++++----------------
+ 4 files changed, 148 insertions(+), 148 deletions(-)
 
 diff --git a/cmake/dependencies/catch.cmake b/cmake/dependencies/catch.cmake
-index 956d66493e..c86ca941c1 100644
+index 956d66493e8ab405d413cf53e9a1a8752f95c584..bc7a3dcc89643509c64330987675f68dbc3b0ab3 100644
 --- a/cmake/dependencies/catch.cmake
 +++ b/cmake/dependencies/catch.cmake
-@@ -16,34 +16,32 @@ function(find_catch2)
+@@ -1,49 +1,49 @@
+ function(find_catch2)
+     if(TARGET Catch2::Catch2)
+         message(STATUS "Catch2::Catch2 target already imported")
+-    elseif(openPMD_catch_src)
+-        message(STATUS "Compiling local Catch2 ...")
+-        message(STATUS "Catch2 source path: ${openPMD_catch_src}")
+-        if(NOT IS_DIRECTORY ${openPMD_catch_src})
+-            message(FATAL_ERROR "Specified directory openPMD_catch_src='${openPMD_catch_src}' does not exist!")
+-        endif()
+-    elseif(openPMD_catch_tar)
+-        message(STATUS "Downloading Catch2 ...")
+-        message(STATUS "Catch2 source: ${openPMD_catch_tar}")
+     elseif(openPMD_USE_INTERNAL_CATCH)
+-        message(STATUS "Downloading Catch2 ...")
+-        message(STATUS "Catch2 repository: ${openPMD_catch_repo} (${openPMD_catch_branch})")
++        if(openPMD_catch_src)
++            message(STATUS "Compiling local Catch2 ...")
++            message(STATUS "Catch2 source path: ${openPMD_catch_src}")
++            if(NOT IS_DIRECTORY ${openPMD_catch_src})
++                message(FATAL_ERROR "Specified directory openPMD_catch_src='${openPMD_catch_src}' does not exist!")
++            endif()
++        elseif(openPMD_catch_tar)
++            message(STATUS "Downloading Catch2 ...")
++            message(STATUS "Catch2 source: ${openPMD_catch_tar}")
++        elseif(openPMD_catch_branch)
++            message(STATUS "Downloading Catch2 ...")
++            message(STATUS "Catch2 repository: ${openPMD_catch_repo} (${openPMD_catch_branch})")
++        endif()
      endif()
      if(TARGET Catch2::Catch2)
          # nothing to do, target already exists in the superbuild
@@ -79,10 +107,38 @@ index 956d66493e..c86ca941c1 100644
          find_package(Catch2 2.13.10 CONFIG REQUIRED)
          message(STATUS "Catch2: Found version '${Catch2_VERSION}'")
 diff --git a/cmake/dependencies/json.cmake b/cmake/dependencies/json.cmake
-index 8b22eb80f8..cd3105a04d 100644
+index 8b22eb80f8eb4b473fe32a2772bdba0358a47295..751ffc87f5d7ccf3aab6da3fdb9b1b3893ff2b21 100644
 --- a/cmake/dependencies/json.cmake
 +++ b/cmake/dependencies/json.cmake
-@@ -16,34 +16,32 @@ function(find_json)
+@@ -1,49 +1,49 @@
+ function(find_json)
+     if(TARGET nlohmann_json::nlohmann_json)
+         message(STATUS "nlohmann_json::nlohmann_json target already imported")
+-    elseif(openPMD_json_src)
+-        message(STATUS "Compiling local nlohmann_json ...")
+-        message(STATUS "nlohmann_json source path: ${openPMD_json_src}")
+-        if(NOT IS_DIRECTORY ${openPMD_json_src})
+-            message(FATAL_ERROR "Specified directory openPMD_json_src='${openPMD_json_src}' does not exist!")
+-        endif()
+-    elseif(openPMD_json_tar)
+-        message(STATUS "Downloading nlohmann_json ...")
+-        message(STATUS "nlohmann_json source: ${openPMD_json_tar}")
+     elseif(openPMD_USE_INTERNAL_JSON)
+-        message(STATUS "Downloading nlohmann_json ...")
+-        message(STATUS "nlohmann_json repository: ${openPMD_json_repo} (${openPMD_json_branch})")
++        if(openPMD_json_src)
++            message(STATUS "Compiling local nlohmann_json ...")
++            message(STATUS "nlohmann_json source path: ${openPMD_json_src}")
++            if(NOT IS_DIRECTORY ${openPMD_json_src})
++                message(FATAL_ERROR "Specified directory openPMD_json_src='${openPMD_json_src}' does not exist!")
++            endif()
++        elseif(openPMD_json_tar)
++            message(STATUS "Downloading nlohmann_json ...")
++            message(STATUS "nlohmann_json source: ${openPMD_json_tar}")
++        elseif(openPMD_json_branch)
++            message(STATUS "Downloading nlohmann_json ...")
++            message(STATUS "nlohmann_json repository: ${openPMD_json_repo} (${openPMD_json_branch})")
++        endif()
      endif()
      if(TARGET nlohmann_json::nlohmann_json)
          # nothing to do, target already exists in the superbuild
@@ -142,10 +198,38 @@ index 8b22eb80f8..cd3105a04d 100644
          find_package(nlohmann_json 3.9.1 CONFIG REQUIRED)
          message(STATUS "nlohmann_json: Found version '${nlohmann_json_VERSION}'")
 diff --git a/cmake/dependencies/pybind11.cmake b/cmake/dependencies/pybind11.cmake
-index 742aafa7dc..b949e02d74 100644
+index 742aafa7dc38554de1aed41a62cdc8f2b2521472..6719a38c372a607f8ade811d89f5ba5201283902 100644
 --- a/cmake/dependencies/pybind11.cmake
 +++ b/cmake/dependencies/pybind11.cmake
-@@ -16,34 +16,32 @@ function(find_pybind11)
+@@ -1,49 +1,49 @@
+ function(find_pybind11)
+     if(TARGET pybind11::module)
+         message(STATUS "pybind11::module target already imported")
+-    elseif(openPMD_pybind11_src)
+-        message(STATUS "Compiling local pybind11 ...")
+-        message(STATUS "pybind11 source path: ${openPMD_pybind11_src}")
+-        if(NOT IS_DIRECTORY ${openPMD_pybind11_src})
+-            message(FATAL_ERROR "Specified directory openPMD_pybind11_src='${openPMD_pybind11_src}' does not exist!")
+-        endif()
+-    elseif(openPMD_pybind11_tar)
+-        message(STATUS "Downloading pybind11 ...")
+-        message(STATUS "pybind11 source: ${openPMD_pybind11_tar}")
+     elseif(openPMD_USE_INTERNAL_PYBIND11)
+-        message(STATUS "Downloading pybind11 ...")
+-        message(STATUS "pybind11 repository: ${openPMD_pybind11_repo} (${openPMD_pybind11_branch})")
++        if(openPMD_pybind11_src)
++            message(STATUS "Compiling local pybind11 ...")
++            message(STATUS "pybind11 source path: ${openPMD_pybind11_src}")
++            if(NOT IS_DIRECTORY ${openPMD_pybind11_src})
++                message(FATAL_ERROR "Specified directory openPMD_pybind11_src='${openPMD_pybind11_src}' does not exist!")
++            endif()
++        elseif(openPMD_pybind11_tar)
++            message(STATUS "Downloading pybind11 ...")
++            message(STATUS "pybind11 source: ${openPMD_pybind11_tar}")
++        elseif(openPMD_pybind11_branch)
++            message(STATUS "Downloading pybind11 ...")
++            message(STATUS "pybind11 repository: ${openPMD_pybind11_repo} (${openPMD_pybind11_branch})")
++        endif()
      endif()
      if(TARGET pybind11::module)
          # nothing to do, target already exists in the superbuild
@@ -205,10 +289,38 @@ index 742aafa7dc..b949e02d74 100644
          if(openPMD_USE_PYTHON STREQUAL AUTO)
              find_package(pybind11 2.13.0 CONFIG)
 diff --git a/cmake/dependencies/toml11.cmake b/cmake/dependencies/toml11.cmake
-index 6ad9990db2..1972dde5f1 100644
+index 6ad9990db2fe18f0583c33b925c8377d8cedc488..034560bdfa58c63a514cef9deb904af6902dd9e5 100644
 --- a/cmake/dependencies/toml11.cmake
 +++ b/cmake/dependencies/toml11.cmake
-@@ -16,34 +16,32 @@ function(find_toml11)
+@@ -1,49 +1,49 @@
+ function(find_toml11)
+     if(TARGET toml11::toml11)
+         message(STATUS "toml11::toml11 target already imported")
+-    elseif(openPMD_toml11_src)
+-        message(STATUS "Compiling local toml11 ...")
+-        message(STATUS "toml11 source path: ${openPMD_toml11_src}")
+-        if(NOT IS_DIRECTORY ${openPMD_toml11_src})
+-            message(FATAL_ERROR "Specified directory openPMD_toml11_src='${openPMD_toml11_src}' does not exist!")
+-        endif()
+-    elseif(openPMD_toml11_tar)
+-        message(STATUS "Downloading toml11 ...")
+-        message(STATUS "toml11 source: ${openPMD_toml11_tar}")
+     elseif(openPMD_USE_INTERNAL_TOML11)
+-        message(STATUS "Downloading toml11 ...")
+-        message(STATUS "toml11 repository: ${openPMD_toml11_repo} (${openPMD_toml11_branch})")
++        if(openPMD_toml11_src)
++            message(STATUS "Compiling local toml11 ...")
++            message(STATUS "toml11 source path: ${openPMD_toml11_src}")
++            if(NOT IS_DIRECTORY ${openPMD_toml11_src})
++                message(FATAL_ERROR "Specified directory openPMD_toml11_src='${openPMD_toml11_src}' does not exist!")
++            endif()
++        elseif(openPMD_toml11_tar)
++            message(STATUS "Downloading toml11 ...")
++            message(STATUS "toml11 source: ${openPMD_toml11_tar}")
++        elseif(openPMD_toml11_branch)
++            message(STATUS "Downloading toml11 ...")
++            message(STATUS "toml11 repository: ${openPMD_toml11_repo} (${openPMD_toml11_branch})")
++        endif()
      endif()
      if(TARGET toml11::toml11)
          # nothing to do, target already exists in the superbuild
