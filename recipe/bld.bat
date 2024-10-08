@@ -24,6 +24,7 @@ cmake ^
     -DopenPMD_USE_ADIOS2=%USE_ADIOS2%    ^
     -DopenPMD_USE_PYTHON=ON     ^
     -DopenPMD_SUPERBUILD=OFF    ^
+    -DopenPMD_USE_INTERNAL_CATCH=ON          ^
     -DopenPMD_USE_INTERNAL_TOML11=ON         ^
     -DPython_EXECUTABLE:FILEPATH=%PYTHON%    ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%  ^
