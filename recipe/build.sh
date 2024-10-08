@@ -12,13 +12,6 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
     export CXXFLAGS="$CXXFLAGS $LDFLAGS"
 fi
 
-# FIXME: ADIOS1 broken with MPI
-if [[ ${mpi} != "nompi" && ${target_platform} =~ osx.* ]]; then
-    export USE_ADIOS1=OFF
-else
-    export USE_ADIOS1=ON
-fi
-
 # newer C++ standard lib features
 # https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
 if [[ ${target_platform} =~ osx.* ]]; then
@@ -62,11 +55,10 @@ cmake ${CMAKE_ARGS} \
     -DBUILD_SHARED_LIBS=ON      \
     -DopenPMD_USE_MPI=${USE_MPI}              \
     -DopenPMD_USE_HDF5=ON                     \
-    -DopenPMD_USE_ADIOS1=${USE_ADIOS1}        \
     -DopenPMD_USE_ADIOS2=${USE_ADIOS2}        \
     -DopenPMD_USE_PYTHON=ON                   \
+    -DopenPMD_SUPERBUILD=OFF                  \
     -DopenPMD_USE_INTERNAL_CATCH=ON           \
-    -DopenPMD_USE_INTERNAL_PYBIND11=OFF       \
     -DopenPMD_USE_INTERNAL_TOML11=ON          \
     -DPython_EXECUTABLE:FILEPATH=$PYTHON      \
     -DBUILD_TESTING=ON                \

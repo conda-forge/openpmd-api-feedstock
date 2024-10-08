@@ -21,12 +21,11 @@ cmake ^
     -DBUILD_SHARED_LIBS=ON      ^
     -DopenPMD_USE_MPI=OFF       ^
     -DopenPMD_USE_HDF5=ON       ^
-    -DopenPMD_USE_ADIOS1=OFF    ^
     -DopenPMD_USE_ADIOS2=%USE_ADIOS2%    ^
     -DopenPMD_USE_PYTHON=ON     ^
-    -DopenPMD_USE_INTERNAL_CATCH=ON      ^
-    -DopenPMD_USE_INTERNAL_PYBIND11=OFF  ^
-    -DopenPMD_USE_INTERNAL_TOML11=ON     ^
+    -DopenPMD_SUPERBUILD=OFF    ^
+    -DopenPMD_USE_INTERNAL_CATCH=ON          ^
+    -DopenPMD_USE_INTERNAL_TOML11=ON         ^
     -DPython_EXECUTABLE:FILEPATH=%PYTHON%    ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%  ^
     -DCMAKE_INSTALL_LIBDIR=lib  ^
