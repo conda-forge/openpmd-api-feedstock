@@ -15,7 +15,7 @@ Documentation: https://openpmd-api.readthedocs.io
 
 This library provides a common high-level API for openPMD writing and
 reading. It provides a common interface to I/O libraries and file formats
-such as HDF5, ADIOS1, ADIOS2, and JSON.
+such as HDF5, ADIOS2, and JSON.
 Language bindings are provided for C++17 (or newer) and Python 3.
 This conda-forge package provides serial and MPI-parallel I/O. Windows
 support is limited to serial versions of HDF5, ADIOS2 and JSON.

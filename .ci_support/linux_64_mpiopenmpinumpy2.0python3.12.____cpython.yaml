@@ -1,7 +1,5 @@
 VERBOSE_CM:
 - VERBOSE=1
-bzip2:
-- '1'
 c_compiler:
 - gcc
 c_compiler_version:
@@ -53,5 +51,3 @@ zip_keys:
   - numpy
   - python_impl
   - channel_sources
-zlib:
-- '1'
