@@ -21,7 +21,6 @@ cmake ^
     -DBUILD_SHARED_LIBS=ON      ^
     -DopenPMD_USE_MPI=OFF       ^
     -DopenPMD_USE_HDF5=ON       ^
-    -DopenPMD_USE_ADIOS1=OFF    ^
     -DopenPMD_USE_ADIOS2=%USE_ADIOS2%    ^
     -DopenPMD_USE_PYTHON=ON     ^
     -DopenPMD_USE_INTERNAL_CATCH=ON      ^
