@@ -11,7 +11,7 @@ c_stdlib_version:
 cdt_name:
 - cos7
 channel_sources:
-- conda-forge/label/python_rc,conda-forge
+- conda-forge
 channel_targets:
 - conda-forge main
 curl:
@@ -23,7 +23,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 hdf5:
-- 1.14.3
+- 1.14.4
 mpi:
 - mpich
 mpich:
@@ -50,4 +50,3 @@ zip_keys:
 - - python
   - numpy
   - python_impl
-  - channel_sources
