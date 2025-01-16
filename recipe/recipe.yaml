@@ -5,10 +5,10 @@ schema_version: 1
 context:
   name: openpmd-api
   version: 0.16.1
-  build: ${{build + 100 if mpi == 'nompi' else build}}
+  build: 0
   sha256: a029a1779351949f41c1f36d0e75c698e59c5d284f080d5e4c2b8650779d2d58
-  mpi: "mpi or 'nompi'"
-  mpi_prefix: ${{""nompi" if mpi == 'nompi' else "mpi_" + mpi"}}
+  mpi: ${{ mpi or "nompi" }}  # is this still needed?
+  mpi_prefix: ${{ "nompi" if mpi == "nompi" else "mpi_" + mpi }}
 
 package:
   name: ${{ name|lower }}
@@ -25,7 +25,7 @@ build:
   # dependencies:
   # `pkg * mpi_mpich_*` for mpich
   # `pkg * mpi_*` for any mpi
-  number: ${{ build }}
+  number: ${{ build | int + 100 if mpi == "nompi" else build }}
   string: ${{ mpi_prefix }}_py${{ py }}h${{ PKG_HASH }}_${{ build }}
 
 requirements:
@@ -47,8 +47,9 @@ requirements:
     # In OpenMPI, the compiler wrappers are binaries and the wrappers in build
     # can use host libraries by adding OPAL_PREFIX and in mpich, compiler
     # wrappers are bash scripts and wrappers in build can't use host libraries.
-    - if: "mpi == \"openmpi\" and (build_platform != target_platform)"
+    - if: "mpi == 'openmpi' and (build_platform != target_platform)"
       then: openmpi
+
   host:
     - if: "mpi != 'nompi'"
       then: ${{ mpi }}
@@ -77,7 +78,7 @@ requirements:
     - python
   run_exports:
     - ${{ name }} * ${{ mpi_prefix }}_*
-    - openpmd-api ${{ version }}
+    - openpmd-api ==${{ version }}
 
 tests:
   - python:
@@ -85,8 +86,8 @@ tests:
         - openpmd_api
       pip_check: false
   - script:
-      - "python -c \"import openpmd_api; print(openpmd_api.__version__);\""
-      - "python -c \"import openpmd_api; print(openpmd_api.variants)\""
+      - "python -c 'import openpmd_api; print(openpmd_api.__version__);'"
+      - "python -c 'import openpmd_api; print(openpmd_api.variants)'"
       - if: unix
         then: test -f ${PREFIX}/lib/cmake/openPMD/openPMDConfig.cmake
       - if: linux
