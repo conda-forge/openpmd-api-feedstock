@@ -19,10 +19,6 @@ source:
   fn: {{ version }}.tar.gz
   url: https://github.com/openPMD/openPMD-api/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # Fix: CMake Internal Control
-    # https://github.com/openPMD/openPMD-api/pull/1678
-    - 1678.patch
 
 build:
   number: {{ build }}
