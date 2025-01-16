@@ -6,7 +6,6 @@ context:
   name: openpmd-api
   version: 0.16.1
   build: 0
-  sha256: a029a1779351949f41c1f36d0e75c698e59c5d284f080d5e4c2b8650779d2d58
   mpi: ${{ mpi or "nompi" }}  # is this still needed?
   mpi_prefix: ${{ "nompi" if mpi == "nompi" else "mpi_" + mpi }}
 
@@ -16,8 +15,7 @@ package:
 
 source:
   url: https://github.com/openPMD/openPMD-api/archive/${{ version }}.tar.gz
-  sha256: ${{ sha256 }}
-  file_name: ${{ version }}.tar.gz
+  sha256: a029a1779351949f41c1f36d0e75c698e59c5d284f080d5e4c2b8650779d2d58
 
 build:
   # add build string so packages can depend on
@@ -31,11 +29,10 @@ build:
 requirements:
   build:
     - if: build_platform != target_platform
-      then: python
-    - if: build_platform != target_platform
-      then: cross-python_${{ target_platform }}
-    - if: build_platform != target_platform
-      then: pybind11
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - pybind11
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
@@ -72,9 +69,9 @@ requirements:
     #- toml11>=3.7.1
   run:
     - if: "mpi != 'nompi'"
-      then: ${{ mpi }}
-    - if: "mpi != 'nompi'"
-      then: mpi4py
+      then:
+        - ${{ mpi }}
+        - mpi4py
     - python
   run_exports:
     - ${{ name }} * ${{ mpi_prefix }}_*
@@ -85,27 +82,31 @@ tests:
       imports:
         - openpmd_api
       pip_check: false
+  - package_contents:
+      lib:
+        - openPMD
+        - cmake/openPMD/openPMDConfig.cmake
   - script:
-      - "python -c 'import openpmd_api; print(openpmd_api.__version__);'"
-      - "python -c 'import openpmd_api; print(openpmd_api.variants)'"
+      - python -c 'import openpmd_api; print(openpmd_api.__version__);'
+      - python -c 'import openpmd_api; print(openpmd_api.variants)'
       - if: unix
-        then: test -f ${PREFIX}/lib/cmake/openPMD/openPMDConfig.cmake
+        then:
+          - test -f ${PREFIX}/lib/cmake/openPMD/openPMDConfig.cmake
+          - test -f ${PREFIX}/share/xeus-cling/tagfiles/openpmd-api-doxygen-web.tag.xml
+          - test -f ${PREFIX}/etc/xeus-cling/tags.d/openpmd-api.json
+          - test -f ${PREFIX}/share/xeus-cling/tagfiles/openpmd-api-doxygen-web.tag.xml
+
       - if: linux
         then: test -f ${PREFIX}/lib/libopenPMD.so
       - if: osx
         then: otool -L ${PREFIX}/lib/libopenPMD.dylib
+
       - if: win
-        then: if exist %LIBRARY_PREFIX%\bin\openPMD.dll (exit 0) else (exit 1)
-      - if: win
-        then: if exist %LIBRARY_PREFIX%\cmake\openPMDConfig.cmake (exit 0) else (exit 1)
-      - if: unix
-        then: test -f ${PREFIX}/share/xeus-cling/tagfiles/openpmd-api-doxygen-web.tag.xml
-      - if: unix
-        then: test -f ${PREFIX}/etc/xeus-cling/tags.d/openpmd-api.json
-      - if: win
-        then: if exist %LIBRARY_PREFIX%\share\xeus-cling\tagfiles\openpmd-api-doxygen-web.tag.xml (exit 0) else (exit 1)
-      - if: win
-        then: if exist %LIBRARY_PREFIX%\etc\xeus-cling\tags.d\openpmd-api.json (exit 0) else (exit 1)
+        then:
+          - if exist %LIBRARY_PREFIX%\bin\openPMD.dll (exit 0) else (exit 1)
+          - if exist %LIBRARY_PREFIX%\cmake\openPMDConfig.cmake (exit 0) else (exit 1)
+          - if exist %LIBRARY_PREFIX%\share\xeus-cling\tagfiles\openpmd-api-doxygen-web.tag.xml (exit 0) else (exit 1)
+          - if exist %LIBRARY_PREFIX%\etc\xeus-cling\tags.d\openpmd-api.json (exit 0) else (exit 1)
 
 about:
   license: LGPL-3.0-or-later
