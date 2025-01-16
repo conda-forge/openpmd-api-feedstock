@@ -7,9 +7,7 @@
 {% set mpi = mpi or 'nompi' %}
 
 # prioritize nompi variant via build number
-{% if mpi == 'nompi' %}
-{% set build = build + 100 %}
-{% endif %}
+{% set build = build + 100 if mpi == 'nompi' else build %}
 
 package:
   name: {{ name|lower }}
@@ -30,11 +28,7 @@ build:
   # `pkg * mpi_mpich_*` for mpich
   # `pkg * mpi_*` for any mpi
   # `pkg * nompi_*` for no mpi
-  {% if mpi == 'nompi' %}
-  {% set mpi_prefix = "nompi" %}
-  {% else %}
-  {% set mpi_prefix = "mpi_" + mpi %}
-  {% endif %}
+  {% set mpi_prefix = "nompi" if mpi == 'nompi' else "mpi_" + mpi %}
   string: {{ mpi_prefix }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}
 
   run_exports:
