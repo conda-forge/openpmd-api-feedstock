@@ -26,9 +26,7 @@ build:
   # `pkg * mpi_mpich_*` for mpich
   # `pkg * mpi_*` for any mpi
   number: ${{ build }}
-  skip: match(python, "==2.7")
-  <conda_recipe_manager.types.SentinelType object at 0x7c5bcd215f10>:  # `pkg * nompi_*` for no mpi
-    string: ${{ mpi_prefix }}_py${{ py }}h${{ PKG_HASH }}_${{ build }}
+  string: ${{ mpi_prefix }}_py${{ py }}h${{ PKG_HASH }}_${{ build }}
 
 requirements:
   build:
