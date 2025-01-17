@@ -3,7 +3,7 @@ About openpmd-api-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openpmd-api-feedstock/blob/main/LICENSE.txt)
 
-Home: https://www.openPMD.org
+Home: https://www.openpmd.org/
 
 Package license: LGPL-3.0-or-later
 
@@ -11,7 +11,7 @@ Summary: C++ & Python API for writing & reading (.h5, .bp, .json, ...), serial &
 
 Development: https://github.com/openPMD/openPMD-api
 
-Documentation: https://openpmd-api.readthedocs.io
+Documentation: https://openpmd-api.readthedocs.io/
 
 This library provides a common high-level API for openPMD writing and
 reading. It provides a common interface to I/O libraries and file formats
@@ -19,7 +19,6 @@ such as HDF5, ADIOS2, and JSON.
 Language bindings are provided for C++17 (or newer) and Python 3.
 This conda-forge package provides serial and MPI-parallel I/O. Windows
 support is limited to serial versions of HDF5, ADIOS2 and JSON.
-
 
 Current build status
 ====================
