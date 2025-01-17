@@ -56,8 +56,8 @@ requirements:
     # jumped by conda-forge, already at v3+
     #- catch2 >=2.13.10,<3
     - if: python_impl != 'pypy'
-      then: adios2 * mpi_${{ mpi }}_*
-    - hdf5   * mpi_${{ mpi }}_*
+      then: adios2 * ${{ mpi_prefix }}_*
+    - hdf5 * ${{ mpi_prefix }}_*
     - nlohmann_json
     # missing in conda-forge
     #- toml11>=3.7.1
@@ -80,10 +80,7 @@ tests:
       lib:
         - openPMD
       files:
-        - if: unix
-          then: lib/cmake/openPMD/openPMDConfig.cmake
-        - if: win
-          then: cmake\openPMD\openPMDConfig.cmake
+        - ${{ "Library" if win else "lib" }}/cmake/${{ "openPMD/" if unix }}openPMDConfig.cmake
   - script:
       - python -c 'import openpmd_api; print(openpmd_api.__version__)'
       - python -c 'import openpmd_api; print(openpmd_api.variants)'
