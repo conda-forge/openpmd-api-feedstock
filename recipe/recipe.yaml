@@ -79,9 +79,13 @@ tests:
   - package_contents:
       lib:
         - openPMD
-        - cmake/openPMD/openPMDConfig.cmake
+      files:
+        - if: unix
+          then: lib/cmake/openPMD/openPMDConfig.cmake
+        - if: win
+          then: cmake\openPMD\openPMDConfig.cmake
   - script:
-      - python -c 'import openpmd_api; print(openpmd_api.__version__);'
+      - python -c 'import openpmd_api; print(openpmd_api.__version__)'
       - python -c 'import openpmd_api; print(openpmd_api.variants)'
       - if: unix
         then:
