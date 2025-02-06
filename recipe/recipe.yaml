@@ -5,7 +5,7 @@ schema_version: 1
 context:
   name: openpmd-api
   version: 0.16.1
-  build: 0
+  build: 1
   mpi: ${{ mpi or "nompi" }}  # is this still needed?
   mpi_prefix: ${{ "nompi" if mpi == "nompi" else "mpi_" + mpi }}
 
@@ -24,7 +24,7 @@ build:
   # `pkg * mpi_mpich_*` for mpich
   # `pkg * mpi_*` for any mpi
   number: ${{ build | int + 100 if mpi == "nompi" else build }}
-  string: ${{ mpi_prefix }}_py${{ py }}h${{ PKG_HASH }}_${{ build }}
+  string: ${{ mpi_prefix }}_py${{ python | version_to_buildstring }}h${{ hash }}_${{ build }}
 
 requirements:
   build:
