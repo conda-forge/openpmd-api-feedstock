@@ -24,7 +24,7 @@ build:
   # `pkg * mpi_mpich_*` for mpich
   # `pkg * mpi_*` for any mpi
   number: ${{ build | int + 100 if mpi == "nompi" else build }}
-  string: ${{ mpi_prefix }}_py${{ python | version_to_buildstring }}h${{ hash }}_${{ build }}
+  string: ${{ mpi_prefix }}_py${{ python | version_to_buildstring }}h${{ hash }}_${{ build | int + 100 if mpi == "nompi" else build }}
 
 requirements:
   build:
