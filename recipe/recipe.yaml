@@ -5,7 +5,7 @@ schema_version: 1
 context:
   name: openpmd-api
   version: 0.16.1
-  build: 1
+  build: 2
   mpi: ${{ mpi or "nompi" }}  # is this still needed?
   mpi_prefix: ${{ "nompi" if mpi == "nompi" else "mpi_" + mpi }}
 
