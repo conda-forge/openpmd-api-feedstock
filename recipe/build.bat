@@ -26,11 +26,9 @@ cmake ^
     -DopenPMD_SUPERBUILD=OFF    ^
     -DopenPMD_USE_INTERNAL_CATCH=ON          ^
     -DopenPMD_USE_INTERNAL_TOML11=OFF        ^
-    -DPython_EXECUTABLE:FILEPATH=%PYTHON%    ^
+    -DPython_EXECUTABLE=%PYTHON%             ^
+    -DCMAKE_INSTALL_LIBDIR=lib               ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%  ^
-    -DCMAKE_INSTALL_LIBDIR=lib  ^
-    -DopenPMD_INSTALL_PYTHONDIR=%SP_DIR%  ^
-    -DopenPMD_PYTHON_OUTPUT_DIRECTORY=%CURRENTDIR%/lib/site-packages  ^
     %SRC_DIR%
 if errorlevel 1 exit 1
 
