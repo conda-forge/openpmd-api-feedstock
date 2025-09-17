@@ -1,0 +1,22 @@
+From 758f6a097af1bfac7f5dd0f4ade69ad2cf0f48e5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Franz=20P=C3=B6schel?= <franz.poeschel@gmail.com>
+Date: Wed, 4 Jun 2025 18:14:26 +0200
+Subject: [PATCH] Fix type: m_configurations instead of m_compressions
+
+---
+ include/openPMD/benchmark/mpi/MPIBenchmark.hpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/openPMD/benchmark/mpi/MPIBenchmark.hpp b/include/openPMD/benchmark/mpi/MPIBenchmark.hpp
+index b88e80adc3..7f2ef89761 100644
+--- a/include/openPMD/benchmark/mpi/MPIBenchmark.hpp
++++ b/include/openPMD/benchmark/mpi/MPIBenchmark.hpp
+@@ -300,7 +300,7 @@ void MPIBenchmark<DatasetFillerProvider>::addConfiguration(
+ template <typename DatasetFillerProvider>
+ void MPIBenchmark<DatasetFillerProvider>::resetConfigurations()
+ {
+-    this->m_compressions.clear();
++    this->m_configurations.clear();
+ }
+ 
+ template <typename DatasetFillerProvider>

@@ -16,6 +16,9 @@ package:
 source:
   url: https://github.com/openPMD/openPMD-api/archive/${{ version }}.tar.gz
   sha256: a029a1779351949f41c1f36d0e75c698e59c5d284f080d5e4c2b8650779d2d58
+  patches:
+    # MPI benchmark example typo in compression
+    - 1762.patch
 
 build:
   # add build string so packages can depend on
