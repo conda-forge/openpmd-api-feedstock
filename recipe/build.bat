@@ -7,7 +7,14 @@ echo "LDFLAGS: %LDFLAGS%"
 mkdir build
 cd build
 
+:: current directory with forward slashes
 set CURRENTDIR="%cd%"
+set "CURRENTDIR=%CURRENTDIR:\=/%"
+echo "CURRENTDIR: %CURRENTDIR%"
+
+:: wit forward slashes
+set "SP_DIR=%SP_DIR:\=/%"
+echo "SP_DIR: %SP_DIR%"
 
 :: FIXME: ADIOS2 has no PyPy support yet (internally shipped, unpatched pybind11<2.6.0)
 ::   https://github.com/conda-forge/adios2-feedstock/pull/16
