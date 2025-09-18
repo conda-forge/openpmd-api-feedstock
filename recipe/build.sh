@@ -69,6 +69,10 @@ cmake ${CMAKE_ARGS} \
 { cat $SRC_DIR/build/CMakeFiles/CMakeOutput.log; \
   cat $SRC_DIR/build/CMakeFiles/CMakeError.log; exit 1; }
 
+# grep for CONDA_BUILD_SYSROOT in CMake files
+grep -iR "${CONDA_BUILD_SYSROOT}" ${SRC_DIR}/build || true
+grep -iR "CONDA_BUILD_SYSROOT" ${SRC_DIR}/build || true
+
 # compiler error or resource exhaustion on PPC64le Travis-CI builds with:
 #   powerpc64le-conda_cos7-linux-gnu-c++: fatal error: Killed signal terminated program cc1plus
 #   FIXME: https://github.com/conda-forge/conda-forge-ci-setup-feedstock/pull/68
