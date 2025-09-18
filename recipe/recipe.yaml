@@ -85,8 +85,8 @@ tests:
       files:
         - ${{ "Library" if win else "lib" }}/cmake/${{ "openPMD/" if unix }}openPMDConfig.cmake
   - script:
-      - python -c 'import openpmd_api; print(openpmd_api.__version__)'
-      - python -c 'import openpmd_api; print(openpmd_api.variants)'
+      - python -c "import openpmd_api; print(openpmd_api.__version__)"
+      - python -c "import openpmd_api; print(openpmd_api.variants)"
       - if: unix
         then:
           - test -f ${PREFIX}/lib/cmake/openPMD/openPMDConfig.cmake
