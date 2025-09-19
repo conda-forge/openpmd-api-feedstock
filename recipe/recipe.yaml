@@ -40,7 +40,9 @@ requirements:
     - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
     - if: unix
-      then: make
+      then:
+        - make
+        - sed
     - cmake
     - curl
     - pkg-config
