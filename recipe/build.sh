@@ -94,7 +94,7 @@ make install
 if [[ ${target_platform} =~ osx.* ]]; then
     #   1) grep for CONDA_BUILD_SYSROOT in installed files again
     echo "Hard-coded sysroot paths:"
-    grep -iR "${CONDA_BUILD_SYSROOT}" ${PREFIX} || true
+    grep -iIR "${CONDA_BUILD_SYSROOT}" ${PREFIX} || true
     #   2) patch
     echo "Patching..."
     sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libdl.tbd@-ldl.tbd@g"       $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
@@ -105,9 +105,9 @@ if [[ ${target_platform} =~ osx.* ]]; then
     sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libm.tbd@-lm@g"             $PREFIX/lib/pkgconfig/openPMD.pc
     sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libpthread.tbd@-lpthread@g" $PREFIX/lib/pkgconfig/openPMD.pc
     sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libz.tbd@-lz@g"             $PREFIX/lib/pkgconfig/openPMD.pc
-    #   3) grep for CONDA_BUILD_SYSROOT in installed files again
+    #   3) grep for CONDA_BUILD_SYSROOT in installed files again -- fail if still present
     echo "Hard-coded sysroot paths:"
-    grep -iR "${CONDA_BUILD_SYSROOT}" ${PREFIX} || true
+    ! grep -iIR "${CONDA_BUILD_SYSROOT}" ${PREFIX}
     echo "Done checking hard-coded sysroot paths"
 fi
 
