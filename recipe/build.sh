@@ -59,7 +59,7 @@ cmake ${CMAKE_ARGS} \
     -DopenPMD_USE_PYTHON=ON                   \
     -DopenPMD_SUPERBUILD=OFF                  \
     -DopenPMD_USE_INTERNAL_CATCH=ON           \
-    -DopenPMD_USE_INTERNAL_TOML11=ON          \
+    -DopenPMD_USE_INTERNAL_TOML11=OFF         \
     -DPython_EXECUTABLE:FILEPATH=$PYTHON      \
     -DBUILD_TESTING=ON                \
     -DCMAKE_INSTALL_LIBDIR=lib        \
@@ -88,6 +88,28 @@ else
 fi
 
 make install
+
+# Patch: On OSX, FindHDF5.cmake adds explicit paths to $CONDA_BUILD_SYSROOT that cause issues
+#   https://github.com/conda-forge/openpmd-api-feedstock/pull/127#issuecomment-3312180240
+if [[ ${target_platform} =~ osx.* ]]; then
+    #   1) grep for CONDA_BUILD_SYSROOT in installed files again
+    echo "Hard-coded sysroot paths:"
+    grep -iIR "${CONDA_BUILD_SYSROOT}" ${PREFIX} || true
+    #   2) patch
+    echo "Patching..."
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libdl.tbd@-ldl.tbd@g"       $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libm.tbd@-lm.tbd@g"         $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libpthread.tbd@-lpthread@g" $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libz.tbd@-lz.tbd@g"         $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libdl.tbd@-ldl@g"           $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libm.tbd@-lm@g"             $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libpthread.tbd@-lpthread@g" $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libz.tbd@-lz@g"             $PREFIX/lib/pkgconfig/openPMD.pc
+    #   3) grep for CONDA_BUILD_SYSROOT in installed files again -- fail if still present
+    echo "Hard-coded sysroot paths:"
+    ! grep -iIR "${CONDA_BUILD_SYSROOT}" ${PREFIX}
+    echo "Done checking hard-coded sysroot paths"
+fi
 
 
 # install API documentation: tagfile for xeus-cling

@@ -5,7 +5,7 @@ schema_version: 1
 context:
   name: openpmd-api
   version: 0.16.1
-  build: 2
+  build: 3
   mpi: ${{ mpi or "nompi" }}  # is this still needed?
   mpi_prefix: ${{ "nompi" if mpi == "nompi" else "mpi_" + mpi }}
 
@@ -16,6 +16,9 @@ package:
 source:
   url: https://github.com/openPMD/openPMD-api/archive/${{ version }}.tar.gz
   sha256: a029a1779351949f41c1f36d0e75c698e59c5d284f080d5e4c2b8650779d2d58
+  patches:
+    # MPI benchmark example typo in compression
+    - 1762.patch
 
 build:
   # add build string so packages can depend on
@@ -37,7 +40,9 @@ requirements:
     - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
     - if: unix
-      then: make
+      then:
+        - make
+        - sed
     - cmake
     - curl
     - pkg-config
@@ -59,8 +64,7 @@ requirements:
       then: adios2 * ${{ mpi_prefix }}_*
     - hdf5 * ${{ mpi_prefix }}_*
     - nlohmann_json
-    # missing in conda-forge
-    #- toml11>=3.7.1
+    - toml11
   run:
     - if: "mpi != 'nompi'"
       then:
@@ -82,8 +86,8 @@ tests:
       files:
         - ${{ "Library" if win else "lib" }}/cmake/${{ "openPMD/" if unix }}openPMDConfig.cmake
   - script:
-      - python -c 'import openpmd_api; print(openpmd_api.__version__)'
-      - python -c 'import openpmd_api; print(openpmd_api.variants)'
+      - python -c "import openpmd_api; print(openpmd_api.__version__)"
+      - python -c "import openpmd_api; print(openpmd_api.variants)"
       - if: unix
         then:
           - test -f ${PREFIX}/lib/cmake/openPMD/openPMDConfig.cmake

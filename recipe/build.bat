@@ -7,7 +7,14 @@ echo "LDFLAGS: %LDFLAGS%"
 mkdir build
 cd build
 
+:: current directory with forward slashes
 set CURRENTDIR="%cd%"
+set "CURRENTDIR=%CURRENTDIR:\=/%"
+echo "CURRENTDIR: %CURRENTDIR%"
+
+:: wit forward slashes
+set "SP_DIR=%SP_DIR:\=/%"
+echo "SP_DIR: %SP_DIR%"
 
 :: FIXME: ADIOS2 has no PyPy support yet (internally shipped, unpatched pybind11<2.6.0)
 ::   https://github.com/conda-forge/adios2-feedstock/pull/16
@@ -25,12 +32,12 @@ cmake ^
     -DopenPMD_USE_PYTHON=ON     ^
     -DopenPMD_SUPERBUILD=OFF    ^
     -DopenPMD_USE_INTERNAL_CATCH=ON          ^
-    -DopenPMD_USE_INTERNAL_TOML11=ON         ^
+    -DopenPMD_USE_INTERNAL_TOML11=OFF        ^
     -DPython_EXECUTABLE:FILEPATH=%PYTHON%    ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%  ^
     -DCMAKE_INSTALL_LIBDIR=lib  ^
     -DopenPMD_INSTALL_PYTHONDIR=%SP_DIR%  ^
-    -DopenPMD_PYTHON_OUTPUT_DIRECTORY=%CURRENTDIR%\lib\site-packages  ^
+    -DopenPMD_PYTHON_OUTPUT_DIRECTORY=%CURRENTDIR%/lib/site-packages  ^
     %SRC_DIR%
 if errorlevel 1 exit 1
 
