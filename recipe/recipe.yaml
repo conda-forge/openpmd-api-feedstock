@@ -62,8 +62,7 @@ requirements:
       then: adios2 * ${{ mpi_prefix }}_*
     - hdf5 * ${{ mpi_prefix }}_*
     - nlohmann_json
-    # missing in conda-forge
-    #- toml11>=3.7.1
+    - toml11
   run:
     - if: "mpi != 'nompi'"
       then:

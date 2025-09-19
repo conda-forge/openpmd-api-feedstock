@@ -59,7 +59,7 @@ cmake ${CMAKE_ARGS} \
     -DopenPMD_USE_PYTHON=ON                   \
     -DopenPMD_SUPERBUILD=OFF                  \
     -DopenPMD_USE_INTERNAL_CATCH=ON           \
-    -DopenPMD_USE_INTERNAL_TOML11=ON          \
+    -DopenPMD_USE_INTERNAL_TOML11=OFF         \
     -DPython_EXECUTABLE:FILEPATH=$PYTHON      \
     -DBUILD_TESTING=ON                \
     -DCMAKE_INSTALL_LIBDIR=lib        \
