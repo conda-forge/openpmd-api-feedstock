@@ -69,10 +69,6 @@ cmake ${CMAKE_ARGS} \
 { cat $SRC_DIR/build/CMakeFiles/CMakeOutput.log; \
   cat $SRC_DIR/build/CMakeFiles/CMakeError.log; exit 1; }
 
-# grep for CONDA_BUILD_SYSROOT in CMake files
-grep -iR "${CONDA_BUILD_SYSROOT}" ${SRC_DIR}/build || true
-grep -iR "CONDA_BUILD_SYSROOT" ${SRC_DIR}/build || true
-
 # compiler error or resource exhaustion on PPC64le Travis-CI builds with:
 #   powerpc64le-conda_cos7-linux-gnu-c++: fatal error: Killed signal terminated program cc1plus
 #   FIXME: https://github.com/conda-forge/conda-forge-ci-setup-feedstock/pull/68
@@ -92,6 +88,28 @@ else
 fi
 
 make install
+
+# Patch: On OSX, FindHDF5.cmake adds explicit paths to $CONDA_BUILD_SYSROOT that cause issues
+#   https://github.com/conda-forge/openpmd-api-feedstock/pull/127#issuecomment-3312180240
+if [[ ${target_platform} =~ osx.* ]]; then
+    #   1) grep for CONDA_BUILD_SYSROOT in installed files again
+    echo "Hard-coded sysroot paths:"
+    grep -iR "${CONDA_BUILD_SYSROOT}" ${PREFIX} || true
+    #   2) patch
+    echo "Patching..."
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libdl.tbd@-ldl.tbd@g"       $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libm.tbd@-lm.tbd@g"         $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libpthread.tbd@-lpthread@g" $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libz.tbd@-lz.tbd@g"         $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libdl.tbd@-ldl@g"           $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libm.tbd@-lm@g"             $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libpthread.tbd@-lpthread@g" $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libz.tbd@-lz@g"             $PREFIX/lib/pkgconfig/openPMD.pc
+    #   3) grep for CONDA_BUILD_SYSROOT in installed files again
+    echo "Hard-coded sysroot paths:"
+    grep -iR "${CONDA_BUILD_SYSROOT}" ${PREFIX} || true
+    echo "Done checking hard-coded sysroot paths"
+fi
 
 
 # install API documentation: tagfile for xeus-cling
