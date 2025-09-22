@@ -97,14 +97,14 @@ if [[ ${target_platform} =~ osx.* ]]; then
     grep -iIR "${CONDA_BUILD_SYSROOT}" ${PREFIX} || true
     #   2) patch
     echo "Patching..."
-    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libdl.tbd@-ldl.tbd@g"       $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
-    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libm.tbd@-lm.tbd@g"         $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
-    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libpthread.tbd@-lpthread@g" $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
-    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libz.tbd@-lz.tbd@g"         $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
-    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libdl.tbd@-ldl@g"           $PREFIX/lib/pkgconfig/openPMD.pc
-    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libm.tbd@-lm@g"             $PREFIX/lib/pkgconfig/openPMD.pc
-    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libpthread.tbd@-lpthread@g" $PREFIX/lib/pkgconfig/openPMD.pc
-    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libz.tbd@-lz@g"             $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libdl.tbd@-ldl.tbd@g"             $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libm.tbd@-lm.tbd@g"               $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libpthread.tbd@-lpthread@g"       $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libz.tbd@\$PREFIX/lib/libz.dylib@g" $PREFIX/lib/cmake/openPMD/openPMDTargets.cmake
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libdl.tbd@-ldl@g"                 $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libm.tbd@-lm@g"                   $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libpthread.tbd@-lpthread@g"       $PREFIX/lib/pkgconfig/openPMD.pc
+    sed -i "s@${CONDA_BUILD_SYSROOT}/usr/lib/libz.tbd@\$PREFIX/lib/libz.dylib@g" $PREFIX/lib/pkgconfig/openPMD.pc
     #   3) grep for CONDA_BUILD_SYSROOT in installed files again -- fail if still present
     echo "Hard-coded sysroot paths:"
     ! grep -iIR "${CONDA_BUILD_SYSROOT}" ${PREFIX}
