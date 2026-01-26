@@ -16,6 +16,10 @@ package:
 source:
   url: https://github.com/openPMD/openPMD-api/archive/${{ version }}.tar.gz
   sha256: 97ff76111f77b06177caa48fa1b5e757967a60a66665f0c13384828d3ae1aa92
+  patches:
+    # https://github.com/openPMD/openPMD-api/pull/1832
+    # Fix instantiations for AttributeWithShapeAndResource
+    - 4143acbe3a092678d6b39bb08c35372a09d193b4.patch
 
 build:
   # add build string so packages can depend on
