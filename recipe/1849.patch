@@ -1,7 +1,7 @@
 From ab29b2abf057fdfc303c7f5fbc04ea9414e528f3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Franz=20P=C3=B6schel?= <franz.poeschel@gmail.com>
 Date: Tue, 17 Feb 2026 11:23:23 +0100
-Subject: [PATCH 1/4] Bump Pybind11 to 3.0.2
+Subject: [PATCH 1/2] Bump Pybind11 to 3.0.2
 
 ---
  cmake/dependencies/pybind11.cmake | 10 +++++-----
@@ -46,55 +46,56 @@ index 68c0986e4f..643421df56 100644
      "Repository branch for openPMD_pybind11_repo if(openPMD_USE_INTERNAL_PYBIND11)")
  
 
-From 84163e88733cd22a141ac231fe8213631871b627 Mon Sep 17 00:00:00 2001
+From 2603556d3d0c254169bada4173ece5dedf057166 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Franz=20P=C3=B6schel?= <franz.poeschel@gmail.com>
 Date: Tue, 17 Feb 2026 11:35:55 +0100
-Subject: [PATCH 2/4] tmp: comment out calls that fail pybind11 v3.0.2
+Subject: [PATCH 2/2] Use cpp_function for defining properties
 
 ---
- src/binding/python/Iteration.cpp       | 25 +++++++++++++------------
- src/binding/python/ParticleSpecies.cpp | 13 +++++++------
- src/binding/python/Series.cpp          | 12 ++++++------
- 3 files changed, 26 insertions(+), 24 deletions(-)
+ src/binding/python/Iteration.cpp       | 24 ++++++++++++++----------
+ src/binding/python/ParticleSpecies.cpp | 11 ++++++-----
+ src/binding/python/Series.cpp          | 11 ++++++-----
+ 3 files changed, 26 insertions(+), 20 deletions(-)
 
 diff --git a/src/binding/python/Iteration.cpp b/src/binding/python/Iteration.cpp
-index 846861d262..be668fc57b 100644
+index 846861d262..8346aaaf63 100644
 --- a/src/binding/python/Iteration.cpp
 +++ b/src/binding/python/Iteration.cpp
-@@ -94,18 +94,19 @@ void init_Iteration(py::module &m)
+@@ -94,18 +94,22 @@ void init_Iteration(py::module &m)
          .def("set_dt", &Iteration::setDt<double>)
          .def("set_time_unit_SI", &Iteration::setTimeUnitSI)
  
 -        .def_readwrite(
--            "meshes",
++        .def_property_readonly(
+             "meshes",
 -            &Iteration::meshes,
 -            py::return_value_policy::copy,
 -            // garbage collection: return value must be freed before Iteration
 -            py::keep_alive<1, 0>())
 -        .def_readwrite(
--            "particles",
++            py::cpp_function(
++                [](Iteration &i) { return i.meshes; },
++                py::return_value_policy::copy,
++                // garbage collection: return value must be freed before
++                // Iteration
++                py::keep_alive<1, 0>()))
++        .def_property_readonly(
+             "particles",
 -            &Iteration::particles,
 -            py::return_value_policy::copy,
 -            // garbage collection: return value must be freed before Iteration
 -            py::keep_alive<1, 0>());
-+        // .def_readwrite(
-+        //     "meshes",
-+        //     &Iteration::meshes,
-+        //     py::return_value_policy::copy,
-+        //     // garbage collection: return value must be freed before Iteration
-+        //     py::keep_alive<1, 0>())
-+        // .def_readwrite(
-+        //     "particles",
-+        //     &Iteration::particles,
-+        //     py::return_value_policy::copy,
-+        //     // garbage collection: return value must be freed before Iteration
-+        //     py::keep_alive<1, 0>())
-+        ;
++            py::cpp_function(
++                [](Iteration &i) { return i.particles; },
++                py::return_value_policy::copy,
++                // garbage collection: return value must be freed before
++                // Iteration
++                py::keep_alive<1, 0>()));
  
      add_pickle(
          cl, [](openPMD::Series series, std::vector<std::string> const &group) {
 diff --git a/src/binding/python/ParticleSpecies.cpp b/src/binding/python/ParticleSpecies.cpp
-index 1af708d206..a66035867a 100644
+index 1af708d206..d619554220 100644
 --- a/src/binding/python/ParticleSpecies.cpp
 +++ b/src/binding/python/ParticleSpecies.cpp
 @@ -48,12 +48,13 @@ void init_ParticleSpecies(py::module &m)
@@ -102,184 +103,40 @@ index 1af708d206..a66035867a 100644
            })
  
 -        .def_readwrite(
--            "particle_patches",
++        .def_property_readonly(
+             "particle_patches",
 -            &ParticleSpecies::particlePatches,
 -            py::return_value_policy::copy,
 -            // garbage collection: return value must be freed before Series
 -            py::keep_alive<1, 0>());
-+        // .def_readwrite(
-+        //     "particle_patches",
-+        //     &ParticleSpecies::particlePatches,
-+        //     py::return_value_policy::copy,
-+        //     // garbage collection: return value must be freed before Series
-+        //     py::keep_alive<1, 0>())
-+        ;
++            py::cpp_function(
++                [](ParticleSpecies &ps) { return ps.particlePatches; },
++                py::return_value_policy::copy,
++                // garbage collection: return value must be freed before Series
++                py::keep_alive<1, 0>()));
      add_pickle(
          cl, [](openPMD::Series series, std::vector<std::string> const &group) {
              uint64_t const n_it = std::stoull(group.at(1));
 diff --git a/src/binding/python/Series.cpp b/src/binding/python/Series.cpp
-index 384462403d..ee06a1f9b0 100644
+index 384462403d..ec2b38c867 100644
 --- a/src/binding/python/Series.cpp
 +++ b/src/binding/python/Series.cpp
-@@ -497,12 +497,12 @@ this method.
+@@ -497,12 +497,13 @@ this method.
          .def("set_iteration_format", &Series::setIterationFormat)
          .def("set_name", &Series::setName)
  
 -        .def_readwrite(
--            "iterations",
++        .def_property_readonly(
+             "iterations",
 -            &Series::iterations,
 -            py::return_value_policy::copy,
 -            // garbage collection: return value must be freed before Series
 -            py::keep_alive<1, 0>())
-+        // .def_readwrite(
-+        //     "iterations",
-+        //     &Series::iterations,
-+        //     py::return_value_policy::copy,
-+        //     // garbage collection: return value must be freed before Series
-+        //     py::keep_alive<1, 0>())
++            py::cpp_function(
++                [](Series &s) { return s.iterations; },
++                py::return_value_policy::copy,
++                // garbage collection: return value must be freed before Series
++                py::keep_alive<1, 0>()))
          .def(
              "read_iterations",
              [](Series &s) {
-
-From fef83c3aa9877733774aa2aaf6ab12afcc6e1780 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Franz=20P=C3=B6schel?= <franz.poeschel@gmail.com>
-Date: Tue, 17 Feb 2026 11:42:11 +0100
-Subject: [PATCH 3/4] Use cpp_function instead (.def(...))
-
-These lose the setters, but those were not used anyway?
-bit of an ugly workaround
----
- src/binding/python/Iteration.cpp           | 25 +++++++++++-----------
- src/binding/python/ParticleSpecies.cpp     | 13 ++++++-----
- src/binding/python/Series.cpp              | 12 +++++------
- src/binding/python/openpmd_api/__init__.py |  4 ++++
- 4 files changed, 28 insertions(+), 26 deletions(-)
-
-diff --git a/src/binding/python/Iteration.cpp b/src/binding/python/Iteration.cpp
-index be668fc57b..7e36677e88 100644
---- a/src/binding/python/Iteration.cpp
-+++ b/src/binding/python/Iteration.cpp
-@@ -94,19 +94,18 @@ void init_Iteration(py::module &m)
-         .def("set_dt", &Iteration::setDt<double>)
-         .def("set_time_unit_SI", &Iteration::setTimeUnitSI)
- 
--        // .def_readwrite(
--        //     "meshes",
--        //     &Iteration::meshes,
--        //     py::return_value_policy::copy,
--        //     // garbage collection: return value must be freed before Iteration
--        //     py::keep_alive<1, 0>())
--        // .def_readwrite(
--        //     "particles",
--        //     &Iteration::particles,
--        //     py::return_value_policy::copy,
--        //     // garbage collection: return value must be freed before Iteration
--        //     py::keep_alive<1, 0>())
--        ;
-+        .def(
-+            "__meshes",
-+            [](Iteration &i) { return i.meshes; },
-+            py::return_value_policy::copy,
-+            // garbage collection: return value must be freed before Iteration
-+            py::keep_alive<1, 0>())
-+        .def(
-+            "__particles",
-+            [](Iteration &i) { return i.particles; },
-+            py::return_value_policy::copy,
-+            // garbage collection: return value must be freed before Iteration
-+            py::keep_alive<1, 0>());
- 
-     add_pickle(
-         cl, [](openPMD::Series series, std::vector<std::string> const &group) {
-diff --git a/src/binding/python/ParticleSpecies.cpp b/src/binding/python/ParticleSpecies.cpp
-index a66035867a..2bfb395f55 100644
---- a/src/binding/python/ParticleSpecies.cpp
-+++ b/src/binding/python/ParticleSpecies.cpp
-@@ -48,13 +48,12 @@ void init_ParticleSpecies(py::module &m)
-               return stream.str();
-           })
- 
--        // .def_readwrite(
--        //     "particle_patches",
--        //     &ParticleSpecies::particlePatches,
--        //     py::return_value_policy::copy,
--        //     // garbage collection: return value must be freed before Series
--        //     py::keep_alive<1, 0>())
--        ;
-+        .def(
-+            "__particle_patches",
-+            [](ParticleSpecies &ps) { return ps.particlePatches; },
-+            py::return_value_policy::copy,
-+            // garbage collection: return value must be freed before Series
-+            py::keep_alive<1, 0>());
-     add_pickle(
-         cl, [](openPMD::Series series, std::vector<std::string> const &group) {
-             uint64_t const n_it = std::stoull(group.at(1));
-diff --git a/src/binding/python/Series.cpp b/src/binding/python/Series.cpp
-index ee06a1f9b0..8507114472 100644
---- a/src/binding/python/Series.cpp
-+++ b/src/binding/python/Series.cpp
-@@ -497,12 +497,12 @@ this method.
-         .def("set_iteration_format", &Series::setIterationFormat)
-         .def("set_name", &Series::setName)
- 
--        // .def_readwrite(
--        //     "iterations",
--        //     &Series::iterations,
--        //     py::return_value_policy::copy,
--        //     // garbage collection: return value must be freed before Series
--        //     py::keep_alive<1, 0>())
-+        .def(
-+            "__iterations",
-+            [](Series &s) { return s.iterations; },
-+            py::return_value_policy::copy,
-+            // garbage collection: return value must be freed before Series
-+            py::keep_alive<1, 0>())
-         .def(
-             "read_iterations",
-             [](Series &s) {
-diff --git a/src/binding/python/openpmd_api/__init__.py b/src/binding/python/openpmd_api/__init__.py
-index 09f21026f9..ab9bc94d10 100644
---- a/src/binding/python/openpmd_api/__init__.py
-+++ b/src/binding/python/openpmd_api/__init__.py
-@@ -16,6 +16,10 @@
- Record_Component.to_dask_array = record_component_to_daskarray  # noqa
- Series.to_df = iterations_to_dataframe  # noqa
- Series.to_cudf = iterations_to_cudf  # noqa
-+Series.iterations = property(Series.__iterations)
-+Iteration.meshes = property(Iteration.__meshes)
-+Iteration.particles = property(Iteration.__particles)
-+ParticleSpecies.particle_patches = property(ParticleSpecies.__particle_patches)
- 
- # TODO remove in future versions (deprecated)
- Access_Type = Access  # noqa
-
-From cfa62597768f58da6a10a7aa634e85356882b9b5 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Franz=20P=C3=B6schel?= <franz.poeschel@gmail.com>
-Date: Tue, 17 Feb 2026 12:01:18 +0100
-Subject: [PATCH 4/4] noqa
-
----
- src/binding/python/openpmd_api/__init__.py | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
-
-diff --git a/src/binding/python/openpmd_api/__init__.py b/src/binding/python/openpmd_api/__init__.py
-index ab9bc94d10..86d22b2307 100644
---- a/src/binding/python/openpmd_api/__init__.py
-+++ b/src/binding/python/openpmd_api/__init__.py
-@@ -16,10 +16,11 @@
- Record_Component.to_dask_array = record_component_to_daskarray  # noqa
- Series.to_df = iterations_to_dataframe  # noqa
- Series.to_cudf = iterations_to_cudf  # noqa
--Series.iterations = property(Series.__iterations)
--Iteration.meshes = property(Iteration.__meshes)
--Iteration.particles = property(Iteration.__particles)
--ParticleSpecies.particle_patches = property(ParticleSpecies.__particle_patches)
-+Series.iterations = property(Series.__iterations) # noqa
-+Iteration.meshes = property(Iteration.__meshes) # noqa
-+Iteration.particles = property(Iteration.__particles) # noqa
-+ParticleSpecies.particle_patches = \
-+    property(ParticleSpecies.__particle_patches) # noqa
- 
- # TODO remove in future versions (deprecated)
- Access_Type = Access  # noqa
