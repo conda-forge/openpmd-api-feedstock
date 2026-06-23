@@ -4,8 +4,8 @@ schema_version: 1
 
 context:
   name: openpmd-api
-  version: "0.17.0"
-  build: 2
+  version: "0.17.1"
+  build: 0
   mpi: ${{ mpi or "nompi" }}  # is this still needed?
   mpi_prefix: ${{ "nompi" if mpi == "nompi" else "mpi_" + mpi }}
 
@@ -15,7 +15,7 @@ package:
 
 source:
   url: https://github.com/openPMD/openPMD-api/archive/${{ version }}.tar.gz
-  sha256: 97ff76111f77b06177caa48fa1b5e757967a60a66665f0c13384828d3ae1aa92
+  sha256: cd4340dc17b41e4fafd0d2893af23a1bee82d169f2b2ca40d012b79c87c564d8
   patches:
     # https://github.com/openPMD/openPMD-api/pull/1832
     # Fix instantiations for AttributeWithShapeAndResource
