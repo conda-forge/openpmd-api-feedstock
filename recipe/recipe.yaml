@@ -16,13 +16,6 @@ package:
 source:
   url: https://github.com/openPMD/openPMD-api/archive/${{ version }}.tar.gz
   sha256: cd4340dc17b41e4fafd0d2893af23a1bee82d169f2b2ca40d012b79c87c564d8
-  patches:
-    # https://github.com/openPMD/openPMD-api/pull/1832
-    # Fix instantiations for AttributeWithShapeAndResource
-    - 4143acbe3a092678d6b39bb08c35372a09d193b4.patch
-    # https://github.com/openPMD/openPMD-api/pull/1849
-    # pybind 3.0.2 and broken property keep-alive
-    - 1849.patch
 
 build:
   # add build string so packages can depend on
