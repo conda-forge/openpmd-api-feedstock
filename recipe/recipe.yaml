@@ -16,6 +16,11 @@ package:
 source:
   url: https://github.com/openPMD/openPMD-api/archive/${{ version }}.tar.gz
   sha256: cd4340dc17b41e4fafd0d2893af23a1bee82d169f2b2ca40d012b79c87c564d8
+  patches:
+    # CMake HDF5 Static: Work-Around for ZLIB
+    # seems to be relevant for PPC64le too for some reason
+    # https://github.com/openPMD/openPMD-api/pull/1894
+    - 1894.patch
 
 build:
   # add build string so packages can depend on
